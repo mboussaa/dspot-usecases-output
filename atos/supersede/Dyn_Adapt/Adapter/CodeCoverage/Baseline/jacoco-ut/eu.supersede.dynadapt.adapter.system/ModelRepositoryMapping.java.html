@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ModelRepositoryMapping.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">adapter-stamp</a> &gt; <a href="index.source.html" class="el_package">eu.supersede.dynadapt.adapter.system</a> &gt; <span class="el_source">ModelRepositoryMapping.java</span></div><h1>ModelRepositoryMapping.java</h1><pre class="source lang-java linenums">package eu.supersede.dynadapt.adapter.system;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.eclipse.emf.common.util.URI;
+
+import eu.supersede.dynadapt.adapter.exception.EnactmentException;
+import eu.supersede.dynadapt.adapter.system.RepositoryMetadata.ResourceTimestamp;
+import eu.supersede.dynadapt.adapter.system.RepositoryMetadata.ResourceType;
+import eu.supersede.integration.api.adaptation.types.ModelSystem;
+
+// TODO Store models locally within Adapter execution. Resolve them
+@Deprecated
+<span class="nc" id="L15">public class ModelRepositoryMapping{</span>
+	public static URI getModelURI (ModelSystem system, RepositoryMetadata type) throws EnactmentException{
+<span class="nc bnc" id="L17" title="All 6 branches missed.">		switch (system) {</span>
+		case Atos:
+<span class="nc" id="L19">			return  URI.createURI (atosMapping.get(type.getType()).get(type.getTimestamp()));</span>
+		case Atos_HSK:
+<span class="nc" id="L21">			return  URI.createURI (atosHskMapping.get(type.getType()).get(type.getTimestamp()));</span>
+		case Health:
+<span class="nc" id="L23">			return URI.createURI (healthMapping.get(type.getType()).get(type.getTimestamp()));</span>
+		case MonitoringReconfiguration:
+<span class="nc" id="L25">			return 	URI.createURI(monitoringMapping.get(type.getType()).get(type.getTimestamp()));</span>
+		case Siemens:
+<span class="nc" id="L27">			return URI.createURI(siemensMapping.get(type.getType()).get(type.getTimestamp()));</span>
+		default:
+			//FIXME Other systems not supported
+<span class="nc" id="L30">			throw new EnactmentException(&quot;System not supported &quot; + system.getId());</span>
+		}
+	}
+	
+<span class="nc" id="L34">	private static Map&lt;ResourceType, Map&lt;ResourceTimestamp, String&gt;&gt; atosMapping = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L35">	private static Map&lt;ResourceType, Map&lt;ResourceTimestamp, String&gt;&gt; atosHskMapping = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L36">	private static Map&lt;ResourceType, Map&lt;ResourceTimestamp, String&gt;&gt; healthMapping = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L37">	private static Map&lt;ResourceType, Map&lt;ResourceTimestamp, String&gt;&gt; monitoringMapping = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L38">	private static Map&lt;ResourceType, Map&lt;ResourceTimestamp, String&gt;&gt; siemensMapping = new HashMap&lt;&gt;();</span>
+	
+	static{
+		//ATOS USE CASE
+<span class="nc" id="L42">		Map&lt;ResourceTimestamp, String&gt; atosBaseModel = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L43">		Map&lt;ResourceTimestamp, String&gt; atosFeatureConfiguration = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L44">		atosBaseModel.put(ResourceTimestamp.CURRENT, ModelRepositoryResolver.repositoryRelativePath + </span>
+				&quot;/models/base/atos_base_model.uml&quot;);
+<span class="nc" id="L46">		atosFeatureConfiguration.put(ResourceTimestamp.CURRENT, ModelRepositoryResolver.repositoryRelativePath +</span>
+				&quot;/features/configurations/AtosNormalCMSCapacityConfiguration.yafc&quot;);
+<span class="nc" id="L48">		atosFeatureConfiguration.put(ResourceTimestamp.NEWEST, ModelRepositoryResolver.repositoryRelativePath +</span>
+				&quot;/features/configurations/AtosOverloadedCMSCapacityConfiguration.yafc&quot;);
+<span class="nc" id="L50">		atosMapping.put(ResourceType.BASE, atosBaseModel);</span>
+<span class="nc" id="L51">		atosMapping.put(ResourceType.FEATURE_CONFIGURATION, atosFeatureConfiguration);</span>
+		
+		//ATOS HSK USE CASE
+<span class="nc" id="L54">		Map&lt;ResourceTimestamp, String&gt; atosHskBaseModel = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L55">		Map&lt;ResourceTimestamp, String&gt; atosHskFeatureConfiguration = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L56">		atosHskBaseModel.put(ResourceTimestamp.CURRENT, ModelRepositoryResolver.repositoryRelativePath + </span>
+				&quot;/models/base/atos_smart_base_model.uml&quot;);
+<span class="nc" id="L58">		atosHskFeatureConfiguration.put(ResourceTimestamp.CURRENT, ModelRepositoryResolver.repositoryRelativePath +</span>
+				&quot;/features/configurations/SmartPlatformFC_HSK_SingleVM_LowLoad.yafc&quot;);
+<span class="nc" id="L60">		atosHskFeatureConfiguration.put(ResourceTimestamp.NEWEST, ModelRepositoryResolver.repositoryRelativePath +</span>
+				&quot;/features/configurations/SmartPlatformFC_HSK_SingleVM_HighLoad.yafc&quot;);
+<span class="nc" id="L62">		atosHskMapping.put(ResourceType.BASE, atosHskBaseModel);</span>
+<span class="nc" id="L63">		atosHskMapping.put(ResourceType.FEATURE_CONFIGURATION, atosHskFeatureConfiguration);</span>
+		
+		//HEALTH USE CASE
+<span class="nc" id="L66">		Map&lt;ResourceTimestamp, String&gt; healthBaseModel = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L67">		Map&lt;ResourceTimestamp, String&gt; healthFeatureConfiguration = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L68">		healthBaseModel.put(ResourceTimestamp.CURRENT, ModelRepositoryResolver.repositoryRelativePath + </span>
+				&quot;/models/base/health_watcher.uml&quot;);
+<span class="nc" id="L70">		healthFeatureConfiguration.put(ResourceTimestamp.CURRENT, ModelRepositoryResolver.repositoryRelativePath +</span>
+				&quot;/features/configurations/HealthNotAuthenticatedFeatureConfiguration.yafc&quot;);
+<span class="nc" id="L72">		healthFeatureConfiguration.put(ResourceTimestamp.NEWEST, ModelRepositoryResolver.repositoryRelativePath +</span>
+				&quot;/features/configurations/HealthAuthenticatedFeatureConfiguration.yafc&quot;);
+<span class="nc" id="L74">		healthMapping.put(ResourceType.BASE, healthBaseModel);</span>
+<span class="nc" id="L75">		healthMapping.put(ResourceType.FEATURE_CONFIGURATION, healthFeatureConfiguration);</span>
+		
+		//MONITORUING USE CASE
+<span class="nc" id="L78">		Map&lt;ResourceTimestamp, String&gt; monitoringBaseModel = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L79">		Map&lt;ResourceTimestamp, String&gt; monitoringFeatureConfiguration = new HashMap&lt;&gt;();</span>
+		
+<span class="nc" id="L81">		monitoringBaseModel.put(ResourceTimestamp.CURRENT, ModelRepositoryResolver.repositoryRelativePath + </span>
+				&quot;/models/base/MonitoringSystemBaseModel.uml&quot;);
+<span class="nc" id="L83">		monitoringFeatureConfiguration.put(ResourceTimestamp.CURRENT, ModelRepositoryResolver.repositoryRelativePath +</span>
+				&quot;/features/configurations/MonitoringSystemConfigDefault.yafc&quot;);
+<span class="nc" id="L85">		monitoringFeatureConfiguration.put(ResourceTimestamp.NEWEST, ModelRepositoryResolver.repositoryRelativePath +</span>
+				&quot;/features/configurations/MonitoringSystemConfigHighTimeslot.yafc&quot;);
+<span class="nc" id="L87">		monitoringMapping.put(ResourceType.BASE, monitoringBaseModel);</span>
+<span class="nc" id="L88">		monitoringMapping.put(ResourceType.FEATURE_CONFIGURATION, monitoringFeatureConfiguration);</span>
+		
+		//SIEMENS USE CASE
+<span class="nc" id="L91">		Map&lt;ResourceTimestamp, String&gt; siemensBaseModel = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L92">		Map&lt;ResourceTimestamp, String&gt; siemensFeatureConfiguration = new HashMap&lt;&gt;();</span>
+		
+<span class="nc" id="L94">		siemensBaseModel.put(ResourceTimestamp.CURRENT, ModelRepositoryResolver.repositoryRelativePath + </span>
+				&quot;/models/base/BaseModel-S2.uml&quot;);
+<span class="nc" id="L96">		siemensFeatureConfiguration.put(ResourceTimestamp.CURRENT, ModelRepositoryResolver.repositoryRelativePath +</span>
+				&quot;/features/configurations/FeatureModel-S1c_dm.yafc&quot;);
+<span class="nc" id="L98">		siemensFeatureConfiguration.put(ResourceTimestamp.NEWEST, ModelRepositoryResolver.repositoryRelativePath +</span>
+				&quot;/features/configurations/FeatureModel-S1c_dm_optimized.yafc&quot;);
+<span class="nc" id="L100">		siemensMapping.put(ResourceType.BASE, siemensBaseModel);</span>
+<span class="nc" id="L101">		siemensMapping.put(ResourceType.FEATURE_CONFIGURATION, siemensFeatureConfiguration);</span>
+<span class="nc" id="L102">	}</span>
+	
+	public static void setModelURI (ModelSystem system, RepositoryMetadata type, String relativeModelPath) throws EnactmentException{
+<span class="nc" id="L105">		Map&lt;ResourceType, Map&lt;ResourceTimestamp, String&gt;&gt; mapping = null;</span>
+<span class="nc bnc" id="L106" title="All 6 branches missed.">		switch (system) {</span>
+			case Atos:
+<span class="nc" id="L108">				mapping = atosMapping;</span>
+<span class="nc" id="L109">				break;</span>
+			case Atos_HSK:
+<span class="nc" id="L111">				mapping = atosHskMapping;</span>
+<span class="nc" id="L112">				break;</span>
+			case Health:
+<span class="nc" id="L114">				mapping = healthMapping;</span>
+<span class="nc" id="L115">				break;</span>
+			case MonitoringReconfiguration:
+<span class="nc" id="L117">				mapping = monitoringMapping;</span>
+<span class="nc" id="L118">				break;</span>
+			case Siemens:
+<span class="nc" id="L120">				mapping = siemensMapping;</span>
+<span class="nc" id="L121">				break;</span>
+			default:
+				//FIXME Other systems not supported
+<span class="nc" id="L124">				throw new EnactmentException(&quot;System not supported &quot; + system.getId());</span>
+		}
+<span class="nc" id="L126">		mapping.get(type.getType()).put(type.getTimestamp(), ModelRepositoryResolver.repositoryRelativePath + relativeModelPath);</span>
+<span class="nc" id="L127">	}</span>
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

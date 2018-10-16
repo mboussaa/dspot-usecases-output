@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClassGeneralizationsMatch.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">adapter-stamp</a> &gt; <a href="index.source.html" class="el_package">eu.supersede.dynadapt.usecases.patterns</a> &gt; <span class="el_source">ClassGeneralizationsMatch.java</span></div><h1>ClassGeneralizationsMatch.java</h1><pre class="source lang-java linenums">/**
+ * Generated from platform:/resource/eu.supersede.dynadapt.adapter/repository/patterns/eu/supersede/dynadapt/usecases/patterns/monitoring_reconfiguration_queries.vql
+ */
+package eu.supersede.dynadapt.usecases.patterns;
+
+import eu.supersede.dynadapt.usecases.patterns.util.ClassGeneralizationsQuerySpecification;
+import java.util.Arrays;
+import java.util.List;
+import org.eclipse.uml2.uml.Element;
+import org.eclipse.viatra.query.runtime.api.IPatternMatch;
+import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
+import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+
+/**
+ * Pattern-specific match representation of the eu.supersede.dynadapt.usecases.patterns.classGeneralizations pattern,
+ * to be used in conjunction with {@link ClassGeneralizationsMatcher}.
+ * 
+ * &lt;p&gt;Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
+ * Each instance is a (possibly partial) substitution of pattern parameters,
+ * usable to represent a match of the pattern in the result of a query,
+ * or to specify the bound (fixed) input parameters when issuing a query.
+ * 
+ * @see ClassGeneralizationsMatcher
+ * @see ClassGeneralizationsProcessor
+ * 
+ */
+@SuppressWarnings(&quot;all&quot;)
+public abstract class ClassGeneralizationsMatch extends BasePatternMatch {
+  private org.eclipse.uml2.uml.Class fClass;
+  
+  private Element fGeneralizationTarget;
+  
+<span class="nc" id="L33">  private static List&lt;String&gt; parameterNames = makeImmutableList(&quot;class&quot;, &quot;generalizationTarget&quot;);</span>
+  
+<span class="nc" id="L35">  private ClassGeneralizationsMatch(final org.eclipse.uml2.uml.Class pClass, final Element pGeneralizationTarget) {</span>
+<span class="nc" id="L36">    this.fClass = pClass;</span>
+<span class="nc" id="L37">    this.fGeneralizationTarget = pGeneralizationTarget;</span>
+<span class="nc" id="L38">  }</span>
+  
+  @Override
+  public Object get(final String parameterName) {
+<span class="nc bnc" id="L42" title="All 2 branches missed.">    if (&quot;class&quot;.equals(parameterName)) return this.fClass;</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">    if (&quot;generalizationTarget&quot;.equals(parameterName)) return this.fGeneralizationTarget;</span>
+<span class="nc" id="L44">    return null;</span>
+  }
+  
+  public org.eclipse.uml2.uml.Class getValueOfClass() {
+<span class="nc" id="L48">    return this.fClass;</span>
+  }
+  
+  public Element getGeneralizationTarget() {
+<span class="nc" id="L52">    return this.fGeneralizationTarget;</span>
+  }
+  
+  @Override
+  public boolean set(final String parameterName, final Object newValue) {
+<span class="nc bnc" id="L57" title="All 2 branches missed.">    if (!isMutable()) throw new java.lang.UnsupportedOperationException();</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">    if (&quot;class&quot;.equals(parameterName) ) {</span>
+<span class="nc" id="L59">    	this.fClass = (org.eclipse.uml2.uml.Class) newValue;</span>
+<span class="nc" id="L60">    	return true;</span>
+    }
+<span class="nc bnc" id="L62" title="All 2 branches missed.">    if (&quot;generalizationTarget&quot;.equals(parameterName) ) {</span>
+<span class="nc" id="L63">    	this.fGeneralizationTarget = (Element) newValue;</span>
+<span class="nc" id="L64">    	return true;</span>
+    }
+<span class="nc" id="L66">    return false;</span>
+  }
+  
+  public void setClass(final org.eclipse.uml2.uml.Class pClass) {
+<span class="nc bnc" id="L70" title="All 2 branches missed.">    if (!isMutable()) throw new java.lang.UnsupportedOperationException();</span>
+<span class="nc" id="L71">    this.fClass = pClass;</span>
+<span class="nc" id="L72">  }</span>
+  
+  public void setGeneralizationTarget(final Element pGeneralizationTarget) {
+<span class="nc bnc" id="L75" title="All 2 branches missed.">    if (!isMutable()) throw new java.lang.UnsupportedOperationException();</span>
+<span class="nc" id="L76">    this.fGeneralizationTarget = pGeneralizationTarget;</span>
+<span class="nc" id="L77">  }</span>
+  
+  @Override
+  public String patternName() {
+<span class="nc" id="L81">    return &quot;eu.supersede.dynadapt.usecases.patterns.classGeneralizations&quot;;</span>
+  }
+  
+  @Override
+  public List&lt;String&gt; parameterNames() {
+<span class="nc" id="L86">    return ClassGeneralizationsMatch.parameterNames;</span>
+  }
+  
+  @Override
+  public Object[] toArray() {
+<span class="nc" id="L91">    return new Object[]{fClass, fGeneralizationTarget};</span>
+  }
+  
+  @Override
+  public ClassGeneralizationsMatch toImmutable() {
+<span class="nc bnc" id="L96" title="All 2 branches missed.">    return isMutable() ? newMatch(fClass, fGeneralizationTarget) : this;</span>
+  }
+  
+  @Override
+  public String prettyPrint() {
+<span class="nc" id="L101">    StringBuilder result = new StringBuilder();</span>
+<span class="nc" id="L102">    result.append(&quot;\&quot;class\&quot;=&quot; + prettyPrintValue(fClass) + &quot;, &quot;);</span>
+    
+<span class="nc" id="L104">    result.append(&quot;\&quot;generalizationTarget\&quot;=&quot; + prettyPrintValue(fGeneralizationTarget)</span>
+    );
+<span class="nc" id="L106">    return result.toString();</span>
+  }
+  
+  @Override
+  public int hashCode() {
+<span class="nc" id="L111">    final int prime = 31;</span>
+<span class="nc" id="L112">    int result = 1;</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">    result = prime * result + ((fClass == null) ? 0 : fClass.hashCode());</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">    result = prime * result + ((fGeneralizationTarget == null) ? 0 : fGeneralizationTarget.hashCode());</span>
+<span class="nc" id="L115">    return result;</span>
+  }
+  
+  @Override
+  public boolean equals(final Object obj) {
+<span class="nc bnc" id="L120" title="All 2 branches missed.">    if (this == obj)</span>
+<span class="nc" id="L121">    	return true;</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">    if (!(obj instanceof ClassGeneralizationsMatch)) { // this should be infrequent</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">    	if (obj == null) {</span>
+<span class="nc" id="L124">    		return false;</span>
+    	}
+<span class="nc bnc" id="L126" title="All 2 branches missed.">    	if (!(obj instanceof IPatternMatch)) {</span>
+<span class="nc" id="L127">    		return false;</span>
+    	}
+<span class="nc" id="L129">    	IPatternMatch otherSig  = (IPatternMatch) obj;</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">    	if (!specification().equals(otherSig.specification()))</span>
+<span class="nc" id="L131">    		return false;</span>
+<span class="nc" id="L132">    	return Arrays.deepEquals(toArray(), otherSig.toArray());</span>
+    }
+<span class="nc" id="L134">    ClassGeneralizationsMatch other = (ClassGeneralizationsMatch) obj;</span>
+<span class="nc bnc" id="L135" title="All 4 branches missed.">    if (fClass == null) {if (other.fClass != null) return false;}</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">    else if (!fClass.equals(other.fClass)) return false;</span>
+<span class="nc bnc" id="L137" title="All 4 branches missed.">    if (fGeneralizationTarget == null) {if (other.fGeneralizationTarget != null) return false;}</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">    else if (!fGeneralizationTarget.equals(other.fGeneralizationTarget)) return false;</span>
+<span class="nc" id="L139">    return true;</span>
+  }
+  
+  @Override
+  public ClassGeneralizationsQuerySpecification specification() {
+    try {
+<span class="nc" id="L145">    	return ClassGeneralizationsQuerySpecification.instance();</span>
+<span class="nc" id="L146">    } catch (ViatraQueryException ex) {</span>
+     	// This cannot happen, as the match object can only be instantiated if the query specification exists
+<span class="nc" id="L148">     	throw new IllegalStateException (ex);</span>
+    }
+  }
+  
+  /**
+   * Returns an empty, mutable match.
+   * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
+   * 
+   * @return the empty match.
+   * 
+   */
+  public static ClassGeneralizationsMatch newEmptyMatch() {
+<span class="nc" id="L160">    return new Mutable(null, null);</span>
+  }
+  
+  /**
+   * Returns a mutable (partial) match.
+   * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
+   * 
+   * @param pClass the fixed value of pattern parameter class, or null if not bound.
+   * @param pGeneralizationTarget the fixed value of pattern parameter generalizationTarget, or null if not bound.
+   * @return the new, mutable (partial) match object.
+   * 
+   */
+  public static ClassGeneralizationsMatch newMutableMatch(final org.eclipse.uml2.uml.Class pClass, final Element pGeneralizationTarget) {
+<span class="nc" id="L173">    return new Mutable(pClass, pGeneralizationTarget);</span>
+  }
+  
+  /**
+   * Returns a new (partial) match.
+   * This can be used e.g. to call the matcher with a partial match.
+   * &lt;p&gt;The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
+   * @param pClass the fixed value of pattern parameter class, or null if not bound.
+   * @param pGeneralizationTarget the fixed value of pattern parameter generalizationTarget, or null if not bound.
+   * @return the (partial) match object.
+   * 
+   */
+  public static ClassGeneralizationsMatch newMatch(final org.eclipse.uml2.uml.Class pClass, final Element pGeneralizationTarget) {
+<span class="nc" id="L186">    return new Immutable(pClass, pGeneralizationTarget);</span>
+  }
+  
+  private static final class Mutable extends ClassGeneralizationsMatch {
+    Mutable(final org.eclipse.uml2.uml.Class pClass, final Element pGeneralizationTarget) {
+<span class="nc" id="L191">      super(pClass, pGeneralizationTarget);</span>
+<span class="nc" id="L192">    }</span>
+    
+    @Override
+    public boolean isMutable() {
+<span class="nc" id="L196">      return true;</span>
+    }
+  }
+  
+  private static final class Immutable extends ClassGeneralizationsMatch {
+    Immutable(final org.eclipse.uml2.uml.Class pClass, final Element pGeneralizationTarget) {
+<span class="nc" id="L202">      super(pClass, pGeneralizationTarget);</span>
+<span class="nc" id="L203">    }</span>
+    
+    @Override
+    public boolean isMutable() {
+<span class="nc" id="L207">      return false;</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

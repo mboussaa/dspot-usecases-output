@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Monitoring_reconfiguration_queries.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">adapter-stamp</a> &gt; <a href="index.source.html" class="el_package">eu.supersede.dynadapt.usecases.patterns</a> &gt; <span class="el_source">Monitoring_reconfiguration_queries.java</span></div><h1>Monitoring_reconfiguration_queries.java</h1><pre class="source lang-java linenums">/**
+ * Generated from platform:/resource/eu.supersede.dynadapt.adapter/repository/patterns/eu/supersede/dynadapt/usecases/patterns/monitoring_reconfiguration_queries.vql
+ */
+package eu.supersede.dynadapt.usecases.patterns;
+
+import eu.supersede.dynadapt.usecases.patterns.ClassGeneralizationsMatcher;
+import eu.supersede.dynadapt.usecases.patterns.ClassesMatcher;
+import eu.supersede.dynadapt.usecases.patterns.InstancesMatcher;
+import eu.supersede.dynadapt.usecases.patterns.MonitorsMatcher;
+import eu.supersede.dynadapt.usecases.patterns.RealizationsMatcher;
+import eu.supersede.dynadapt.usecases.patterns.TwitterTimeSlotMatcher;
+import eu.supersede.dynadapt.usecases.patterns.util.ClassGeneralizationsQuerySpecification;
+import eu.supersede.dynadapt.usecases.patterns.util.ClassesQuerySpecification;
+import eu.supersede.dynadapt.usecases.patterns.util.InstancesQuerySpecification;
+import eu.supersede.dynadapt.usecases.patterns.util.MonitorsQuerySpecification;
+import eu.supersede.dynadapt.usecases.patterns.util.RealizationsQuerySpecification;
+import eu.supersede.dynadapt.usecases.patterns.util.TwitterTimeSlotQuerySpecification;
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
+import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
+import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+
+/**
+ * A pattern group formed of all patterns defined in monitoring_reconfiguration_queries.vql.
+ * 
+ * &lt;p&gt;Use the static instance as any {@link org.eclipse.viatra.query.runtime.api.IPatternGroup}, to conveniently prepare
+ * a VIATRA Query engine for matching all patterns originally defined in file monitoring_reconfiguration_queries.vql,
+ * in order to achieve better performance than one-by-one on-demand matcher initialization.
+ * 
+ * &lt;p&gt; From package eu.supersede.dynadapt.usecases.patterns, the group contains the definition of the following patterns: &lt;ul&gt;
+ * &lt;li&gt;classes&lt;/li&gt;
+ * &lt;li&gt;classGeneralizations&lt;/li&gt;
+ * &lt;li&gt;instances&lt;/li&gt;
+ * &lt;li&gt;realizations&lt;/li&gt;
+ * &lt;li&gt;monitors&lt;/li&gt;
+ * &lt;li&gt;twitterTimeSlot&lt;/li&gt;
+ * &lt;/ul&gt;
+ * 
+ * @see IPatternGroup
+ * 
+ */
+@SuppressWarnings(&quot;all&quot;)
+public final class Monitoring_reconfiguration_queries extends BaseGeneratedPatternGroup {
+  /**
+   * Access the pattern group.
+   * 
+   * @return the singleton instance of the group
+   * @throws ViatraQueryException if there was an error loading the generated code of pattern specifications
+   * 
+   */
+  public static Monitoring_reconfiguration_queries instance() throws ViatraQueryException {
+<span class="nc bnc" id="L51" title="All 2 branches missed.">    if (INSTANCE == null) {</span>
+<span class="nc" id="L52">    	INSTANCE = new Monitoring_reconfiguration_queries();</span>
+    }
+<span class="nc" id="L54">    return INSTANCE;</span>
+  }
+  
+  private static Monitoring_reconfiguration_queries INSTANCE;
+  
+<span class="nc" id="L59">  private Monitoring_reconfiguration_queries() throws ViatraQueryException {</span>
+<span class="nc" id="L60">    querySpecifications.add(ClassesQuerySpecification.instance());</span>
+<span class="nc" id="L61">    querySpecifications.add(ClassGeneralizationsQuerySpecification.instance());</span>
+<span class="nc" id="L62">    querySpecifications.add(InstancesQuerySpecification.instance());</span>
+<span class="nc" id="L63">    querySpecifications.add(RealizationsQuerySpecification.instance());</span>
+<span class="nc" id="L64">    querySpecifications.add(MonitorsQuerySpecification.instance());</span>
+<span class="nc" id="L65">    querySpecifications.add(TwitterTimeSlotQuerySpecification.instance());</span>
+<span class="nc" id="L66">  }</span>
+  
+  public ClassesQuerySpecification getClasses() throws ViatraQueryException {
+<span class="nc" id="L69">    return ClassesQuerySpecification.instance();</span>
+  }
+  
+  public ClassesMatcher getClasses(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L73">    return ClassesMatcher.on(engine);</span>
+  }
+  
+  public ClassGeneralizationsQuerySpecification getClassGeneralizations() throws ViatraQueryException {
+<span class="nc" id="L77">    return ClassGeneralizationsQuerySpecification.instance();</span>
+  }
+  
+  public ClassGeneralizationsMatcher getClassGeneralizations(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L81">    return ClassGeneralizationsMatcher.on(engine);</span>
+  }
+  
+  public InstancesQuerySpecification getInstances() throws ViatraQueryException {
+<span class="nc" id="L85">    return InstancesQuerySpecification.instance();</span>
+  }
+  
+  public InstancesMatcher getInstances(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L89">    return InstancesMatcher.on(engine);</span>
+  }
+  
+  public RealizationsQuerySpecification getRealizations() throws ViatraQueryException {
+<span class="nc" id="L93">    return RealizationsQuerySpecification.instance();</span>
+  }
+  
+  public RealizationsMatcher getRealizations(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L97">    return RealizationsMatcher.on(engine);</span>
+  }
+  
+  public MonitorsQuerySpecification getMonitors() throws ViatraQueryException {
+<span class="nc" id="L101">    return MonitorsQuerySpecification.instance();</span>
+  }
+  
+  public MonitorsMatcher getMonitors(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L105">    return MonitorsMatcher.on(engine);</span>
+  }
+  
+  public TwitterTimeSlotQuerySpecification getTwitterTimeSlot() throws ViatraQueryException {
+<span class="nc" id="L109">    return TwitterTimeSlotQuerySpecification.instance();</span>
+  }
+  
+  public TwitterTimeSlotMatcher getTwitterTimeSlot(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L113">    return TwitterTimeSlotMatcher.on(engine);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
