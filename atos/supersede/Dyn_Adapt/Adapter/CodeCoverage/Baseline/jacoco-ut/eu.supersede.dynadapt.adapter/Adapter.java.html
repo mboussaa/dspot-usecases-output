@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Adapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">adapter-stamp</a> &gt; <a href="index.source.html" class="el_package">eu.supersede.dynadapt.adapter</a> &gt; <span class="el_source">Adapter.java</span></div><h1>Adapter.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright (c) 2016 Universitat Politécnica de Catalunya (UPC), ATOS Spain S.A
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Contributors:
+ * 	Quim Motger (UPC) - main development
+ *  Yosu Gorroñogoitia (Atos)
+ * 	
+ * Initially developed in the context of SUPERSEDE EU project
+ * www.supersede.eu
+ *******************************************************************************/
+package eu.supersede.dynadapt.adapter;
+
+import static java.util.stream.Collectors.toList;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.uml2.uml.Element;
+import org.eclipse.uml2.uml.Model;
+import org.eclipse.uml2.uml.NamedElement;
+import org.eclipse.uml2.uml.Profile;
+import org.eclipse.uml2.uml.Property;
+import org.eclipse.uml2.uml.Stereotype;
+import org.eclipse.viatra.query.runtime.api.IPatternMatch;
+import org.junit.Assert;
+
+import cz.zcu.yafmt.model.fc.FeatureConfiguration;
+import cz.zcu.yafmt.model.fc.Selection;
+import cz.zcu.yafmt.model.fm.Feature;
+import cz.zcu.yafmt.model.fm.FeatureModel;
+import cz.zcu.yafmt.model.fm.Group;
+import eu.supersede.dynadapt.adapter.exception.EnactmentException;
+import eu.supersede.dynadapt.adapter.kpi.AdapterKPIComputer;
+import eu.supersede.dynadapt.dsl.aspect.ActionOptionType;
+import eu.supersede.dynadapt.dsl.aspect.Aspect;
+import eu.supersede.dynadapt.dsl.aspect.Composition;
+import eu.supersede.dynadapt.dsl.aspect.Pointcut;
+import eu.supersede.dynadapt.dsl.aspect.impl.UpdateValueImpl;
+import eu.supersede.dynadapt.enactor.factory.EnactorFactory;
+import eu.supersede.dynadapt.model.ModelManager;
+import eu.supersede.dynadapt.model.query.ModelQuery;
+import eu.supersede.dynadapt.modeladapter.ModelAdapter;
+import eu.supersede.dynadapt.modeladapter.ModelAdapterUtilities;
+import eu.supersede.dynadapt.modelrepository.populate.PopulateRepositoryManager;
+import eu.supersede.dynadapt.modelrepository.repositoryaccess.ModelRepository;
+import eu.supersede.integration.api.adaptation.dashboad.types.Action;
+import eu.supersede.integration.api.adaptation.dashboad.types.Adaptation;
+import eu.supersede.integration.api.adaptation.dashboad.types.Enactment;
+import eu.supersede.integration.api.adaptation.dashboard.proxies.AdaptationDashboardProxy;
+import eu.supersede.integration.api.adaptation.types.BaseModel;
+import eu.supersede.integration.api.adaptation.types.GenericModel;
+import eu.supersede.integration.api.adaptation.types.IModel;
+import eu.supersede.integration.api.adaptation.types.ModelMetadata;
+import eu.supersede.integration.api.adaptation.types.ModelSystem;
+import eu.supersede.integration.api.adaptation.types.ModelType;
+import eu.supersede.integration.api.adaptation.types.ModelUpdateMetadata;
+import eu.supersede.integration.api.adaptation.types.Status;
+import eu.supersede.integration.api.adaptation.types.TypedModelId;
+
+public class Adapter implements IAdapter {
+
+	private static final double DEFAULT_ADAPTATION_RANK = 1.0;
+	private static final String DEFAULT_ADAPTATION_ID = &quot;FC_1&quot;;
+	private static final String MODELS_AUTHOR = &quot;Adapter&quot;;
+<span class="fc" id="L95">	private final static Logger log = LogManager.getLogger(Adapter.class);</span>
+	protected AdaptationDashboardProxy&lt;?, ?&gt; adaptationDashboardProxy;
+
+	private ModelRepository mr;
+	private ModelManager mm;
+	private ModelQuery mq;
+	private ModelAdapter ma;
+
+	private Map&lt;String, String&gt; modelsLocation;
+
+<span class="fc" id="L105">	public AdapterKPIComputer kpiComputerAdapter = new AdapterKPIComputer(&quot;Enactment KPI: Adapter Enactment Time&quot;);</span>
+<span class="fc" id="L106">	public AdapterKPIComputer kpiComputerEnactor = new AdapterKPIComputer(&quot;Enactment KPI: Enactor Enactment Time&quot;);</span>
+
+	private String repositoryRelativePath;
+<span class="fc" id="L109">	private boolean demo = false;</span>
+
+	public Adapter(ModelRepository mr, ModelManager mm, Map&lt;String, String&gt; modelsLocation,
+			String repositoryRelativePath) throws Exception {
+<span class="nc" id="L113">		this(mr, mm, modelsLocation, repositoryRelativePath, false);</span>
+<span class="nc" id="L114">	}</span>
+
+	public Adapter(ModelRepository mr, ModelManager mm, Map&lt;String, String&gt; modelsLocation,
+<span class="fc" id="L117">			String repositoryRelativePath, boolean demo) throws Exception {</span>
+<span class="fc" id="L118">		this.mr = mr;</span>
+<span class="fc" id="L119">		this.ma = new ModelAdapter(mm);</span>
+<span class="fc" id="L120">		this.mm = mm;</span>
+<span class="fc" id="L121">		this.mq = new ModelQuery(mm);</span>
+<span class="fc" id="L122">		this.modelsLocation = modelsLocation;</span>
+<span class="fc" id="L123">		this.repositoryRelativePath = repositoryRelativePath;</span>
+<span class="fc" id="L124">		this.demo = demo;</span>
+		// FIXME To avoid FE session expires, create the proxy upon the
+		// reception of the alarm
+		// this.adaptationDashboardProxy = new
+		// AdaptationDashboardProxy&lt;&gt;(&quot;adaptation&quot;, &quot;adaptation&quot;, &quot;atos&quot;);
+<span class="fc" id="L129">		log.debug(&quot;Adapter set up&quot;);</span>
+<span class="fc" id="L130">	}</span>
+
+	@Override
+	public void enactAdaptationDecisionAction(ModelSystem system, String adaptationDecisionActionId,
+			String featureConfigurationId) throws EnactmentException {
+<span class="fc" id="L135">		List&lt;String&gt; adaptationDecisionActionIds = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L136">		adaptationDecisionActionIds.add(adaptationDecisionActionId);</span>
+<span class="fc" id="L137">		enactAdaptationDecisionActions(system, adaptationDecisionActionIds, featureConfigurationId);</span>
+<span class="fc" id="L138">	}</span>
+
+	@Override
+	public void enactFeatureConfiguration(ModelSystem system, String featureConfigurationId) throws EnactmentException {
+		try {
+
+<span class="nc" id="L144">			doEnactmentWithEnactor(system, featureConfigurationId, null);</span>
+
+<span class="nc" id="L146">		} catch (Exception e) {</span>
+<span class="nc" id="L147">			e.printStackTrace();</span>
+<span class="nc" id="L148">			throw new EnactmentException(e);</span>
+<span class="nc" id="L149">		}</span>
+<span class="nc" id="L150">	}</span>
+
+	@Override
+	public void enactAdaptationDecisionActions(ModelSystem system, List&lt;String&gt; adaptationDecisionActionIds,
+			String featureConfigurationId) throws EnactmentException {
+		try {
+
+<span class="fc" id="L157">			doEnactment(system, adaptationDecisionActionIds, featureConfigurationId, null);</span>
+
+<span class="nc" id="L159">		} catch (Exception e) {</span>
+<span class="nc" id="L160">			e.printStackTrace();</span>
+<span class="nc" id="L161">			throw new EnactmentException(e);</span>
+<span class="fc" id="L162">		}</span>
+<span class="fc" id="L163">	}</span>
+
+	@Override
+	public void enactAdaptationDecisionActionsInFCasString(ModelSystem system, List&lt;String&gt; adaptationDecisionActionIds,
+			String featureConfigurationAsString, String featureConfigurationId) throws EnactmentException {
+		try {
+
+<span class="fc" id="L170">			doEnactment(system, adaptationDecisionActionIds, featureConfigurationId, featureConfigurationAsString);</span>
+
+<span class="nc" id="L172">		} catch (Exception e) {</span>
+<span class="nc" id="L173">			e.printStackTrace();</span>
+<span class="nc" id="L174">			throw new EnactmentException(e);</span>
+<span class="fc" id="L175">		}</span>
+<span class="fc" id="L176">	}</span>
+
+	@Override
+	public void enactAdaptationDecisionActionsForFC(ModelSystem system, String featureConfigurationId)
+			throws EnactmentException {
+
+		try {
+
+<span class="fc" id="L184">			doEnactment(system, null, featureConfigurationId, null);</span>
+
+<span class="nc" id="L186">		} catch (Exception e) {</span>
+<span class="nc" id="L187">			e.printStackTrace();</span>
+<span class="nc" id="L188">			throw new EnactmentException(e);</span>
+<span class="fc" id="L189">		}</span>
+
+<span class="fc" id="L191">	};</span>
+
+	// FIXME Divide this method in two: adaptModel(), enactModel()
+	private void doEnactment(ModelSystem system, List&lt;String&gt; adaptationDecisionActionIds,
+			String featureConfigurationId, String featureConfigurationAsString)
+			throws EnactmentException, Exception, IOException {
+
+		// Registering dashboard proxy to initialize Front-end session
+<span class="pc bpc" id="L199" title="1 of 2 branches missed.">		if (!demo)</span>
+<span class="nc" id="L200">			this.adaptationDashboardProxy = new AdaptationDashboardProxy&lt;&gt;(&quot;adaptation&quot;, &quot;adaptation&quot;,</span>
+<span class="nc" id="L201">					system.getTenant().getId());</span>
+
+<span class="fc" id="L203">		kpiComputerAdapter.startComputingKPI();</span>
+
+		// Preload Models from remote repository in temporal one
+<span class="fc" id="L206">		mr.loadModelsFromRepository(system);</span>
+
+<span class="fc" id="L208">		FeatureConfiguration newFeatureConfig = null;</span>
+
+<span class="pc bpc" id="L210" title="3 of 4 branches missed.">		if (featureConfigurationId == null &amp;&amp; featureConfigurationAsString != null) {</span>
+			// Read feature configuration from string
+<span class="nc" id="L212">			newFeatureConfig = mr.readModelFromString(featureConfigurationAsString, ModelType.FeatureConfiguration,</span>
+					FeatureConfiguration.class);
+<span class="nc" id="L214">			Assert.assertNotNull(&quot;Passed feature configuration could not be loaded: &quot;, featureConfigurationAsString);</span>
+<span class="pc bpc" id="L215" title="1 of 2 branches missed.">		} else if (featureConfigurationId == null) {</span>
+<span class="nc" id="L216">			newFeatureConfig = mr.getLastComputedFeatureConfigurationForSystem(system);</span>
+		} else {
+<span class="fc" id="L218">			newFeatureConfig = mr.getFeatureConfigurationModel(featureConfigurationId);</span>
+		}
+
+		// Get currently enacted BaseModel
+<span class="fc" id="L222">		Model baseModel = mr.getLastBaseModelForSystem(system);</span>
+<span class="fc" id="L223">		mm.setTargetModel(baseModel);</span>
+
+		// Get currently enacted FeatureConfiguration
+<span class="fc" id="L226">		FeatureConfiguration originalFeatureConfig = mr.getLastEnactedFeatureConfigurationForSystem(system);</span>
+
+		// Select features that have suffered change. Only leaf selections are
+		// included
+<span class="fc" id="L230">		List&lt;Selection&gt; changedSelections = diffFeatureConfigurations(originalFeatureConfig, newFeatureConfig);</span>
+
+		// Filter out changedSelections not included in
+		// adaptationDecisionActionIds
+<span class="pc bpc" id="L234" title="1 of 4 branches missed.">		if (adaptationDecisionActionIds != null &amp;&amp; !adaptationDecisionActionIds.isEmpty()) {</span>
+<span class="fc" id="L235">			List&lt;Selection&gt; droppedSelections = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L236" title="All 2 branches covered.">			for (Selection s : changedSelections) {</span>
+<span class="fc bfc" id="L237" title="All 2 branches covered.">				if (!adaptationDecisionActionIds.contains(s.getId())) {</span>
+<span class="fc" id="L238">					log.debug(&quot;Selection &quot; + s.getId()</span>
+							+ &quot; not required for enactment. Dropped from list of changed selections&quot;);
+<span class="fc" id="L240">					droppedSelections.add(s);</span>
+				}
+<span class="fc" id="L242">			}</span>
+<span class="fc" id="L243">			changedSelections.removeAll(droppedSelections);</span>
+		}
+
+<span class="pc bpc" id="L246" title="1 of 2 branches missed.">		if (changedSelections.isEmpty()) {</span>
+			// There are not adaptation changes to enact, reporting as an
+			// exception
+<span class="nc" id="L249">			throw new EnactmentException(</span>
+					&quot;No adaptation changes for enactment between enacted and computed FCs have been detected&quot;);
+		}
+
+		// BASE MODEL ADAPTATION
+
+<span class="fc" id="L255">		Model model = adapt(system, changedSelections, baseModel);</span>
+<span class="fc" id="L256">		kpiComputerAdapter.stopComputingKPI();</span>
+<span class="fc" id="L257">		kpiComputerAdapter.reportComputedKPI();</span>
+
+		// BASE MODEL ENACTMENT
+<span class="fc" id="L260">		EnactmentException ee = null;</span>
+<span class="pc bpc" id="L261" title="1 of 2 branches missed.">		if (model != null) {</span>
+			// NOTE adapted model must be placed in a folder at the same level
+			// as the base model's folder
+			// otherwise referenced models (e.g., profiles) are not resolved.
+<span class="fc" id="L265">			String suri = repositoryRelativePath + &quot;/&quot; + modelsLocation.get(&quot;adapted&quot;) + model.getName() + &quot;.uml&quot;;</span>
+<span class="fc" id="L266">			URI uri = URI.createFileURI(suri);</span>
+<span class="fc" id="L267">			String adaptation_suffix = &quot;_&quot; + UUID.randomUUID();</span>
+<span class="fc" id="L268">			uri = mm.saveModel(model.eResource(), uri, adaptation_suffix + &quot;.uml&quot;);</span>
+<span class="fc" id="L269">			log.debug(&quot;Saved updated model in &quot; + uri);</span>
+
+			// Ask Enactor to enact adapted model
+<span class="pc bpc" id="L272" title="1 of 2 branches missed.">			if (!demo) {</span>
+				try {
+<span class="nc" id="L274">					log.debug(&quot;Invoking enactor for system &quot; + system);</span>
+<span class="nc" id="L275">					kpiComputerEnactor.startComputingKPI();</span>
+<span class="nc" id="L276">					Model enactedModel = null;</span>
+					try {
+<span class="nc" id="L278">						enactedModel = EnactorFactory.getEnactorForSystem(system).enactAdaptedModel(model, baseModel,</span>
+								demo);
+<span class="nc" id="L280">					} catch (UnsupportedOperationException ex) {</span>
+<span class="nc" id="L281">						log.info(&quot;There is not enactor registered for system: &quot; + system + &quot; . Skipping&quot;);</span>
+<span class="nc" id="L282">					}</span>
+<span class="nc" id="L283">					kpiComputerEnactor.stopComputingKPI();</span>
+<span class="nc" id="L284">					kpiComputerEnactor.reportComputedKPI();</span>
+					// Update enacted model into repository
+<span class="nc bnc" id="L286" title="All 2 branches missed.">					if (enactedModel != null) {</span>
+<span class="nc" id="L287">						String id = storeAdaptedModelInRepository(system, model);</span>
+<span class="nc" id="L288">						log.debug(&quot;Adapted model has been stored in the repository with id: &quot; + id);</span>
+
+						// Update enacted FC
+<span class="nc" id="L291">						eu.supersede.integration.api.adaptation.types.FeatureConfiguration fcMetadata = mr</span>
+<span class="nc" id="L292">								.getMetadataOfLastComputedFeatureConfigurationForSystem(system);</span>
+<span class="nc" id="L293">						id = mr.storeModel(newFeatureConfig, ModelType.FeatureConfiguration,</span>
+<span class="nc" id="L294">								createModelMetadata(fcMetadata, Status.Enacted), fcMetadata.getRelativePath());</span>
+<span class="nc" id="L295">						log.debug(&quot;Enacted FC has been stored in the repository with id: &quot; + id);</span>
+					}
+<span class="nc" id="L297">				} catch (Exception e) {</span>
+<span class="nc" id="L298">					e.printStackTrace();</span>
+<span class="nc" id="L299">					ee = new EnactmentException(e);</span>
+<span class="nc" id="L300">				}</span>
+
+				// Recover the adaptation corresponding to the latest feature
+				// configuration
+<span class="nc" id="L304">				String adaptationId = featureConfigurationId;</span>
+<span class="nc" id="L305">				Adaptation adaptation = adaptationDashboardProxy.getAdaptation(adaptationId);</span>
+<span class="nc bnc" id="L306" title="All 2 branches missed.">				if (adaptation == null) {</span>
+<span class="nc" id="L307">					log.warn(&quot;Adaptation with id &quot; + adaptationId + &quot; not found in dashboard&quot;);</span>
+<span class="nc" id="L308">					adaptation = createAdaptation(adaptationId,</span>
+<span class="nc" id="L309">							String.format(&quot;%s %s&quot;, system.toString(), featureConfigurationId), system,</span>
+<span class="nc" id="L310">							changedSelections, kpiComputerAdapter.getInitialProcessingTime());</span>
+<span class="nc" id="L311">					adaptation = adaptationDashboardProxy.addAdaptation(adaptation);</span>
+				}
+
+				// Notify dashboard the enactment of the FC
+				// TODO Do we need to report more data to dashboard in case of
+				// failure?
+<span class="nc bnc" id="L317" title="All 2 branches missed.">				Enactment enactment = createEnactment(adaptationId, ee == null,</span>
+<span class="nc" id="L318">						kpiComputerAdapter.getInitialProcessingTime(), kpiComputerEnactor.getFinalProcessingTime());</span>
+				// Populate Enactment data
+<span class="nc" id="L320">				adaptationDashboardProxy.addEnactment(enactment);</span>
+			}
+
+			// TODO Notify DM that adaptation actions have been enacted
+<span class="fc" id="L324">			log.debug(&quot;Notifing back to DM that adaptation actions have been enacted&quot;);</span>
+		}
+<span class="pc bpc" id="L326" title="2 of 4 branches missed.">		if ((model == null) || !(ee == null)) {</span>
+			// TODO Notify DM that adaptation actions have not been enacted
+<span class="nc" id="L328">			log.debug(&quot;Notifing back to DM that adaptation actions have not been enacted&quot;);</span>
+<span class="nc bnc" id="L329" title="All 2 branches missed.">			if (ee != null)</span>
+<span class="nc" id="L330">				throw ee;</span>
+<span class="nc bnc" id="L331" title="All 2 branches missed.">			if (model == null)</span>
+<span class="nc" id="L332">				throw new EnactmentException(&quot;Adaptation model was not computed&quot;);</span>
+		}
+<span class="fc" id="L334">	}</span>
+
+	private String storeAdaptedModelInRepository(ModelSystem system, Model model) throws Exception {
+<span class="nc" id="L337">		BaseModel baseModelMetadata = mr.getMetadataOfLastBaseModelForSystem(system);</span>
+		// FIXME Use update based model instead of creating a new
+		// one. Fix the problem found
+		// mr.updateBaseModel(enactedModel,
+		// createBaseModelUpdateMetadata(metadata), (String)
+		// metadata.getValue(&quot;id&quot;));
+<span class="nc" id="L343">		String id = mr.storeModel(model, ModelType.BaseModel, createModelMetadata(baseModelMetadata, Status.Enacted),</span>
+<span class="nc" id="L344">				baseModelMetadata.getRelativePath());</span>
+		// Refresh adapted model for associated system.
+<span class="nc" id="L346">		log.debug(&quot;Stored updated model for &quot; + system);</span>
+<span class="nc bnc" id="L347" title="All 2 branches missed.">		if (system == ModelSystem.AtosMonitoringEnabling) {</span>
+<span class="nc" id="L348">			log.debug(&quot;Stored updated model for AtosMonitoringTimeSlot&quot;);</span>
+<span class="nc" id="L349">			storeAdaptedModelInRepository(ModelSystem.AtosMonitoringTimeSlot, model);</span>
+		}
+<span class="nc" id="L351">		return id;</span>
+	}
+
+	private boolean isSiemensSystem(ModelSystem system) {
+		// TODO Auto-generated method stub
+<span class="nc bnc" id="L356" title="All 8 branches missed.">		return system == ModelSystem.Siemens || system == ModelSystem.Siemens_Buildings</span>
+				|| system == ModelSystem.Siemens_Types || system == ModelSystem.Siemens_GetMinMaxDates;
+	}
+
+	private void doEnactmentWithEnactor(ModelSystem system, String featureConfigurationId,
+			String featureConfigurationAsString) throws EnactmentException, Exception, IOException {
+
+		// Registering dashboard proxy to initialize Front-end session
+<span class="nc" id="L364">		this.adaptationDashboardProxy = new AdaptationDashboardProxy&lt;&gt;(&quot;adaptation&quot;, &quot;adaptation&quot;,</span>
+<span class="nc" id="L365">				system.getTenant().getId());</span>
+
+<span class="nc" id="L367">		kpiComputerAdapter.startComputingKPI();</span>
+
+		// Preload Models from remote repository in temporal one
+<span class="nc" id="L370">		mr.loadModelsFromRepository(system);</span>
+
+<span class="nc" id="L372">		FeatureConfiguration newFeatureConfig = null;</span>
+
+<span class="nc bnc" id="L374" title="All 4 branches missed.">		if (featureConfigurationId == null &amp;&amp; featureConfigurationAsString != null) {</span>
+			// Read feature configuration from string
+<span class="nc" id="L376">			newFeatureConfig = mr.readModelFromString(featureConfigurationAsString, ModelType.FeatureConfiguration,</span>
+					FeatureConfiguration.class);
+<span class="nc" id="L378">			Assert.assertNotNull(&quot;Passed feature configuration could not be loaded: &quot;, featureConfigurationAsString);</span>
+<span class="nc bnc" id="L379" title="All 2 branches missed.">		} else if (featureConfigurationId == null) {</span>
+<span class="nc" id="L380">			newFeatureConfig = mr.getLastComputedFeatureConfigurationForSystem(system);</span>
+		} else {
+<span class="nc" id="L382">			newFeatureConfig = mr.getFeatureConfigurationModel(featureConfigurationId);</span>
+		}
+
+		// Get currently enacted FeatureConfiguration
+<span class="nc" id="L386">		FeatureConfiguration originalFeatureConfig = mr.getLastEnactedFeatureConfigurationForSystem(system);</span>
+
+<span class="nc" id="L388">		kpiComputerAdapter.stopComputingKPI();</span>
+<span class="nc" id="L389">		kpiComputerAdapter.reportComputedKPI();</span>
+
+		// BASE MODEL ENACTMENT
+<span class="nc" id="L392">		EnactmentException ee = null;</span>
+<span class="nc" id="L393">		String uploadedFeatureConfigurationId = null;</span>
+<span class="nc bnc" id="L394" title="All 2 branches missed.">		if (newFeatureConfig != null) {</span>
+
+			// Ask Enactor to enact the new Feature Configuration
+<span class="nc" id="L397">			kpiComputerEnactor.startComputingKPI();</span>
+			try {
+<span class="nc" id="L399">				log.debug(&quot;Invoking enactor for system &quot; + system);</span>
+<span class="nc" id="L400">				EnactorFactory.getEnactorForSystem(system).enactFeatureConfiguration(newFeatureConfig, demo);</span>
+<span class="nc" id="L401">			} catch (Exception e) {</span>
+<span class="nc" id="L402">				e.printStackTrace();</span>
+<span class="nc" id="L403">				ee = new EnactmentException(e);</span>
+<span class="nc" id="L404">			}</span>
+
+<span class="nc" id="L406">			kpiComputerEnactor.stopComputingKPI();</span>
+<span class="nc" id="L407">			kpiComputerEnactor.reportComputedKPI();</span>
+
+			// Recover the adaptation corresponding to the latest feature
+			// configuration
+<span class="nc bnc" id="L411" title="All 4 branches missed.">			String adaptationId = featureConfigurationId != null ? featureConfigurationId</span>
+					: uploadedFeatureConfigurationId != null ? uploadedFeatureConfigurationId : DEFAULT_ADAPTATION_ID;
+<span class="nc" id="L413">			Adaptation adaptation = adaptationDashboardProxy.getAdaptation(adaptationId);</span>
+<span class="nc bnc" id="L414" title="All 2 branches missed.">			if (adaptation == null) {</span>
+<span class="nc" id="L415">				log.warn(&quot;Adaptation with id &quot; + adaptationId + &quot; not found in dashboard&quot;);</span>
+<span class="nc" id="L416">				List&lt;Selection&gt; changedSelections = new ArrayList&lt;Selection&gt;();</span>
+<span class="nc" id="L417">				adaptation = createAdaptation(adaptationId,</span>
+<span class="nc" id="L418">						String.format(&quot;%s %s&quot;, system.toString(), featureConfigurationId), system, changedSelections,</span>
+<span class="nc" id="L419">						kpiComputerAdapter.getInitialProcessingTime());</span>
+<span class="nc" id="L420">				adaptation = adaptationDashboardProxy.addAdaptation(adaptation);</span>
+			}
+
+			// Notify dashboard the enactment of the FC
+<span class="nc bnc" id="L424" title="All 2 branches missed.">			Enactment enactment = createEnactment(adaptationId, ee == null,</span>
+<span class="nc" id="L425">					kpiComputerAdapter.getInitialProcessingTime(), kpiComputerEnactor.getFinalProcessingTime());</span>
+			// Populate Enactment data
+<span class="nc" id="L427">			adaptationDashboardProxy.addEnactment(enactment);</span>
+
+			// TODO Notify DM that adaptation actions have been enacted
+<span class="nc" id="L430">			log.debug(&quot;Notifing back to DM that adaptation actions have been enacted&quot;);</span>
+		}
+<span class="nc bnc" id="L432" title="All 4 branches missed.">		if ((newFeatureConfig == null) || !(ee == null)) {</span>
+			// TODO Notify DM that adaptation actions have not been enacted
+<span class="nc" id="L434">			log.debug(&quot;Notifing back to DM that adaptation actions have not been enacted&quot;);</span>
+<span class="nc bnc" id="L435" title="All 2 branches missed.">			if (ee != null)</span>
+<span class="nc" id="L436">				throw ee;</span>
+<span class="nc bnc" id="L437" title="All 2 branches missed.">			if (newFeatureConfig == null)</span>
+<span class="nc" id="L438">				throw new EnactmentException(&quot;There was not found the computed feature configuration to be enacted&quot;);</span>
+		}
+<span class="nc" id="L440">	}</span>
+
+	/**
+	 * Load the latest adapted base model for the given system.
+	 * 
+	 * @param am
+	 *            the latest adapted base {@link Model}
+	 * @param amName
+	 *            the name of the adapted mdel file
+	 * @param system
+	 *            the system owner of the adated model
+	 * @return the id of the uploaded model in the model repository
+	 * @throws IOException
+	 * @throws Exception
+	 */
+	protected String uploadLatestAdaptedModel(Model am, String amName, ModelSystem system)
+			throws IOException, Exception {
+		// String userdir = System.getProperty(&quot;user.dir&quot;);
+		// Path repositoryPath =
+		// FileSystems.getDefault().getPath(userdir,repositoryRelativePath);
+<span class="nc" id="L460">		PopulateRepositoryManager prm = new PopulateRepositoryManager(mm, mr);</span>
+<span class="nc" id="L461">		String modelId = prm.populateModel(</span>
+				// Paths.get(repositoryPath.toString(), &quot;models/adapted&quot;,
+				// amName),
+<span class="nc" id="L464">				am, amName, MODELS_AUTHOR, system, Status.Enacted, modelsLocation.get(&quot;adapted&quot;), Model.class,</span>
+				ModelType.BaseModel, BaseModel.class);
+<span class="nc" id="L466">		return modelId;</span>
+	}
+
+	/**
+	 * Load the latest computed FeatureConfiguration for the given system.
+	 * 
+	 * @param fc
+	 *            the latest {@link FeatureConfiguration} model
+	 * @param fcName
+	 *            the name of the feature configuration file
+	 * @param system
+	 *            the system owner of the adated model
+	 * @return the id of the uploaded model in the model repository
+	 * @throws IOException
+	 * @throws Exception
+	 */
+	protected String uploadLatestComputedFC(FeatureConfiguration fc, String fcName, ModelSystem system)
+			throws IOException, Exception {
+		// String userdir = System.getProperty(&quot;user.dir&quot;);
+		// Path repositoryPath =
+		// FileSystems.getDefault().getPath(userdir,repositoryRelativePath);
+<span class="nc" id="L487">		PopulateRepositoryManager prm = new PopulateRepositoryManager(mm, mr);</span>
+<span class="nc" id="L488">		String modelId = prm.populateModel(</span>
+				// Paths.get(repositoryPath.toString(),
+				// &quot;features/configurations&quot;, fcName),
+<span class="nc" id="L491">				fc, fcName, MODELS_AUTHOR, system, Status.Computed, modelsLocation.get(&quot;configurations&quot;),</span>
+				FeatureConfiguration.class, ModelType.FeatureConfiguration,
+				eu.supersede.integration.api.adaptation.types.FeatureConfiguration.class);
+<span class="nc" id="L494">		return modelId;</span>
+	}
+
+	/**
+	 * Create an {@link Adaptation} object related to the latest feature
+	 * configuration id which is passed as parameter.
+	 * 
+	 * @param fc_id
+	 *            id of the {@link Adaptation} whose enactment is required
+	 * @param name
+	 *            of the adaptation
+	 * @param system
+	 *            the {@link ModelSystem} the new adaptation belongs to
+	 * @param features
+	 *            the list of features that have changed in the latest feature
+	 *            configuration
+	 * @param inititialTime
+	 *            is the enactment process initiation time
+	 * @return the {@link Enactment}
+	 */
+	protected Adaptation createAdaptation(String fc_id, String name, ModelSystem system, List&lt;Selection&gt; features,
+			Date inititialTime) {
+<span class="nc" id="L516">		Adaptation adaptation = new Adaptation();</span>
+<span class="nc" id="L517">		adaptation.setFc_id(fc_id);</span>
+		// adaptation.setComputation_timestamp(Calendar.getInstance().getTime());
+<span class="nc" id="L519">		adaptation.setComputation_timestamp(inititialTime);</span>
+<span class="nc" id="L520">		adaptation.setModel_system(system);</span>
+<span class="nc" id="L521">		adaptation.setName(name);</span>
+<span class="nc" id="L522">		adaptation.setRank(DEFAULT_ADAPTATION_RANK);</span>
+<span class="nc" id="L523">		adaptation.getActions().addAll(createAction(features));</span>
+<span class="nc" id="L524">		return adaptation;</span>
+	}
+
+	/**
+	 * TODO This is a dummy implementation of the action description
+	 * 
+	 * @param features
+	 *            the list of features that have changed in the latest feature
+	 *            configuration
+	 * @return the list of enactment {@link Action}
+	 */
+	protected List&lt;Action&gt; createAction(List&lt;Selection&gt; features) {
+<span class="nc" id="L536">		List&lt;Action&gt; actions = new ArrayList&lt;Action&gt;();</span>
+<span class="nc bnc" id="L537" title="All 2 branches missed.">		for (Selection feature : features) {</span>
+<span class="nc" id="L538">			Action action = new Action();</span>
+			// action.setAction_id(&quot;vm2_b_high&quot;);
+			// action.setDescription(&quot;Medium load configuration for HSK
+			// service&quot;);
+			// action.setName(&quot;VM2_B_HighConfiguration&quot;);
+			// action.setEnabled(true);
+<span class="nc" id="L544">			action.setAction_id(feature.getId());</span>
+<span class="nc bnc" id="L545" title="All 2 branches missed.">			String description = feature.getDescription() != null ? feature.getDescription() : &quot;N/A&quot;;</span>
+<span class="nc" id="L546">			action.setDescription(description);</span>
+<span class="nc" id="L547">			action.setName(feature.getName());</span>
+<span class="nc" id="L548">			action.setEnabled(feature.isEnabled());</span>
+<span class="nc" id="L549">			actions.add(action);</span>
+<span class="nc" id="L550">		}</span>
+<span class="nc" id="L551">		return actions;</span>
+	}
+
+	/**
+	 * Create an {@link Enactment} object related to the adaptation whose id which
+	 * is passed as parameter.
+	 * 
+	 * @param fc_id
+	 *            id of the {@link Adaptation} whose enactment is required
+	 * @param status
+	 *            true when the enactment was sucessful, false otherwise
+	 * @param initialTime
+	 *            is the enactment process initiation time
+	 * @param finalTime
+	 *            is the enactment process finalization time
+	 * @return the {@link Enactment}
+	 */
+	protected Enactment createEnactment(String fc_id, boolean status, Date initialTime, Date finalTime) {
+
+<span class="nc" id="L570">		Long duration = finalTime.getTime() - initialTime.getTime();</span>
+<span class="nc" id="L571">		Date durationDate = new Date(duration);</span>
+<span class="nc" id="L572">		SimpleDateFormat df = new SimpleDateFormat(&quot;HH:mm:ss.SS&quot;);// dd/MM/yyyy</span>
+<span class="nc" id="L573">		String durationDateString = df.format(durationDate);</span>
+<span class="nc" id="L574">		log.info(&quot;The enactment completion time was &quot; + durationDateString);</span>
+
+<span class="nc" id="L576">		Enactment enactment = new Enactment();</span>
+<span class="nc" id="L577">		enactment.setFc_id(fc_id);</span>
+		// enactment.setEnactment_completion_time(Calendar.getInstance().getTime());
+		// enactment.setEnactment_request_time(Calendar.getInstance().getTime());
+<span class="nc" id="L580">		enactment.setEnactment_request_time(initialTime);</span>
+<span class="nc" id="L581">		enactment.setEnactment_completion_time(durationDate);</span>
+<span class="nc" id="L582">		enactment.setResult(status);</span>
+<span class="nc" id="L583">		return enactment;</span>
+	}
+
+	public Model adapt(ModelSystem modelSystem, List&lt;Selection&gt; selections, Model baseModel) throws Exception {
+
+<span class="fc" id="L588">		Model model = null;</span>
+		// Clone base model
+<span class="fc" id="L590">		Model clonnedModel = (Model) EcoreUtil.copy(baseModel);</span>
+
+		// Create a model manager targeting cloned model
+<span class="fc" id="L593">		ModelManager clonedModelManager = new ModelManager(clonnedModel, mm.getTargetModelAsResource().getURI());</span>
+
+		// Preserving stereotypes in cloned model
+		// checkStereotypesInModel(baseModel);
+<span class="fc" id="L597">		copyStereotypes(baseModel, clonnedModel);</span>
+		// checkStereotypesInModel(clonnedModel);
+
+		// Create modelQuery targeting cloned Model
+<span class="fc" id="L601">		this.mq = new ModelQuery(clonedModelManager);</span>
+
+<span class="fc bfc" id="L603" title="All 2 branches covered.">		for (Selection selection : selections) {</span>
+<span class="fc" id="L604">			Feature feature = selection.getFeature();</span>
+<span class="fc" id="L605">			boolean featureEnabled = selection.isEnabled();</span>
+
+<span class="fc bfc" id="L607" title="All 2 branches covered.">			log.debug(&quot;Feature &lt;&quot; + feature.getId() + &quot;&gt;&quot; + (featureEnabled ? &quot; Enabled&quot; : &quot; Disabled&quot;));</span>
+<span class="fc" id="L608">			List&lt;Aspect&gt; aspects = mr.getAspectModels(feature.getId(), modelsLocation);</span>
+
+<span class="fc" id="L610">			log.debug(&quot;Found &quot; + aspects.size() + &quot; adaptations for feature: &quot; + feature.getId());</span>
+
+<span class="fc bfc" id="L612" title="All 2 branches covered.">			for (Aspect aspect : aspects) {</span>
+<span class="fc" id="L613">				log.debug(&quot;\tAspect name: &quot; + aspect.getName());</span>
+<span class="fc" id="L614">				Stereotype role = null;</span>
+<span class="fc" id="L615">				List&lt;Pointcut&gt; pointcuts = aspect.getPointcuts();</span>
+
+<span class="fc" id="L617">				HashMap&lt;Stereotype, List&lt;Element&gt;&gt; matchingElements = new HashMap&lt;&gt;();</span>
+
+<span class="fc bfc" id="L619" title="All 2 branches covered.">				for (Pointcut p : pointcuts) {</span>
+<span class="fc" id="L620">					role = p.getRole();</span>
+<span class="fc" id="L621">					matchingElements.put(role, new ArrayList&lt;&gt;());</span>
+<span class="fc" id="L622">					log.debug(&quot;\tRole: &quot; + role.getName());</span>
+<span class="fc" id="L623">					Collection&lt;? extends IPatternMatch&gt; matches = mq.query(p.getPattern());</span>
+<span class="fc bfc" id="L624" title="All 2 branches covered.">					for (IPatternMatch i : matches) {</span>
+<span class="fc" id="L625">						Element e = (Element) i.get(0);</span>
+<span class="fc" id="L626">						log.debug(&quot;\tMatching Element: &quot; + e);</span>
+<span class="fc" id="L627">						log.debug(&quot;\tApplicable stereotypes: &quot; + e.getApplicableStereotypes().size());</span>
+<span class="fc" id="L628">						matchingElements.get(role).add(e);</span>
+<span class="fc" id="L629">					}</span>
+<span class="fc" id="L630">				}</span>
+<span class="fc" id="L631">				Model variant = aspect.getAdvice();</span>
+<span class="fc bfc" id="L632" title="All 2 branches covered.">				log.debug(&quot;\tVariant: &quot; + (variant != null ? variant.getName() : &quot;Null Variant - Not provided&quot;));</span>
+
+<span class="fc bfc" id="L634" title="All 2 branches covered.">				for (Composition c : aspect.getCompositions()) {</span>
+<span class="fc" id="L635">					log.debug(&quot;\tComposition &quot; + c.getName());</span>
+<span class="fc" id="L636">					boolean compositionEnabled = c.getFeature_enabled();</span>
+<span class="fc bfc" id="L637" title="All 2 branches covered.">					if (featureEnabled == compositionEnabled) {</span>
+<span class="fc" id="L638">						ActionOptionType actionOptionType = c.getAction();</span>
+<span class="fc bfc" id="L639" title="All 2 branches covered.">						if (actionOptionType instanceof UpdateValueImpl) {</span>
+<span class="fc" id="L640">							String value = actionOptionType</span>
+<span class="fc" id="L641">									.eGet(actionOptionType.eClass().getEStructuralFeature(&quot;value&quot;)).toString();</span>
+<span class="fc" id="L642">							model = ma.applyUpdateCompositionDirective(clonnedModel, matchingElements, value);</span>
+<span class="fc" id="L643">						} else {</span>
+<span class="fc" id="L644">							model = ma.applyCompositionDirective(c.getAction(), clonnedModel, matchingElements,</span>
+<span class="fc" id="L645">									c.getAdvice(), variant);</span>
+						}
+					}
+<span class="fc" id="L648">				}</span>
+<span class="fc" id="L649">			}</span>
+<span class="fc" id="L650">		}</span>
+
+<span class="fc" id="L652">		checkStereotypesInModel(model);</span>
+<span class="fc" id="L653">		return model;</span>
+
+	}
+
+	// Calculate leaf selection changes among provided feature configurations
+	private List&lt;Selection&gt; diffFeatureConfigurations(FeatureConfiguration originalFeatureConfig,
+			FeatureConfiguration newFeatureConfig) {
+<span class="fc" id="L660">		FeatureModel fm = originalFeatureConfig.getFeatureModelCopy();</span>
+<span class="fc" id="L661">		Feature root = fm.getRoot();</span>
+
+<span class="fc" id="L663">		return diffFeatureConfigurationsInFeature(root, originalFeatureConfig, newFeatureConfig);</span>
+	}
+
+	private List&lt;Selection&gt; diffFeatureConfigurationsInFeature(Feature feature,
+			FeatureConfiguration originalFeatureConfig, FeatureConfiguration newFeatureConfig) {
+
+<span class="fc" id="L669">		List&lt;Selection&gt; selections = new ArrayList&lt;Selection&gt;();</span>
+
+		// Only computes differences for leaf features
+<span class="fc bfc" id="L672" title="All 2 branches covered.">		if (isLeafFeature(feature)) {</span>
+<span class="fc" id="L673">			selections = diffFeatureConfigurationsInFeature(feature.getId(), originalFeatureConfig, newFeatureConfig);</span>
+		}
+
+<span class="fc bfc" id="L676" title="All 2 branches covered.">		for (Feature child : feature.getFeatures()) {</span>
+<span class="fc" id="L677">			selections.addAll(diffFeatureConfigurationsInFeature(child, originalFeatureConfig, newFeatureConfig));</span>
+<span class="fc" id="L678">		}</span>
+
+<span class="fc bfc" id="L680" title="All 2 branches covered.">		for (Group group : feature.getGroups()) {</span>
+<span class="fc bfc" id="L681" title="All 2 branches covered.">			for (Feature childInGroup : group.getFeatures()) {</span>
+<span class="fc" id="L682">				selections.addAll(</span>
+<span class="fc" id="L683">						diffFeatureConfigurationsInFeature(childInGroup, originalFeatureConfig, newFeatureConfig));</span>
+<span class="fc" id="L684">			}</span>
+<span class="fc" id="L685">		}</span>
+<span class="fc" id="L686">		return selections;</span>
+	}
+
+	private boolean isLeafFeature(Feature feature) {
+<span class="fc bfc" id="L690" title="All 4 branches covered.">		return feature.getFeatures().isEmpty() &amp;&amp; feature.getGroups().isEmpty();</span>
+	}
+
+	private List&lt;Selection&gt; diffFeatureConfigurationsInFeature(String featureId,
+			FeatureConfiguration originalFeatureConfig, FeatureConfiguration newFeatureConfig) {
+<span class="fc" id="L695">		List&lt;Selection&gt; selections = new ArrayList&lt;Selection&gt;();</span>
+
+<span class="fc" id="L697">		List&lt;Selection&gt; originalSelections = originalFeatureConfig.getSelectionsById(featureId);</span>
+<span class="fc" id="L698">		List&lt;Selection&gt; newSelections = newFeatureConfig.getSelectionsById(featureId);</span>
+
+<span class="fc bfc" id="L700" title="All 2 branches covered.">		for (Selection s1 : originalSelections) {</span>
+<span class="fc bfc" id="L701" title="All 2 branches covered.">			if (!selectionExistsInList(s1, newSelections)) {</span>
+<span class="fc" id="L702">				s1.setEnabled(false);</span>
+<span class="fc" id="L703">				selections.add(s1);</span>
+			}
+<span class="fc" id="L705">		}</span>
+
+<span class="fc bfc" id="L707" title="All 2 branches covered.">		for (Selection s1 : newSelections) {</span>
+<span class="fc bfc" id="L708" title="All 2 branches covered.">			if (!selectionExistsInList(s1, originalSelections)) {</span>
+<span class="fc" id="L709">				selections.add(s1);</span>
+			}
+<span class="fc" id="L711">		}</span>
+
+		/**
+		 * Monitoring UC testing
+		 */
+<span class="fc bfc" id="L716" title="All 2 branches covered.">		for (Selection s1 : originalSelections) {</span>
+<span class="pc bpc" id="L717" title="1 of 2 branches missed.">			if (selectionIsModified(s1, newSelections)) {</span>
+<span class="nc" id="L718">				selections.add(s1);</span>
+			}
+<span class="fc" id="L720">		}</span>
+
+<span class="fc" id="L722">		return selections;</span>
+	}
+
+	private boolean selectionExistsInList(Selection s1, List&lt;Selection&gt; list) {
+<span class="fc" id="L726">		boolean result = false;</span>
+
+<span class="fc bfc" id="L728" title="All 2 branches covered.">		for (Selection s : list) {</span>
+<span class="pc bpc" id="L729" title="1 of 2 branches missed.">			if (s.getId().equals(s1.getId())) {</span>
+<span class="fc" id="L730">				result = true;</span>
+<span class="fc" id="L731">				break;</span>
+			}
+<span class="nc" id="L733">		}</span>
+
+<span class="fc" id="L735">		return result;</span>
+	}
+
+	private boolean selectionIsModified(Selection s1, List&lt;Selection&gt; list) {
+<span class="fc" id="L739">		boolean result = false;</span>
+
+<span class="fc bfc" id="L741" title="All 2 branches covered.">		for (Selection s : list) {</span>
+<span class="pc bpc" id="L742" title="1 of 4 branches missed.">			if (s.getId().equals(s1.getId()) &amp;&amp; s.getValues().size() &gt; 0) {</span>
+<span class="pc bpc" id="L743" title="1 of 2 branches missed.">				if (!s.getValues().get(0).eGet(s.getValues().get(0).eClass().getEStructuralFeature(&quot;value&quot;)).equals(</span>
+<span class="fc" id="L744">						s1.getValues().get(0).eGet(s.getValues().get(0).eClass().getEStructuralFeature(&quot;value&quot;))))</span>
+<span class="nc" id="L745">					result = true;</span>
+				break;
+			}
+<span class="fc" id="L748">		}</span>
+
+<span class="fc" id="L750">		return result;</span>
+	}
+
+	protected void save(Model model, org.eclipse.emf.common.util.URI uri) {
+
+<span class="nc" id="L755">		ResourceSet resourceSet = new ResourceSetImpl();</span>
+		// UMLResourcesUtil.init(resourceSet);
+<span class="nc" id="L757">		Resource resource = resourceSet.createResource(uri);</span>
+<span class="nc" id="L758">		resource.getContents().add(model);</span>
+		try {
+<span class="nc" id="L760">			resource.save(null); // no save options needed</span>
+<span class="nc" id="L761">		} catch (IOException ioe) {</span>
+<span class="nc" id="L762">		}</span>
+<span class="nc" id="L763">	}</span>
+
+	private ModelMetadata createModelMetadata(GenericModel model, Status status) throws Exception {
+<span class="nc" id="L766">		ModelMetadata metadata = new ModelMetadata();</span>
+<span class="nc" id="L767">		metadata.setSender(&quot;Adapter&quot;);</span>
+<span class="nc" id="L768">		metadata.setTimeStamp(Calendar.getInstance().getTime());</span>
+<span class="nc" id="L769">		List&lt;IModel&gt; modelInstances = new ArrayList&lt;&gt;();</span>
+		// Update modification time
+<span class="nc" id="L771">		model.setLastModificationDate(Calendar.getInstance().getTime());</span>
+<span class="nc" id="L772">		model.setValue(&quot;status&quot;, status.toString());</span>
+<span class="nc" id="L773">		modelInstances.add(model);</span>
+<span class="nc" id="L774">		metadata.setModelInstances(modelInstances);</span>
+
+<span class="nc" id="L776">		return metadata;</span>
+	}
+
+	private ModelUpdateMetadata createBaseModelUpdateMetadata(BaseModel metadata) {
+<span class="nc" id="L780">		ModelUpdateMetadata mum = new ModelUpdateMetadata();</span>
+<span class="nc" id="L781">		mum.setSender(&quot;Adapter&quot;);</span>
+<span class="nc" id="L782">		mum.setTimeStamp(Calendar.getInstance().getTime());</span>
+
+<span class="nc" id="L784">		Map&lt;String, Object&gt; values = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L785">		values.put(&quot;authorId&quot;, metadata.getAuthorId());</span>
+<span class="nc" id="L786">		values.put(&quot;status&quot;, &quot;Enacted&quot;);</span>
+<span class="nc" id="L787">		values.put(&quot;name&quot;, metadata.getName());</span>
+<span class="nc" id="L788">		values.put(&quot;creationDate&quot;, metadata.getCreationDate());</span>
+<span class="nc" id="L789">		values.put(&quot;LastModificationDate&quot;, Calendar.getInstance().getTime());</span>
+<span class="nc" id="L790">		values.put(&quot;fileExtension&quot;, ModelType.BaseModel.getExtension());</span>
+<span class="nc" id="L791">		values.put(&quot;systemId&quot;, metadata.getSystemId());</span>
+<span class="nc" id="L792">		values.put(&quot;relativePath&quot;, metadata.getRelativePath());</span>
+<span class="nc" id="L793">		values.put(&quot;dependencies&quot;, metadata.getDependencies());</span>
+
+<span class="nc" id="L795">		mum.setValues(values);</span>
+
+<span class="nc" id="L797">		return mum;</span>
+	}
+
+	private void copyStereotypes(Model originalModel, Model clonedModel) {
+		// Applying profiles
+<span class="fc bfc" id="L802" title="All 2 branches covered.">		for (Profile p : originalModel.getAppliedProfiles()) {</span>
+<span class="fc" id="L803">			log.debug(&quot;Applying &quot; + p.getName());</span>
+<span class="pc bpc" id="L804" title="1 of 2 branches missed.">			if (!clonedModel.getAppliedProfiles().contains(p))</span>
+<span class="nc" id="L805">				clonedModel.applyProfile(p);</span>
+<span class="fc" id="L806">		}</span>
+
+		// Applying stereotypes
+<span class="fc bfc" id="L809" title="All 2 branches covered.">		for (Element e : originalModel.getOwnedElements()) {</span>
+<span class="fc bfc" id="L810" title="All 2 branches covered.">			if (e instanceof NamedElement)</span>
+<span class="fc" id="L811">				applyStereotypesInElement((NamedElement) e, clonedModel);</span>
+<span class="fc" id="L812">		}</span>
+<span class="fc" id="L813">	}</span>
+
+	private void applyStereotypesInElement(NamedElement element, Model clonedModel) {
+<span class="fc bfc" id="L816" title="All 2 branches covered.">		for (Element e : element.getOwnedElements()) {</span>
+<span class="fc bfc" id="L817" title="All 2 branches covered.">			if (e instanceof NamedElement)</span>
+<span class="fc" id="L818">				applyStereotypesInElement((NamedElement) e, clonedModel);</span>
+<span class="fc" id="L819">		}</span>
+<span class="fc bfc" id="L820" title="All 2 branches covered.">		if (element.getAppliedStereotypes().size() &gt; 0) {</span>
+<span class="fc" id="L821">			List&lt;String&gt; stereotypes = element.getAppliedStereotypes().stream().map(Stereotype::getName)</span>
+<span class="fc" id="L822">					.collect(toList());</span>
+<span class="fc" id="L823">			log.debug(&quot;Model: &quot; + element.getModel().getName() + &quot;. Base element: &quot; + element.getName()</span>
+					+ &quot; is stereotyped with &quot; + stereotypes);
+<span class="fc" id="L825">			applyStereoTypesInModel(element, element.getAppliedStereotypes(), clonedModel);</span>
+		}
+<span class="fc" id="L827">	}</span>
+
+	private void applyStereoTypesInModel(NamedElement element, EList&lt;Stereotype&gt; appliedStereotypes, Model model) {
+		// Find element in model
+<span class="fc" id="L831">		Element newElement = ModelAdapterUtilities.findElementInModel(element, model);</span>
+
+		// Apply stereotypes and properties
+<span class="fc bfc" id="L834" title="All 2 branches covered.">		for (Stereotype s : appliedStereotypes) {</span>
+<span class="fc" id="L835">			newElement.applyStereotype(s);</span>
+<span class="fc bfc" id="L836" title="All 2 branches covered.">			for (Property p : s.getAllAttributes()) {</span>
+<span class="fc bfc" id="L837" title="All 2 branches covered.">				if (p.getAssociation() == null) { // Skipping Stereotype</span>
+													// property associations.
+<span class="fc" id="L839">					String propertyName = p.getName();</span>
+<span class="fc" id="L840">					newElement.setValue(s, propertyName, element.getValue(s, propertyName));</span>
+				}
+<span class="fc" id="L842">			}</span>
+<span class="fc" id="L843">		}</span>
+<span class="fc" id="L844">	}</span>
+
+	private void checkStereotypesInModel(Model model) {
+<span class="fc bfc" id="L847" title="All 2 branches covered.">		for (Element e : model.getOwnedElements()) {</span>
+<span class="fc bfc" id="L848" title="All 2 branches covered.">			if (e instanceof NamedElement)</span>
+<span class="fc" id="L849">				checkScheckStereotypesInElement((NamedElement) e);</span>
+<span class="fc" id="L850">		}</span>
+<span class="fc" id="L851">	}</span>
+
+	private void checkScheckStereotypesInElement(NamedElement element) {
+<span class="fc bfc" id="L854" title="All 2 branches covered.">		for (Element e : element.getOwnedElements()) {</span>
+<span class="fc bfc" id="L855" title="All 2 branches covered.">			if (e instanceof NamedElement)</span>
+<span class="fc" id="L856">				checkScheckStereotypesInElement((NamedElement) e);</span>
+<span class="fc" id="L857">		}</span>
+<span class="fc bfc" id="L858" title="All 2 branches covered.">		if (element.getAppliedStereotypes().size() &gt; 0) {</span>
+<span class="fc" id="L859">			List&lt;String&gt; stereotypes = element.getAppliedStereotypes().stream().map(Stereotype::getName)</span>
+<span class="fc" id="L860">					.collect(toList());</span>
+<span class="fc" id="L861">			log.debug(&quot;Base element: &quot; + element.getName() + &quot; is stereotyped with &quot; + stereotypes);</span>
+		}
+<span class="fc" id="L863">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
