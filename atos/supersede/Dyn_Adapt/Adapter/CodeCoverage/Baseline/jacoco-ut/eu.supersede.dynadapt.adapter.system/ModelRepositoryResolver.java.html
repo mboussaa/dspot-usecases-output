@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ModelRepositoryResolver.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">adapter-stamp</a> &gt; <a href="index.source.html" class="el_package">eu.supersede.dynadapt.adapter.system</a> &gt; <span class="el_source">ModelRepositoryResolver.java</span></div><h1>ModelRepositoryResolver.java</h1><pre class="source lang-java linenums">package eu.supersede.dynadapt.adapter.system;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.uml2.uml.Model;
+
+import cz.zcu.yafmt.model.fc.FeatureConfiguration;
+import eu.supersede.dynadapt.adapter.exception.EnactmentException;
+import eu.supersede.dynadapt.model.ModelManager;
+import eu.supersede.integration.api.adaptation.types.ModelSystem;
+
+@Deprecated
+public class ModelRepositoryResolver {
+	static String repositoryRelativePath;
+<span class="nc" id="L14">	private ModelManager mm = null;</span>
+	
+<span class="nc" id="L16">	public ModelRepositoryResolver (ModelManager mm, String repositoryRelativePath){</span>
+<span class="nc" id="L17">		this.mm = mm;</span>
+<span class="nc" id="L18">		ModelRepositoryResolver.repositoryRelativePath = repositoryRelativePath;</span>
+<span class="nc" id="L19">	}</span>
+
+	public Model getModelForSystem (ModelSystem system, RepositoryMetadata metadata) throws EnactmentException{
+<span class="nc" id="L22">		URI uri = ModelRepositoryMapping.getModelURI (system, metadata);</span>
+<span class="nc" id="L23">		return mm.loadUMLModel(uri.toString());</span>
+	}
+	
+	public FeatureConfiguration getConfigurationForSystem (ModelSystem system, RepositoryMetadata metadata) throws EnactmentException{
+<span class="nc" id="L27">		URI uri = ModelRepositoryMapping.getModelURI (system, metadata);</span>
+<span class="nc" id="L28">		return mm.loadFeatureConfiguration(uri.toString());</span>
+	}
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

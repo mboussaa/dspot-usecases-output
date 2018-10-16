@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Atos_query_patterns.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">adapter-stamp</a> &gt; <a href="index.source.html" class="el_package">eu.supersede.dynadapt.usecases.patterns</a> &gt; <span class="el_source">Atos_query_patterns.java</span></div><h1>Atos_query_patterns.java</h1><pre class="source lang-java linenums">/**
+ * Generated from platform:/resource/eu.supersede.dynadapt.adapter/repository/patterns/eu/supersede/dynadapt/usecases/patterns/atos_query_patterns.vql
+ */
+package eu.supersede.dynadapt.usecases.patterns;
+
+import eu.supersede.dynadapt.usecases.patterns.ArtifactManifestationsMatcher;
+import eu.supersede.dynadapt.usecases.patterns.CMSConfigurationInstancesMatcher;
+import eu.supersede.dynadapt.usecases.patterns.CMSInstanceToConfigurationLinkMatcher;
+import eu.supersede.dynadapt.usecases.patterns.CMSInstancesMatcher;
+import eu.supersede.dynadapt.usecases.patterns.HSKExecutionEnvironmentsMatcher;
+import eu.supersede.dynadapt.usecases.patterns.HSKVirtualExecutionEnvironmentsMatcher;
+import eu.supersede.dynadapt.usecases.patterns.InstanceOfInstanceSpecificationLinkMatcher;
+import eu.supersede.dynadapt.usecases.patterns.InstanceSpecificationLinkMatcher;
+import eu.supersede.dynadapt.usecases.patterns.InstanceSpecificationsAsManifestationsOfNodeArtifactsMatcher;
+import eu.supersede.dynadapt.usecases.patterns.NodeArtifactsMatcher;
+import eu.supersede.dynadapt.usecases.patterns.VMInstancesContainingHSKServicesMatcher;
+import eu.supersede.dynadapt.usecases.patterns.VirtualExecutionEnvContainingAComponentMatcher;
+import eu.supersede.dynadapt.usecases.patterns.util.ArtifactManifestationsQuerySpecification;
+import eu.supersede.dynadapt.usecases.patterns.util.CMSConfigurationInstancesQuerySpecification;
+import eu.supersede.dynadapt.usecases.patterns.util.CMSInstanceToConfigurationLinkQuerySpecification;
+import eu.supersede.dynadapt.usecases.patterns.util.CMSInstancesQuerySpecification;
+import eu.supersede.dynadapt.usecases.patterns.util.HSKExecutionEnvironmentsQuerySpecification;
+import eu.supersede.dynadapt.usecases.patterns.util.HSKVirtualExecutionEnvironmentsQuerySpecification;
+import eu.supersede.dynadapt.usecases.patterns.util.InstanceOfInstanceSpecificationLinkQuerySpecification;
+import eu.supersede.dynadapt.usecases.patterns.util.InstanceSpecificationLinkQuerySpecification;
+import eu.supersede.dynadapt.usecases.patterns.util.InstanceSpecificationsAsManifestationsOfNodeArtifactsQuerySpecification;
+import eu.supersede.dynadapt.usecases.patterns.util.NodeArtifactsQuerySpecification;
+import eu.supersede.dynadapt.usecases.patterns.util.VMInstancesContainingHSKServicesQuerySpecification;
+import eu.supersede.dynadapt.usecases.patterns.util.VirtualExecutionEnvContainingAComponentQuerySpecification;
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
+import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
+import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+
+/**
+ * A pattern group formed of all patterns defined in atos_query_patterns.vql.
+ * 
+ * &lt;p&gt;Use the static instance as any {@link org.eclipse.viatra.query.runtime.api.IPatternGroup}, to conveniently prepare
+ * a VIATRA Query engine for matching all patterns originally defined in file atos_query_patterns.vql,
+ * in order to achieve better performance than one-by-one on-demand matcher initialization.
+ * 
+ * &lt;p&gt; From package eu.supersede.dynadapt.usecases.patterns, the group contains the definition of the following patterns: &lt;ul&gt;
+ * &lt;li&gt;nodeArtifacts&lt;/li&gt;
+ * &lt;li&gt;artifactManifestations&lt;/li&gt;
+ * &lt;li&gt;instanceSpecificationsAsManifestationsOfNodeArtifacts&lt;/li&gt;
+ * &lt;li&gt;CMSInstances&lt;/li&gt;
+ * &lt;li&gt;CMSConfigurationInstances&lt;/li&gt;
+ * &lt;li&gt;InstanceSpecificationLink&lt;/li&gt;
+ * &lt;li&gt;InstanceOfInstanceSpecificationLink&lt;/li&gt;
+ * &lt;li&gt;CMSInstanceToConfigurationLink&lt;/li&gt;
+ * &lt;li&gt;HSKExecutionEnvironments&lt;/li&gt;
+ * &lt;li&gt;VMInstancesContainingHSKServices&lt;/li&gt;
+ * &lt;li&gt;VirtualExecutionEnvContainingAComponent&lt;/li&gt;
+ * &lt;li&gt;HSKVirtualExecutionEnvironments&lt;/li&gt;
+ * &lt;/ul&gt;
+ * 
+ * @see IPatternGroup
+ * 
+ */
+@SuppressWarnings(&quot;all&quot;)
+public final class Atos_query_patterns extends BaseGeneratedPatternGroup {
+  /**
+   * Access the pattern group.
+   * 
+   * @return the singleton instance of the group
+   * @throws ViatraQueryException if there was an error loading the generated code of pattern specifications
+   * 
+   */
+  public static Atos_query_patterns instance() throws ViatraQueryException {
+<span class="nc bnc" id="L69" title="All 2 branches missed.">    if (INSTANCE == null) {</span>
+<span class="nc" id="L70">    	INSTANCE = new Atos_query_patterns();</span>
+    }
+<span class="nc" id="L72">    return INSTANCE;</span>
+  }
+  
+  private static Atos_query_patterns INSTANCE;
+  
+<span class="nc" id="L77">  private Atos_query_patterns() throws ViatraQueryException {</span>
+<span class="nc" id="L78">    querySpecifications.add(NodeArtifactsQuerySpecification.instance());</span>
+<span class="nc" id="L79">    querySpecifications.add(ArtifactManifestationsQuerySpecification.instance());</span>
+<span class="nc" id="L80">    querySpecifications.add(InstanceSpecificationsAsManifestationsOfNodeArtifactsQuerySpecification.instance());</span>
+<span class="nc" id="L81">    querySpecifications.add(CMSInstancesQuerySpecification.instance());</span>
+<span class="nc" id="L82">    querySpecifications.add(CMSConfigurationInstancesQuerySpecification.instance());</span>
+<span class="nc" id="L83">    querySpecifications.add(InstanceSpecificationLinkQuerySpecification.instance());</span>
+<span class="nc" id="L84">    querySpecifications.add(InstanceOfInstanceSpecificationLinkQuerySpecification.instance());</span>
+<span class="nc" id="L85">    querySpecifications.add(CMSInstanceToConfigurationLinkQuerySpecification.instance());</span>
+<span class="nc" id="L86">    querySpecifications.add(HSKExecutionEnvironmentsQuerySpecification.instance());</span>
+<span class="nc" id="L87">    querySpecifications.add(VMInstancesContainingHSKServicesQuerySpecification.instance());</span>
+<span class="nc" id="L88">    querySpecifications.add(VirtualExecutionEnvContainingAComponentQuerySpecification.instance());</span>
+<span class="nc" id="L89">    querySpecifications.add(HSKVirtualExecutionEnvironmentsQuerySpecification.instance());</span>
+<span class="nc" id="L90">  }</span>
+  
+  public NodeArtifactsQuerySpecification getNodeArtifacts() throws ViatraQueryException {
+<span class="nc" id="L93">    return NodeArtifactsQuerySpecification.instance();</span>
+  }
+  
+  public NodeArtifactsMatcher getNodeArtifacts(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L97">    return NodeArtifactsMatcher.on(engine);</span>
+  }
+  
+  public ArtifactManifestationsQuerySpecification getArtifactManifestations() throws ViatraQueryException {
+<span class="nc" id="L101">    return ArtifactManifestationsQuerySpecification.instance();</span>
+  }
+  
+  public ArtifactManifestationsMatcher getArtifactManifestations(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L105">    return ArtifactManifestationsMatcher.on(engine);</span>
+  }
+  
+  public InstanceSpecificationsAsManifestationsOfNodeArtifactsQuerySpecification getInstanceSpecificationsAsManifestationsOfNodeArtifacts() throws ViatraQueryException {
+<span class="nc" id="L109">    return InstanceSpecificationsAsManifestationsOfNodeArtifactsQuerySpecification.instance();</span>
+  }
+  
+  public InstanceSpecificationsAsManifestationsOfNodeArtifactsMatcher getInstanceSpecificationsAsManifestationsOfNodeArtifacts(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L113">    return InstanceSpecificationsAsManifestationsOfNodeArtifactsMatcher.on(engine);</span>
+  }
+  
+  public CMSInstancesQuerySpecification getCMSInstances() throws ViatraQueryException {
+<span class="nc" id="L117">    return CMSInstancesQuerySpecification.instance();</span>
+  }
+  
+  public CMSInstancesMatcher getCMSInstances(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L121">    return CMSInstancesMatcher.on(engine);</span>
+  }
+  
+  public CMSConfigurationInstancesQuerySpecification getCMSConfigurationInstances() throws ViatraQueryException {
+<span class="nc" id="L125">    return CMSConfigurationInstancesQuerySpecification.instance();</span>
+  }
+  
+  public CMSConfigurationInstancesMatcher getCMSConfigurationInstances(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L129">    return CMSConfigurationInstancesMatcher.on(engine);</span>
+  }
+  
+  public InstanceSpecificationLinkQuerySpecification getInstanceSpecificationLink() throws ViatraQueryException {
+<span class="nc" id="L133">    return InstanceSpecificationLinkQuerySpecification.instance();</span>
+  }
+  
+  public InstanceSpecificationLinkMatcher getInstanceSpecificationLink(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L137">    return InstanceSpecificationLinkMatcher.on(engine);</span>
+  }
+  
+  public InstanceOfInstanceSpecificationLinkQuerySpecification getInstanceOfInstanceSpecificationLink() throws ViatraQueryException {
+<span class="nc" id="L141">    return InstanceOfInstanceSpecificationLinkQuerySpecification.instance();</span>
+  }
+  
+  public InstanceOfInstanceSpecificationLinkMatcher getInstanceOfInstanceSpecificationLink(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L145">    return InstanceOfInstanceSpecificationLinkMatcher.on(engine);</span>
+  }
+  
+  public CMSInstanceToConfigurationLinkQuerySpecification getCMSInstanceToConfigurationLink() throws ViatraQueryException {
+<span class="nc" id="L149">    return CMSInstanceToConfigurationLinkQuerySpecification.instance();</span>
+  }
+  
+  public CMSInstanceToConfigurationLinkMatcher getCMSInstanceToConfigurationLink(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L153">    return CMSInstanceToConfigurationLinkMatcher.on(engine);</span>
+  }
+  
+  public HSKExecutionEnvironmentsQuerySpecification getHSKExecutionEnvironments() throws ViatraQueryException {
+<span class="nc" id="L157">    return HSKExecutionEnvironmentsQuerySpecification.instance();</span>
+  }
+  
+  public HSKExecutionEnvironmentsMatcher getHSKExecutionEnvironments(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L161">    return HSKExecutionEnvironmentsMatcher.on(engine);</span>
+  }
+  
+  public VMInstancesContainingHSKServicesQuerySpecification getVMInstancesContainingHSKServices() throws ViatraQueryException {
+<span class="nc" id="L165">    return VMInstancesContainingHSKServicesQuerySpecification.instance();</span>
+  }
+  
+  public VMInstancesContainingHSKServicesMatcher getVMInstancesContainingHSKServices(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L169">    return VMInstancesContainingHSKServicesMatcher.on(engine);</span>
+  }
+  
+  public VirtualExecutionEnvContainingAComponentQuerySpecification getVirtualExecutionEnvContainingAComponent() throws ViatraQueryException {
+<span class="nc" id="L173">    return VirtualExecutionEnvContainingAComponentQuerySpecification.instance();</span>
+  }
+  
+  public VirtualExecutionEnvContainingAComponentMatcher getVirtualExecutionEnvContainingAComponent(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L177">    return VirtualExecutionEnvContainingAComponentMatcher.on(engine);</span>
+  }
+  
+  public HSKVirtualExecutionEnvironmentsQuerySpecification getHSKVirtualExecutionEnvironments() throws ViatraQueryException {
+<span class="nc" id="L181">    return HSKVirtualExecutionEnvironmentsQuerySpecification.instance();</span>
+  }
+  
+  public HSKVirtualExecutionEnvironmentsMatcher getHSKVirtualExecutionEnvironments(final ViatraQueryEngine engine) throws ViatraQueryException {
+<span class="nc" id="L185">    return HSKVirtualExecutionEnvironmentsMatcher.on(engine);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

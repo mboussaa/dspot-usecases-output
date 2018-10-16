@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SupersedeSystem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">adapter-stamp</a> &gt; <a href="index.source.html" class="el_package">eu.supersede.dynadapt.adapter.system</a> &gt; <span class="el_source">SupersedeSystem.java</span></div><h1>SupersedeSystem.java</h1><pre class="source lang-java linenums">package eu.supersede.dynadapt.adapter.system;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
+<span class="nc" id="L6">@Deprecated</span>
+/**
+ * Use IF:
+ * @Use eu.supersede.integration.api.adaptation.types.ModelSystem
+ * @Deprecated Use IF ModelSystem
+ * @author yosu
+ * 
+ */
+public enum SupersedeSystem {
+<span class="nc" id="L15">	ATOS (&quot;atos&quot;), </span>
+<span class="nc" id="L16">	ATOS_HSK (&quot;atos_hsk&quot;), </span>
+<span class="nc" id="L17">	SIEMENS (&quot;siemens&quot;), </span>
+<span class="nc" id="L18">	SENERCON (&quot;senercon&quot;), </span>
+<span class="nc" id="L19">	MONITORING (&quot;monitoring&quot;), </span>
+<span class="nc" id="L20">	FEEDBACK_GATHERING (&quot;feedback_gathering&quot;),</span>
+<span class="nc" id="L21">	HEALTH (&quot;health&quot;);</span>
+	
+	private URI uri;
+	
+<span class="nc" id="L25">	SupersedeSystem(String suri){</span>
+		try {
+<span class="nc" id="L27">			uri = new URI (suri);</span>
+<span class="nc" id="L28">		} catch (URISyntaxException e) {</span>
+<span class="nc" id="L29">			e.printStackTrace();</span>
+<span class="nc" id="L30">		}</span>
+<span class="nc" id="L31">	}</span>
+	
+	public URI getURI (){
+<span class="nc" id="L34">		return uri;</span>
+	}
+	
+	public static SupersedeSystem getByURI (String suri){
+<span class="nc bnc" id="L38" title="All 8 branches missed.">		switch (suri){</span>
+		case &quot;atos&quot;:
+<span class="nc" id="L40">			return ATOS;</span>
+		case &quot;atos_hsk&quot;:
+<span class="nc" id="L42">			return ATOS_HSK;</span>
+		case &quot;siemens&quot;:
+<span class="nc" id="L44">			return SIEMENS;</span>
+		case &quot;senercon&quot;:
+<span class="nc" id="L46">			return SENERCON;</span>
+		case &quot;monitoring&quot;: 
+<span class="nc" id="L48">			return MONITORING;</span>
+		case &quot;feedback_gathering&quot;:
+<span class="nc" id="L50">			return FEEDBACK_GATHERING;</span>
+		case &quot;health&quot;:
+<span class="nc" id="L52">			return HEALTH;</span>
+		default:
+<span class="nc" id="L54">			return null;</span>
+		}
+	}
+	
+	@Override
+	public String toString(){
+<span class="nc" id="L60">		return getURI().toString();</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

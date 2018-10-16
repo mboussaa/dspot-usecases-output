@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClassesMatcher.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">adapter-stamp</a> &gt; <a href="index.source.html" class="el_package">eu.supersede.dynadapt.usecases.patterns</a> &gt; <span class="el_source">ClassesMatcher.java</span></div><h1>ClassesMatcher.java</h1><pre class="source lang-java linenums">/**
+ * Generated from platform:/resource/eu.supersede.dynadapt.adapter/repository/patterns/eu/supersede/dynadapt/usecases/patterns/monitoring_reconfiguration_queries.vql
+ */
+package eu.supersede.dynadapt.usecases.patterns;
+
+import eu.supersede.dynadapt.usecases.patterns.ClassesMatch;
+import eu.supersede.dynadapt.usecases.patterns.util.ClassesQuerySpecification;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import org.apache.log4j.Logger;
+import org.eclipse.viatra.query.runtime.api.IMatchProcessor;
+import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
+import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
+import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
+import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
+
+/**
+ * Generated pattern matcher API of the eu.supersede.dynadapt.usecases.patterns.classes pattern,
+ * providing pattern-specific query methods.
+ * 
+ * &lt;p&gt;Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
+ * e.g. in conjunction with {@link ViatraQueryEngine#on(Notifier)}.
+ * 
+ * &lt;p&gt;Matches of the pattern will be represented as {@link ClassesMatch}.
+ * 
+ * &lt;p&gt;Original source:
+ * &lt;code&gt;&lt;pre&gt;
+ * pattern classes(class : Class, name) {
+ * 	Class.name(class, name);
+ * }
+ * &lt;/pre&gt;&lt;/code&gt;
+ * 
+ * @see ClassesMatch
+ * @see ClassesProcessor
+ * @see ClassesQuerySpecification
+ * 
+ */
+@SuppressWarnings(&quot;all&quot;)
+public class ClassesMatcher extends BaseMatcher&lt;ClassesMatch&gt; {
+  /**
+   * Initializes the pattern matcher within an existing VIATRA Query engine.
+   * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
+   * The match set will be incrementally refreshed upon updates.
+   * @param engine the existing VIATRA Query engine in which this matcher will be created.
+   * @throws ViatraQueryException if an error occurs during pattern matcher creation
+   * 
+   */
+  public static ClassesMatcher on(final ViatraQueryEngine engine) throws ViatraQueryException {
+    // check if matcher already exists
+<span class="nc" id="L53">    ClassesMatcher matcher = engine.getExistingMatcher(querySpecification());</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">    if (matcher == null) {</span>
+<span class="nc" id="L55">    	matcher = (ClassesMatcher)engine.getMatcher(querySpecification());</span>
+    }
+<span class="nc" id="L57">    return matcher;</span>
+  }
+  
+  /**
+   * @throws ViatraQueryException if an error occurs during pattern matcher creation
+   * @return an initialized matcher
+   * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
+   * 
+   */
+  public static ClassesMatcher create() throws ViatraQueryException {
+<span class="nc" id="L67">    return new ClassesMatcher();</span>
+  }
+  
+  private final static int POSITION_CLASS = 0;
+  
+  private final static int POSITION_NAME = 1;
+  
+<span class="nc" id="L74">  private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(ClassesMatcher.class);</span>
+  
+  /**
+   * Initializes the pattern matcher within an existing VIATRA Query engine.
+   * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
+   * The match set will be incrementally refreshed upon updates.
+   * @param engine the existing VIATRA Query engine in which this matcher will be created.
+   * @throws ViatraQueryException if an error occurs during pattern matcher creation
+   * 
+   */
+  private ClassesMatcher() throws ViatraQueryException {
+<span class="nc" id="L85">    super(querySpecification());</span>
+<span class="nc" id="L86">  }</span>
+  
+  /**
+   * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
+   * @param pClass the fixed value of pattern parameter class, or null if not bound.
+   * @param pName the fixed value of pattern parameter name, or null if not bound.
+   * @return matches represented as a ClassesMatch object.
+   * 
+   */
+  public Collection&lt;ClassesMatch&gt; getAllMatches(final org.eclipse.uml2.uml.Class pClass, final String pName) {
+<span class="nc" id="L96">    return rawGetAllMatches(new Object[]{pClass, pName});</span>
+  }
+  
+  /**
+   * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
+   * Neither determinism nor randomness of selection is guaranteed.
+   * @param pClass the fixed value of pattern parameter class, or null if not bound.
+   * @param pName the fixed value of pattern parameter name, or null if not bound.
+   * @return a match represented as a ClassesMatch object, or null if no match is found.
+   * 
+   */
+  public ClassesMatch getOneArbitraryMatch(final org.eclipse.uml2.uml.Class pClass, final String pName) {
+<span class="nc" id="L108">    return rawGetOneArbitraryMatch(new Object[]{pClass, pName});</span>
+  }
+  
+  /**
+   * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
+   * under any possible substitution of the unspecified parameters (if any).
+   * @param pClass the fixed value of pattern parameter class, or null if not bound.
+   * @param pName the fixed value of pattern parameter name, or null if not bound.
+   * @return true if the input is a valid (partial) match of the pattern.
+   * 
+   */
+  public boolean hasMatch(final org.eclipse.uml2.uml.Class pClass, final String pName) {
+<span class="nc" id="L120">    return rawHasMatch(new Object[]{pClass, pName});</span>
+  }
+  
+  /**
+   * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
+   * @param pClass the fixed value of pattern parameter class, or null if not bound.
+   * @param pName the fixed value of pattern parameter name, or null if not bound.
+   * @return the number of pattern matches found.
+   * 
+   */
+  public int countMatches(final org.eclipse.uml2.uml.Class pClass, final String pName) {
+<span class="nc" id="L131">    return rawCountMatches(new Object[]{pClass, pName});</span>
+  }
+  
+  /**
+   * Executes the given processor on each match of the pattern that conforms to the given fixed values of some parameters.
+   * @param pClass the fixed value of pattern parameter class, or null if not bound.
+   * @param pName the fixed value of pattern parameter name, or null if not bound.
+   * @param processor the action that will process each pattern match.
+   * 
+   */
+  public void forEachMatch(final org.eclipse.uml2.uml.Class pClass, final String pName, final IMatchProcessor&lt;? super ClassesMatch&gt; processor) {
+<span class="nc" id="L142">    rawForEachMatch(new Object[]{pClass, pName}, processor);</span>
+<span class="nc" id="L143">  }</span>
+  
+  /**
+   * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
+   * Neither determinism nor randomness of selection is guaranteed.
+   * @param pClass the fixed value of pattern parameter class, or null if not bound.
+   * @param pName the fixed value of pattern parameter name, or null if not bound.
+   * @param processor the action that will process the selected match.
+   * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
+   * 
+   */
+  public boolean forOneArbitraryMatch(final org.eclipse.uml2.uml.Class pClass, final String pName, final IMatchProcessor&lt;? super ClassesMatch&gt; processor) {
+<span class="nc" id="L155">    return rawForOneArbitraryMatch(new Object[]{pClass, pName}, processor);</span>
+  }
+  
+  /**
+   * Returns a new (partial) match.
+   * This can be used e.g. to call the matcher with a partial match.
+   * &lt;p&gt;The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
+   * @param pClass the fixed value of pattern parameter class, or null if not bound.
+   * @param pName the fixed value of pattern parameter name, or null if not bound.
+   * @return the (partial) match object.
+   * 
+   */
+  public ClassesMatch newMatch(final org.eclipse.uml2.uml.Class pClass, final String pName) {
+<span class="nc" id="L168">    return ClassesMatch.newMatch(pClass, pName);</span>
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for class.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  protected Set&lt;org.eclipse.uml2.uml.Class&gt; rawAccumulateAllValuesOfclass(final Object[] parameters) {
+<span class="nc" id="L177">    Set&lt;org.eclipse.uml2.uml.Class&gt; results = new HashSet&lt;org.eclipse.uml2.uml.Class&gt;();</span>
+<span class="nc" id="L178">    rawAccumulateAllValues(POSITION_CLASS, parameters, results);</span>
+<span class="nc" id="L179">    return results;</span>
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for class.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set&lt;org.eclipse.uml2.uml.Class&gt; getAllValuesOfclass() {
+<span class="nc" id="L188">    return rawAccumulateAllValuesOfclass(emptyArray());</span>
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for class.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set&lt;org.eclipse.uml2.uml.Class&gt; getAllValuesOfclass(final ClassesMatch partialMatch) {
+<span class="nc" id="L197">    return rawAccumulateAllValuesOfclass(partialMatch.toArray());</span>
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for class.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set&lt;org.eclipse.uml2.uml.Class&gt; getAllValuesOfclass(final String pName) {
+<span class="nc" id="L206">    return rawAccumulateAllValuesOfclass(new Object[]{</span>
+    null, 
+    pName
+    });
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for name.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  protected Set&lt;String&gt; rawAccumulateAllValuesOfname(final Object[] parameters) {
+<span class="nc" id="L218">    Set&lt;String&gt; results = new HashSet&lt;String&gt;();</span>
+<span class="nc" id="L219">    rawAccumulateAllValues(POSITION_NAME, parameters, results);</span>
+<span class="nc" id="L220">    return results;</span>
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for name.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set&lt;String&gt; getAllValuesOfname() {
+<span class="nc" id="L229">    return rawAccumulateAllValuesOfname(emptyArray());</span>
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for name.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set&lt;String&gt; getAllValuesOfname(final ClassesMatch partialMatch) {
+<span class="nc" id="L238">    return rawAccumulateAllValuesOfname(partialMatch.toArray());</span>
+  }
+  
+  /**
+   * Retrieve the set of values that occur in matches for name.
+   * @return the Set of all values, null if no parameter with the given name exists, empty set if there are no matches
+   * 
+   */
+  public Set&lt;String&gt; getAllValuesOfname(final org.eclipse.uml2.uml.Class pClass) {
+<span class="nc" id="L247">    return rawAccumulateAllValuesOfname(new Object[]{</span>
+    pClass, 
+    null
+    });
+  }
+  
+  @Override
+  protected ClassesMatch tupleToMatch(final Tuple t) {
+    try {
+<span class="nc" id="L256">    	return ClassesMatch.newMatch((org.eclipse.uml2.uml.Class) t.get(POSITION_CLASS), (String) t.get(POSITION_NAME));</span>
+<span class="nc" id="L257">    } catch(ClassCastException e) {</span>
+<span class="nc" id="L258">    	LOGGER.error(&quot;Element(s) in tuple not properly typed!&quot;,e);</span>
+<span class="nc" id="L259">    	return null;</span>
+    }
+  }
+  
+  @Override
+  protected ClassesMatch arrayToMatch(final Object[] match) {
+    try {
+<span class="nc" id="L266">    	return ClassesMatch.newMatch((org.eclipse.uml2.uml.Class) match[POSITION_CLASS], (String) match[POSITION_NAME]);</span>
+<span class="nc" id="L267">    } catch(ClassCastException e) {</span>
+<span class="nc" id="L268">    	LOGGER.error(&quot;Element(s) in array not properly typed!&quot;,e);</span>
+<span class="nc" id="L269">    	return null;</span>
+    }
+  }
+  
+  @Override
+  protected ClassesMatch arrayToMatchMutable(final Object[] match) {
+    try {
+<span class="nc" id="L276">    	return ClassesMatch.newMutableMatch((org.eclipse.uml2.uml.Class) match[POSITION_CLASS], (String) match[POSITION_NAME]);</span>
+<span class="nc" id="L277">    } catch(ClassCastException e) {</span>
+<span class="nc" id="L278">    	LOGGER.error(&quot;Element(s) in array not properly typed!&quot;,e);</span>
+<span class="nc" id="L279">    	return null;</span>
+    }
+  }
+  
+  /**
+   * @return the singleton instance of the query specification of this pattern
+   * @throws ViatraQueryException if the pattern definition could not be loaded
+   * 
+   */
+  public static IQuerySpecification&lt;ClassesMatcher&gt; querySpecification() throws ViatraQueryException {
+<span class="nc" id="L289">    return ClassesQuerySpecification.instance();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
