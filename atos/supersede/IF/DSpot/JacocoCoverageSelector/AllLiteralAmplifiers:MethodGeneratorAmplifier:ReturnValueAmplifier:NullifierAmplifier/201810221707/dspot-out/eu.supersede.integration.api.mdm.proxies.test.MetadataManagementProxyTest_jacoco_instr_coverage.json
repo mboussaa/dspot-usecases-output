@@ -1,0 +1,11 @@
+{
+  "name": "eu.supersede.integration.api.mdm.proxies.test.MetadataManagementProxyTest",
+  "nbOriginalTestCases": 7,
+  "initialInstructionCovered": 1599,
+  "initialInstructionTotal": 33518,
+  "percentageinitialInstructionCovered": 4.770571036458023,
+  "amplifiedInstructionCovered": 1625,
+  "amplifiedInstructionTotal": 33518,
+  "percentageamplifiedInstructionCovered": 4.848141297213438,
+  "testCases": []
+}
