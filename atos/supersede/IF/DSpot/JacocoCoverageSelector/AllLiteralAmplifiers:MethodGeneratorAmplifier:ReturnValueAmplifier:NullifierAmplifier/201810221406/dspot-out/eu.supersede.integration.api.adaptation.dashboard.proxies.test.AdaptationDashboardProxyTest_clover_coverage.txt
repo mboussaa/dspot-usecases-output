@@ -1,0 +1,4 @@
+======= REPORT =======
+Initial Coverage: 1682 / 33518
+The amplification results with: 0 amplified test cases
+Amplified Coverage: 1648 / 33518
