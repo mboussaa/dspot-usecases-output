@@ -1,0 +1,71 @@
+Started DSpot: Tue Oct 23 14:09:58 CEST 2018
+DSpot CLI configuration:  -i 3 -t eu.supersede.integration.api.monitoring.proxies.test.* -a AllLiteralAmplifiers:MethodGeneratorAmplifier:ReturnValueAmplifier:NullifierAmplifier -s JacocoCoverageSelector --timeOut 30000 --max-test-amplified 200 --budgetizer NoBudgetizer --verbose
+DSpot properties file:  ./dspot.properties
+2018-10-23 14:09:58,684 INFO eu.stamp_project.testrunner.EntryPoint - Path to runner Classes: /home/stamp/Git/dspot/dspot/target/dspot-1.1.1-SNAPSHOT-jar-with-dependencies.jar
+2018-10-23 14:09:58,690 INFO eu.stamp_project.testrunner.EntryPoint - /home/stamp/Git/dspot/dspot/target/dspot-1.1.1-SNAPSHOT-jar-with-dependencies.jar
+2018-10-23 14:09:58,690 INFO eu.stamp_project.testrunner.EntryPoint - /home/stamp/Git/dspot/dspot/target/dspot-1.1.1-SNAPSHOT-jar-with-dependencies.jar
+2018-10-23 14:09:58,690 INFO eu.stamp_project.testrunner.EntryPoint - /home/stamp/Git/dspot/dspot/target/dspot-1.1.1-SNAPSHOT-jar-with-dependencies.jar
+2018-10-23 14:09:58,691 WARN eu.stamp_project.program.InputConfiguration - No builder has been specified.
+2018-10-23 14:09:58,691 WARN eu.stamp_project.program.InputConfiguration - Using Maven as a default builder.
+2018-10-23 14:09:58,692 WARN eu.stamp_project.program.InputConfiguration - You can use the command-line option --automatic-builder
+2018-10-23 14:09:58,692 WARN eu.stamp_project.program.InputConfiguration - or the properties automaticBuilderName to configure it.
+2018-10-23 14:09:58,692 INFO eu.stamp_project.automaticbuilder.AutomaticBuilderFactory - Selected Maven automatic builder.
+2018-10-23 14:09:58,708 INFO eu.stamp_project.automaticbuilder.MavenAutomaticBuilder - Using /home/stamp/software/maven for maven home
+2018-10-23 14:09:58,710 INFO eu.stamp_project.automaticbuilder.MavenAutomaticBuilder - run maven: /home/stamp/software/maven/bin/mvn clean test -DskipTests dependency:build-classpath -Dmdep.outputFile=target/dspot/classpath
+[WARN] Maven will be executed in interactive mode, but no input stream has been configured for this MavenInvoker instance.
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< eu.supersede.if:eu.supersede.if.api >-----------------
+[INFO] Building eu.supersede.if.api 0.4.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] The POM for org.wso2.carbon:org.wso2.carbon.um.ws.api.stub:jar:4.2.2 is missing, no dependency information available
+[WARNING] The POM for org.wso2.carbon:org.wso2.carbon.tenant.mgt.stub:jar:4.2.0 is missing, no dependency information available
+[WARNING] The POM for org.wso2.carbon:org.wso2.carbon.um.ws.api:jar:4.2.2 is missing, no dependency information available
+[WARNING] The POM for org.wso2.carbon:org.wso2.carbon.user.api:jar:4.2.0 is missing, no dependency information available
+[WARNING] The POM for org.wso2.carbon:org.wso2.carbon.user.core:jar:4.2.0 is missing, no dependency information available
+[WARNING] The POM for org.wso2.carbon:org.wso2.carbon.utils:jar:4.2.0 is missing, no dependency information available
+[WARNING] The POM for opensaml.wso2:opensaml2:jar:2.4.1.wso2v1 is missing, no dependency information available
+[WARNING] The POM for org.wso2.andes.wso2:andes-client:jar:3.1.1 is missing, no dependency information available
+[WARNING] The POM for org.apache.geronimo.specs.wso2:geronimo-jms_1.1_spec:jar:1.1.0.wso2v1 is missing, no dependency information available
+[WARNING] The POM for org.wso2.carbon:org.wso2.carbon.logging:jar:4.4.1 is missing, no dependency information available
+[WARNING] The POM for org.wso2.securevault:org.wso2.securevault:jar:1.0.0-wso2v2 is missing, no dependency information available
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ eu.supersede.if.api ---
+[INFO] Deleting /home/stamp/Git/Supersede/integration/IF/API/eu.supersede.if.api/target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ eu.supersede.if.api ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 8 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ eu.supersede.if.api ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 267 source files to /home/stamp/Git/Supersede/integration/IF/API/eu.supersede.if.api/target/classes
+[INFO] /home/stamp/Git/Supersede/integration/IF/API/eu.supersede.if.api/src/main/java/eu/supersede/integration/api/json/NotificationArrayJsonDeserializer.java: Some input files use or override a deprecated API.
+[INFO] /home/stamp/Git/Supersede/integration/IF/API/eu.supersede.if.api/src/main/java/eu/supersede/integration/api/json/NotificationArrayJsonDeserializer.java: Recompile with -Xlint:deprecation for details.
+[INFO] /home/stamp/Git/Supersede/integration/IF/API/eu.supersede.if.api/src/main/java/eu/supersede/integration/rest/client/IFMessageClient.java: Some input files use unchecked or unsafe operations.
+[INFO] /home/stamp/Git/Supersede/integration/IF/API/eu.supersede.if.api/src/main/java/eu/supersede/integration/rest/client/IFMessageClient.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ eu.supersede.if.api ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 15 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ eu.supersede.if.api ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 36 source files to /home/stamp/Git/Supersede/integration/IF/API/eu.supersede.if.api/target/test-classes
+[INFO] /home/stamp/Git/Supersede/integration/IF/API/eu.supersede.if.api/src/test/java/eu/supersede/integration/application/SpringAppTest.java: /home/stamp/Git/Supersede/integration/IF/API/eu.supersede.if.api/src/test/java/eu/supersede/integration/application/SpringAppTest.java uses or overrides a deprecated API.
+[INFO] /home/stamp/Git/Supersede/integration/IF/API/eu.supersede.if.api/src/test/java/eu/supersede/integration/application/SpringAppTest.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.20.1:test (default-test) @ eu.supersede.if.api ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:build-classpath (default-cli) @ eu.supersede.if.api ---
+[INFO] Wrote classpath file '/home/stamp/Git/Supersede/integration/IF/API/eu.supersede.if.api/target/dspot/classpath'.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 8.189 s
+[INFO] Finished at: 2018-10-23T14:10:08+02:00
+[INFO] ------------------------------------------------------------------------
+Ended DSpot: Tue Oct 23 14:10:13 CEST 2018
