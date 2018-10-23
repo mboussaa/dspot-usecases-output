@@ -1,0 +1,11 @@
+{
+  "name": "eu.supersede.integration.api.monitoring.proxies.test.AppStoreMonitorProxyTest",
+  "nbOriginalTestCases": 4,
+  "initialInstructionCovered": 635,
+  "initialInstructionTotal": 33518,
+  "percentageinitialInstructionCovered": 1.8945044453726356,
+  "amplifiedInstructionCovered": 679,
+  "amplifiedInstructionTotal": 33518,
+  "percentageamplifiedInstructionCovered": 2.0257771943433376,
+  "testCases": []
+}
