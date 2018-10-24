@@ -1,0 +1,11 @@
+{
+  "name": "eu.supersede.integration.api.dm.proxies.test.DMOptimizerProxyTest",
+  "nbOriginalTestCases": 4,
+  "initialInstructionCovered": 1761,
+  "initialInstructionTotal": 33518,
+  "percentageinitialInstructionCovered": 5.253893430395609,
+  "amplifiedInstructionCovered": 1761,
+  "amplifiedInstructionTotal": 33518,
+  "percentageamplifiedInstructionCovered": 5.253893430395609,
+  "testCases": []
+}
