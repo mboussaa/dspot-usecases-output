@@ -1,0 +1,32 @@
+Error occurred during initialization of VM
+java.lang.OutOfMemoryError: unable to create new native thread
+	at java.lang.Thread.start0(Native Method)
+	at java.lang.Thread.start(Thread.java:717)
+	at java.lang.ref.Reference.<clinit>(Reference.java:232)
+
+Exception in thread "main" java.lang.RuntimeException: java.io.FileNotFoundException: /home/stamp/Git/Supersede/integration/IF/API/eu.supersede.if.api/target/dspot/TestListener.ser does not exist.
+	at eu.stamp_project.testrunner.runner.test.Loader.load(Loader.java:23)
+	at eu.stamp_project.testrunner.runner.test.TestListener.load(TestListener.java:134)
+	at eu.stamp_project.testrunner.EntryPoint.runTests(EntryPoint.java:184)
+	at eu.stamp_project.testrunner.EntryPoint.runTests(EntryPoint.java:166)
+	at eu.stamp_project.utils.compilation.TestRunner.runGivenTestMethods(TestRunner.java:61)
+	at eu.stamp_project.utils.compilation.TestCompiler.compileAndRun(TestCompiler.java:99)
+	at eu.stamp_project.dspot.assertgenerator.AssertGenerator.innerAssertionAmplification(AssertGenerator.java:100)
+	at eu.stamp_project.dspot.assertgenerator.AssertGenerator.assertionAmplification(AssertGenerator.java:71)
+	at eu.stamp_project.dspot.Amplification.assertionsAmplification(Amplification.java:150)
+	at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:135)
+	at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:97)
+	at eu.stamp_project.dspot.DSpot._amplify(DSpot.java:231)
+	at eu.stamp_project.dspot.DSpot.lambda$amplifyTestClassesTestMethods$6(DSpot.java:210)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1382)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+	at eu.stamp_project.dspot.DSpot.amplifyTestClassesTestMethods(DSpot.java:211)
+	at eu.stamp_project.Main.run(Main.java:66)
+	at eu.stamp_project.Main.main(Main.java:40)
+Caused by: java.io.FileNotFoundException: /home/stamp/Git/Supersede/integration/IF/API/eu.supersede.if.api/target/dspot/TestListener.ser does not exist.
+
