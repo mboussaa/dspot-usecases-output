@@ -1,0 +1,20 @@
+{
+  "nbMutantKilledOriginally": 0,
+  "name": "org.sat4j.minisat.core.HeapLevelTest",
+  "nbOriginalTestCases": 6,
+  "testCases": [
+    {
+      "name": "testInHeap3",
+      "nbAssertionAdded": 222,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 1,
+      "mutantsKilled": [
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.ArgumentPropagationMutator",
+          "lineNumber": 158,
+          "locationMethod": "ensure"
+        }
+      ]
+    }
+  ]
+}

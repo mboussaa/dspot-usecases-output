@@ -1,0 +1,4 @@
+2018-10-29 15:41:29,549 INFO eu.stamp_project.automaticbuilder.MavenAutomaticBuilder - /home/assadm/OW2-Projects/Forks/sat4j/./org.sat4j.core//pom.xml restoring original pom.xml...
+2018-10-29 15:41:29,550 INFO eu.stamp_project.Main - Amplification succeed.
+2018-10-29 15:41:29,550 INFO eu.stamp_project.Main - Elapsed time 1213807 ms
+

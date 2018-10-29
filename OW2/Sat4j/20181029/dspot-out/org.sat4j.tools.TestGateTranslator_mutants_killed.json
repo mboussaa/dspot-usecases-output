@@ -1,0 +1,48 @@
+{
+  "nbMutantKilledOriginally": 0,
+  "name": "org.sat4j.tools.TestGateTranslator",
+  "nbOriginalTestCases": 9,
+  "testCases": [
+    {
+      "name": "testSATIfThen3",
+      "nbAssertionAdded": 2,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 4,
+      "mutantsKilled": [
+        {
+          "ID": "0",
+          "lineNumber": 529,
+          "locationMethod": "next"
+        },
+        {
+          "ID": "void",
+          "lineNumber": 368,
+          "locationMethod": "selectionSort"
+        },
+        {
+          "ID": "1",
+          "lineNumber": 529,
+          "locationMethod": "next"
+        },
+        {
+          "ID": "void",
+          "lineNumber": 382,
+          "locationMethod": "sort"
+        }
+      ]
+    },
+    {
+      "name": "testSATIfThen5",
+      "nbAssertionAdded": 2,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 1,
+      "mutantsKilled": [
+        {
+          "ID": "false",
+          "lineNumber": 525,
+          "locationMethod": "hasNext"
+        }
+      ]
+    }
+  ]
+}
