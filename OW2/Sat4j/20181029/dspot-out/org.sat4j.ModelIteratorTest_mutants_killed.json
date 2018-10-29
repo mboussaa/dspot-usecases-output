@@ -1,0 +1,30 @@
+{
+  "nbMutantKilledOriginally": 0,
+  "name": "org.sat4j.ModelIteratorTest",
+  "nbOriginalTestCases": 13,
+  "testCases": [
+    {
+      "name": "testSpecificValues",
+      "nbAssertionAdded": 30,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 3,
+      "mutantsKilled": [
+        {
+          "ID": "void",
+          "lineNumber": 157,
+          "locationMethod": "ensure"
+        },
+        {
+          "ID": "void",
+          "lineNumber": 277,
+          "locationMethod": "moveTo"
+        },
+        {
+          "ID": "void",
+          "lineNumber": 150,
+          "locationMethod": "growTo"
+        }
+      ]
+    }
+  ]
+}

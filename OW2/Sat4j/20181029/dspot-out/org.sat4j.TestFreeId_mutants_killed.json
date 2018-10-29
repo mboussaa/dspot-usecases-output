@@ -1,0 +1,30 @@
+{
+  "nbMutantKilledOriginally": 0,
+  "name": "org.sat4j.TestFreeId",
+  "nbOriginalTestCases": 3,
+  "testCases": [
+    {
+      "name": "testIncrementalFeed",
+      "nbAssertionAdded": 124,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 3,
+      "mutantsKilled": [
+        {
+          "ID": "void",
+          "lineNumber": 368,
+          "locationMethod": "selectionSort"
+        },
+        {
+          "ID": "void",
+          "lineNumber": 382,
+          "locationMethod": "sort"
+        },
+        {
+          "ID": "void",
+          "lineNumber": 424,
+          "locationMethod": "sortUnique"
+        }
+      ]
+    }
+  ]
+}

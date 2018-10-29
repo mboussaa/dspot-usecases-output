@@ -1,0 +1,50 @@
+{
+  "nbMutantKilledOriginally": 0,
+  "name": "org.sat4j.tools.NegationDecoratorTest",
+  "nbOriginalTestCases": 2,
+  "testCases": [
+    {
+      "name": "testNegatingTwoClauses",
+      "nbAssertionAdded": 44,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 7,
+      "mutantsKilled": [
+        {
+          "ID": "void",
+          "lineNumber": 157,
+          "locationMethod": "ensure"
+        },
+        {
+          "ID": "void",
+          "lineNumber": 368,
+          "locationMethod": "selectionSort"
+        },
+        {
+          "ID": "void",
+          "lineNumber": 382,
+          "locationMethod": "sort"
+        },
+        {
+          "ID": "void",
+          "lineNumber": 150,
+          "locationMethod": "growTo"
+        },
+        {
+          "ID": "void",
+          "lineNumber": 424,
+          "locationMethod": "sortUnique"
+        },
+        {
+          "ID": "void",
+          "lineNumber": 69,
+          "locationMethod": "add"
+        },
+        {
+          "ID": "false",
+          "lineNumber": 525,
+          "locationMethod": "hasNext"
+        }
+      ]
+    }
+  ]
+}

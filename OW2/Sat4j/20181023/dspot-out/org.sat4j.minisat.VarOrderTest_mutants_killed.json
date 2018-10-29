@@ -1,0 +1,35 @@
+{
+  "nbMutantKilledOriginally": 0,
+  "name": "org.sat4j.minisat.VarOrderTest",
+  "nbOriginalTestCases": 1,
+  "testCases": [
+    {
+      "name": "testNewVar",
+      "nbAssertionAdded": 10,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 4,
+      "mutantsKilled": [
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_ORDER_ELSE",
+          "lineNumber": 157,
+          "locationMethod": "ensure"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.experimental.MemberVariableMutator",
+          "lineNumber": 160,
+          "locationMethod": "ensure"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.VoidMethodCallMutator",
+          "lineNumber": 150,
+          "locationMethod": "growTo"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.ArgumentPropagationMutator",
+          "lineNumber": 158,
+          "locationMethod": "ensure"
+        }
+      ]
+    }
+  ]
+}

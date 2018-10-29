@@ -1,0 +1,81 @@
+{
+  "nbMutantKilledOriginally": 0,
+  "name": "org.sat4j.tools.BackboneTest",
+  "nbOriginalTestCases": 7,
+  "testCases": [
+    {
+      "name": "testFilter",
+      "nbAssertionAdded": 146,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 1,
+      "mutantsKilled": [
+        {
+          "ID": "true",
+          "lineNumber": 198,
+          "locationMethod": "contains"
+        }
+      ]
+    },
+    {
+      "name": "testEasyCaseWithOnlyOneModel",
+      "nbAssertionAdded": 122,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 8,
+      "mutantsKilled": [
+        {
+          "ID": "0",
+          "lineNumber": 529,
+          "locationMethod": "next"
+        },
+        {
+          "ID": "0",
+          "lineNumber": 67,
+          "locationMethod": "var"
+        },
+        {
+          "ID": "1",
+          "lineNumber": 67,
+          "locationMethod": "var"
+        },
+        {
+          "ID": "1",
+          "lineNumber": 529,
+          "locationMethod": "next"
+        },
+        {
+          "ID": "false",
+          "lineNumber": 198,
+          "locationMethod": "contains"
+        },
+        {
+          "ID": "false",
+          "lineNumber": 525,
+          "locationMethod": "hasNext"
+        },
+        {
+          "ID": "0",
+          "lineNumber": 115,
+          "locationMethod": "toDimacs"
+        },
+        {
+          "ID": "1",
+          "lineNumber": 115,
+          "locationMethod": "toDimacs"
+        }
+      ]
+    },
+    {
+      "name": "testBugBr4cp",
+      "nbAssertionAdded": 144,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 1,
+      "mutantsKilled": [
+        {
+          "ID": "void",
+          "lineNumber": 242,
+          "locationMethod": "copyTo"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "nbMutantKilledOriginally": 0,
+  "name": "org.sat4j.minisat.core.BugTrivialAssumption",
+  "nbOriginalTestCases": 6,
+  "testCases": [
+    {
+      "name": "testEasyInconsistencyInAssumption",
+      "nbAssertionAdded": 18,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 7,
+      "mutantsKilled": [
+        {
+          "ID": "0",
+          "lineNumber": 529,
+          "locationMethod": "next"
+        },
+        {
+          "ID": "void",
+          "lineNumber": 242,
+          "locationMethod": "copyTo"
+        },
+        {
+          "ID": "1",
+          "lineNumber": 529,
+          "locationMethod": "next"
+        },
+        {
+          "ID": "false",
+          "lineNumber": 198,
+          "locationMethod": "contains"
+        },
+        {
+          "ID": "false",
+          "lineNumber": 525,
+          "locationMethod": "hasNext"
+        },
+        {
+          "ID": "0",
+          "lineNumber": 115,
+          "locationMethod": "toDimacs"
+        },
+        {
+          "ID": "1",
+          "lineNumber": 115,
+          "locationMethod": "toDimacs"
+        }
+      ]
+    }
+  ]
+}
