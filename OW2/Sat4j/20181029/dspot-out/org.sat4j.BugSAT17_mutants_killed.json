@@ -1,0 +1,30 @@
+{
+  "nbMutantKilledOriginally": 0,
+  "name": "org.sat4j.BugSAT17",
+  "nbOriginalTestCases": 6,
+  "testCases": [
+    {
+      "name": "testInconsistentLits",
+      "nbAssertionAdded": 2,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 3,
+      "mutantsKilled": [
+        {
+          "ID": "0",
+          "lineNumber": 529,
+          "locationMethod": "next"
+        },
+        {
+          "ID": "1",
+          "lineNumber": 529,
+          "locationMethod": "next"
+        },
+        {
+          "ID": "false",
+          "lineNumber": 525,
+          "locationMethod": "hasNext"
+        }
+      ]
+    }
+  ]
+}

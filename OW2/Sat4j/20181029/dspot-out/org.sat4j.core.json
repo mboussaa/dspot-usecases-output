@@ -1,0 +1,289 @@
+{
+  "classTimes": [
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT107",
+      "timeInMs": 21857
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT109",
+      "timeInMs": 10988
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT117ModelIterator",
+      "timeInMs": 11100
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT118",
+      "timeInMs": 17274
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT139",
+      "timeInMs": 11614
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT17",
+      "timeInMs": 24749
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT18",
+      "timeInMs": 25018
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT25",
+      "timeInMs": 15266
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT26",
+      "timeInMs": 402
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT34",
+      "timeInMs": 543
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT37",
+      "timeInMs": 3829
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT43",
+      "timeInMs": 11924
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT50",
+      "timeInMs": 32253
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT79",
+      "timeInMs": 319
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT81",
+      "timeInMs": 27869
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT95",
+      "timeInMs": 6077
+    },
+    {
+      "fullQualifiedName": "org.sat4j.ModelIteratorTest",
+      "timeInMs": 163999
+    },
+    {
+      "fullQualifiedName": "org.sat4j.SingleSolutionTest",
+      "timeInMs": 788
+    },
+    {
+      "fullQualifiedName": "org.sat4j.StampPerformanceTest",
+      "timeInMs": 348
+    },
+    {
+      "fullQualifiedName": "org.sat4j.TestConstrGroup",
+      "timeInMs": 21650
+    },
+    {
+      "fullQualifiedName": "org.sat4j.TestFreeId",
+      "timeInMs": 9144
+    },
+    {
+      "fullQualifiedName": "org.sat4j.TestSatAssumps",
+      "timeInMs": 409
+    },
+    {
+      "fullQualifiedName": "org.sat4j.TestSolverEngine",
+      "timeInMs": 12083
+    },
+    {
+      "fullQualifiedName": "org.sat4j.core.JsonReaderTest",
+      "timeInMs": 13493
+    },
+    {
+      "fullQualifiedName": "org.sat4j.core.VecTest",
+      "timeInMs": 1090
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.TestAssertion",
+      "timeInMs": 375
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.TestLubyFunction",
+      "timeInMs": 8009
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.TestsFonctionnels",
+      "timeInMs": 1222
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.VarOrderTest",
+      "timeInMs": 12908
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.constraints.LitTest",
+      "timeInMs": 934
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.constraints.TestXor",
+      "timeInMs": 57010
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.Bug275101",
+      "timeInMs": 21716
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.BugFatih",
+      "timeInMs": 17164
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.BugFatih2",
+      "timeInMs": 18920
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.BugReset",
+      "timeInMs": 27075
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.BugSAT117",
+      "timeInMs": 13789
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.BugThomas",
+      "timeInMs": 23961
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.BugTrivialAssumption",
+      "timeInMs": 16201
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.CircularBufferTest",
+      "timeInMs": 6552
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.HeapLevelTest",
+      "timeInMs": 8257
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.HeapTest",
+      "timeInMs": 8840
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.LboolTest",
+      "timeInMs": 748
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.LevelBasedVarOrderTest",
+      "timeInMs": 5200
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.QueueTest",
+      "timeInMs": 584
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.TestAtMost",
+      "timeInMs": 652
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.TestGroupedTimeoutModelEnumeration",
+      "timeInMs": 111678
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.TestMaxSatDecorator",
+      "timeInMs": 18077
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.TestPrimeComputation",
+      "timeInMs": 356
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.TestSizeComparator",
+      "timeInMs": 12488
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.restarts.ArminRestarts",
+      "timeInMs": 313
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.restarts.EMARestarts",
+      "timeInMs": 324
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.restarts.FixedPeriodRestarts",
+      "timeInMs": 309
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.restarts.Glucose21Restarts",
+      "timeInMs": 331
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.restarts.LubyRestarts",
+      "timeInMs": 347
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.restarts.MiniSATRestarts",
+      "timeInMs": 379
+    },
+    {
+      "fullQualifiedName": "org.sat4j.minisat.restarts.NoRestarts",
+      "timeInMs": 345
+    },
+    {
+      "fullQualifiedName": "org.sat4j.tools.BackboneTest",
+      "timeInMs": 27724
+    },
+    {
+      "fullQualifiedName": "org.sat4j.tools.NegationDecoratorTest",
+      "timeInMs": 17749
+    },
+    {
+      "fullQualifiedName": "org.sat4j.tools.RemiUtilsTest",
+      "timeInMs": 24787
+    },
+    {
+      "fullQualifiedName": "org.sat4j.tools.TestAllMSSes",
+      "timeInMs": 29943
+    },
+    {
+      "fullQualifiedName": "org.sat4j.tools.TestAllMUSes",
+      "timeInMs": 41063
+    },
+    {
+      "fullQualifiedName": "org.sat4j.tools.TestAllMUSesAndCheckTest",
+      "timeInMs": 45307
+    },
+    {
+      "fullQualifiedName": "org.sat4j.tools.TestAllMUSesGroupTest",
+      "timeInMs": 33121
+    },
+    {
+      "fullQualifiedName": "org.sat4j.tools.TestCheckItIsAMUS",
+      "timeInMs": 18784
+    },
+    {
+      "fullQualifiedName": "org.sat4j.tools.TestClausalCardinalitiesBinaryEncoding",
+      "timeInMs": 14553
+    },
+    {
+      "fullQualifiedName": "org.sat4j.tools.TestClausalCardinalitiesBinomialEncoding",
+      "timeInMs": 14567
+    },
+    {
+      "fullQualifiedName": "org.sat4j.tools.TestClausalCardinalitiesCommanderEncoding",
+      "timeInMs": 20203
+    },
+    {
+      "fullQualifiedName": "org.sat4j.tools.TestClausalCardinalitiesLadderEncoding",
+      "timeInMs": 21519
+    },
+    {
+      "fullQualifiedName": "org.sat4j.tools.TestClausalCardinalitiesProductEncoding",
+      "timeInMs": 20477
+    },
+    {
+      "fullQualifiedName": "org.sat4j.tools.TestClausalCardinalitiesSequentialEncoding",
+      "timeInMs": 20238
+    },
+    {
+      "fullQualifiedName": "org.sat4j.tools.TestGateTranslator",
+      "timeInMs": 17645
+    }
+  ],
+  "projectName": "org.sat4j.core"
+}
