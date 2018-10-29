@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":61,"id":3512,"methods":[{"el":60,"sc":5,"sl":47}],"name":"ReplanFeatureReleaseJsonDeserializer","sl":38}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_100":{"methods":[{"sl":47}],"name":"testDeleteDependenciesOfFeatureByIdOfProjectById","pass":true,"statements":[{"sl":51},{"sl":53},{"sl":54}]},"test_114":{"methods":[{"sl":47}],"name":"testAddDeleteDependenciesOfFeatureByIdOfProjectById","pass":true,"statements":[{"sl":51},{"sl":53},{"sl":54}]},"test_121":{"methods":[{"sl":47}],"name":"testGetFeatureByIdOfProjectById","pass":true,"statements":[{"sl":51},{"sl":53},{"sl":54}]},"test_13":{"methods":[{"sl":47}],"name":"testDeleteFeaturesOfReleaseByIdOfProjectById","pass":true,"statements":[{"sl":51},{"sl":53},{"sl":54},{"sl":56},{"sl":57},{"sl":59}]},"test_23":{"methods":[{"sl":47}],"name":"testGetFeaturesOfProjectById","pass":true,"statements":[{"sl":51},{"sl":53},{"sl":54}]},"test_66":{"methods":[{"sl":47}],"name":"testAddDeleteFeaturesOfReleaseByIdOfProjectById","pass":true,"statements":[{"sl":51},{"sl":53},{"sl":54}]},"test_76":{"methods":[{"sl":47}],"name":"testDeleteSkillsOfFeatureByIdOfProjectById","pass":true,"statements":[{"sl":51},{"sl":53},{"sl":54}]},"test_79":{"methods":[{"sl":47}],"name":"testCreateAndDeleteFeatureForProject","pass":true,"statements":[{"sl":51},{"sl":53},{"sl":54}]},"test_94":{"methods":[{"sl":47}],"name":"testAddDeleteSkillsOfFeatureByIdOfProjectById","pass":true,"statements":[{"sl":51},{"sl":53},{"sl":54}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [66, 76, 121, 100, 79, 94, 114, 13, 23], [], [], [], [66, 76, 121, 100, 79, 94, 114, 13, 23], [], [66, 76, 121, 100, 79, 94, 114, 13, 23], [66, 76, 121, 100, 79, 94, 114, 13, 23], [], [13], [13], [], [13], [], []]
