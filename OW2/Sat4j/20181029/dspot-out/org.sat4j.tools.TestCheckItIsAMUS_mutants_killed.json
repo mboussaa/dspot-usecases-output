@@ -1,0 +1,20 @@
+{
+  "nbMutantKilledOriginally": 0,
+  "name": "org.sat4j.tools.TestCheckItIsAMUS",
+  "nbOriginalTestCases": 2,
+  "testCases": [
+    {
+      "name": "testItWorksOnSimpleMUSes",
+      "nbAssertionAdded": 50,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 1,
+      "mutantsKilled": [
+        {
+          "ID": "void",
+          "lineNumber": 242,
+          "locationMethod": "copyTo"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "nbMutantKilledOriginally": 0,
+  "name": "org.sat4j.tools.TestCheckItIsAMUS",
+  "nbOriginalTestCases": 2,
+  "testCases": [
+    {
+      "name": "testItWorksOnSimpleNonMUSes",
+      "nbAssertionAdded": 38,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 14,
+      "mutantsKilled": [
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.VoidMethodCallMutator",
+          "lineNumber": 245,
+          "locationMethod": "copyTo"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.PrimitiveReturnsMutator",
+          "lineNumber": 480,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.ArgumentPropagationMutator",
+          "lineNumber": 158,
+          "locationMethod": "ensure"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator",
+          "lineNumber": 477,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_ORDER_ELSE",
+          "lineNumber": 477,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.ReturnValsMutator",
+          "lineNumber": 480,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.InlineConstantMutator",
+          "lineNumber": 245,
+          "locationMethod": "copyTo"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.MathMutator",
+          "lineNumber": 478,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.MathMutator",
+          "lineNumber": 480,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator",
+          "lineNumber": 368,
+          "locationMethod": "selectionSort"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator",
+          "lineNumber": 477,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_ORDER_IF",
+          "lineNumber": 477,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.InlineConstantMutator",
+          "lineNumber": 477,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.InlineConstantMutator",
+          "lineNumber": 476,
+          "locationMethod": "hashCode"
+        }
+      ]
+    },
+    {
+      "name": "testItWorksOnSimpleMUSes",
+      "nbAssertionAdded": 50,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 3,
+      "mutantsKilled": [
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.MathMutator",
+          "lineNumber": 338,
+          "locationMethod": "delete"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.experimental.MemberVariableMutator",
+          "lineNumber": 247,
+          "locationMethod": "copyTo"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.InlineConstantMutator",
+          "lineNumber": 338,
+          "locationMethod": "delete"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,293 @@
+{
+  "nbMutantKilledOriginally": 0,
+  "name": "org.sat4j.minisat.core.TestSizeComparator",
+  "nbOriginalTestCases": 2,
+  "testCases": [
+    {
+      "name": "testSizeComparatorWithTie",
+      "nbAssertionAdded": 82,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 43,
+      "mutantsKilled": [
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator",
+          "lineNumber": 365,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.InlineConstantMutator",
+          "lineNumber": 486,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator",
+          "lineNumber": 514,
+          "locationMethod": "isEmpty"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator",
+          "lineNumber": 366,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator",
+          "lineNumber": 367,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.ReturnValsMutator",
+          "lineNumber": 372,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator",
+          "lineNumber": 486,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.MathMutator",
+          "lineNumber": 487,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_ORDER_ELSE",
+          "lineNumber": 369,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.experimental.MemberVariableMutator",
+          "lineNumber": 160,
+          "locationMethod": "ensure"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_ORDER_IF",
+          "lineNumber": 365,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_ORDER_ELSE",
+          "lineNumber": 365,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_ORDER_ELSE",
+          "lineNumber": 486,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator",
+          "lineNumber": 365,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.BooleanTrueReturnValsMutator",
+          "lineNumber": 514,
+          "locationMethod": "isEmpty"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.NullReturnValsMutator",
+          "lineNumber": 185,
+          "locationMethod": "push"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.MathMutator",
+          "lineNumber": 365,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator",
+          "lineNumber": 367,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.InlineConstantMutator",
+          "lineNumber": 514,
+          "locationMethod": "isEmpty"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.VoidMethodCallMutator",
+          "lineNumber": 165,
+          "locationMethod": "push"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.EmptyObjectReturnValsMutator",
+          "lineNumber": 372,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator",
+          "lineNumber": 486,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.MathMutator",
+          "lineNumber": 165,
+          "locationMethod": "push"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.ReturnValsMutator",
+          "lineNumber": 489,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.ReturnValsMutator",
+          "lineNumber": 185,
+          "locationMethod": "push"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.InlineConstantMutator",
+          "lineNumber": 485,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.InlineConstantMutator",
+          "lineNumber": 365,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator",
+          "lineNumber": 487,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.PrimitiveReturnsMutator",
+          "lineNumber": 489,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator",
+          "lineNumber": 366,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.ReturnValsMutator",
+          "lineNumber": 514,
+          "locationMethod": "isEmpty"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator",
+          "lineNumber": 369,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF",
+          "lineNumber": 514,
+          "locationMethod": "isEmpty"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator",
+          "lineNumber": 370,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_ORDER_ELSE",
+          "lineNumber": 157,
+          "locationMethod": "ensure"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_ORDER_IF",
+          "lineNumber": 486,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator",
+          "lineNumber": 365,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.InlineConstantMutator",
+          "lineNumber": 370,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.ConstructorCallMutator",
+          "lineNumber": 364,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator",
+          "lineNumber": 370,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.MathMutator",
+          "lineNumber": 370,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator",
+          "lineNumber": 372,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator",
+          "lineNumber": 486,
+          "locationMethod": "hashCode"
+        }
+      ]
+    },
+    {
+      "name": "testSizeComparator",
+      "nbAssertionAdded": 294,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 11,
+      "mutantsKilled": [
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.MathMutator",
+          "lineNumber": 478,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator",
+          "lineNumber": 358,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.PrimitiveReturnsMutator",
+          "lineNumber": 480,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.MathMutator",
+          "lineNumber": 480,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator",
+          "lineNumber": 477,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_ORDER_IF",
+          "lineNumber": 477,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_ORDER_IF",
+          "lineNumber": 358,
+          "locationMethod": "toString"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.IncrementsMutator",
+          "lineNumber": 477,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_ORDER_ELSE",
+          "lineNumber": 477,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.InlineConstantMutator",
+          "lineNumber": 477,
+          "locationMethod": "hashCode"
+        },
+        {
+          "ID": "org.pitest.mutationtest.engine.gregor.mutators.ReturnValsMutator",
+          "lineNumber": 480,
+          "locationMethod": "hashCode"
+        }
+      ]
+    }
+  ]
+}

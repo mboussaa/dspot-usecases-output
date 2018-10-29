@@ -1,0 +1,25 @@
+{
+  "nbMutantKilledOriginally": 0,
+  "name": "org.sat4j.minisat.core.TestGroupedTimeoutModelEnumeration",
+  "nbOriginalTestCases": 2,
+  "testCases": [
+    {
+      "name": "testTimeoutOnSeconds_failAssert1",
+      "nbAssertionAdded": 1,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 2,
+      "mutantsKilled": [
+        {
+          "ID": "void",
+          "lineNumber": 157,
+          "locationMethod": "ensure"
+        },
+        {
+          "ID": "void",
+          "lineNumber": 150,
+          "locationMethod": "growTo"
+        }
+      ]
+    }
+  ]
+}

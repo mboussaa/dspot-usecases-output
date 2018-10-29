@@ -1,0 +1,35 @@
+{
+  "nbMutantKilledOriginally": 0,
+  "name": "org.sat4j.tools.RemiUtilsTest",
+  "nbOriginalTestCases": 1,
+  "testCases": [
+    {
+      "name": "testBugUnitClauses",
+      "nbAssertionAdded": 34,
+      "nbInputAdded": 0,
+      "nbMutantKilled": 4,
+      "mutantsKilled": [
+        {
+          "ID": "0",
+          "lineNumber": 529,
+          "locationMethod": "next"
+        },
+        {
+          "ID": "1",
+          "lineNumber": 529,
+          "locationMethod": "next"
+        },
+        {
+          "ID": "false",
+          "lineNumber": 198,
+          "locationMethod": "contains"
+        },
+        {
+          "ID": "false",
+          "lineNumber": 525,
+          "locationMethod": "hasNext"
+        }
+      ]
+    }
+  ]
+}
