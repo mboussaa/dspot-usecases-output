@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Xor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SAT4J core</a> &gt; <a href="index.source.html" class="el_package">org.sat4j.minisat.constraints.xor</a> &gt; <span class="el_source">Xor.java</span></div><h1>Xor.java</h1><pre class="source lang-java linenums">package org.sat4j.minisat.constraints.xor;
+
+import org.sat4j.core.LiteralsUtils;
+import org.sat4j.minisat.core.ILits;
+import org.sat4j.specs.Constr;
+import org.sat4j.specs.IVecInt;
+import org.sat4j.specs.MandatoryLiteralListener;
+import org.sat4j.specs.Propagatable;
+import org.sat4j.specs.UnitPropagationListener;
+import org.sat4j.specs.VarMapper;
+
+/**
+ * A simple implementation of a xor constraint to be handled in Sat4j CDCL
+ * solver.
+ * 
+ * As for each constraint in the solver, the propagation and conflict analysis
+ * is performed locally for each constraint, not globally like in the SMT
+ * framework.
+ * 
+ * As such, the constraint uses an extended form of watched literals, basic
+ * analysis in case of conflicts (it will typically return a clause of the CNF
+ * encoding), so think about that implementation as a lazy clause generation of
+ * the full CNF encoding.
+ *
+ * The normalized for of the constraint is:
+ * 
+ * v1 xor v2 xor v3 xor ... xor vn = (true | false)
+ * 
+ * where v1 are dimacs positive literals (using Sat4j internal representation)
+ * 
+ * if rhs is false, then an even number of literals must be satisfied, else an
+ * odd number of literals must be satisfied (thus the name parity constraints).
+ * 
+ * @author leberre
+ * @since 2.3.6
+ */
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">public class Xor implements Constr, Propagatable {</span>
+
+    private final int[] lits;
+    private final boolean parity;
+    private final ILits voc;
+
+    public static Xor createParityConstraint(IVecInt lits, boolean parity,
+            ILits voc) {
+        // TODO ensure normal form
+<span class="fc" id="L46">        Xor xor = new Xor(lits, parity, voc);</span>
+<span class="fc" id="L47">        xor.register();</span>
+<span class="fc" id="L48">        return xor;</span>
+    }
+
+<span class="fc" id="L51">    public Xor(IVecInt lits, boolean parity, ILits voc) {</span>
+<span class="fc" id="L52">        this.lits = new int[lits.size()];</span>
+<span class="fc" id="L53">        lits.copyTo(this.lits);</span>
+<span class="fc" id="L54">        this.parity = parity;</span>
+<span class="fc" id="L55">        this.voc = voc;</span>
+<span class="fc" id="L56">    }</span>
+
+    @Override
+    public boolean learnt() {
+<span class="fc" id="L60">        return false;</span>
+    }
+
+    @Override
+    public int size() {
+<span class="nc" id="L65">        return lits.length;</span>
+    }
+
+    @Override
+    public int get(int i) {
+<span class="nc" id="L70">        return lits[i];</span>
+    }
+
+    @Override
+    public double getActivity() {
+        // TODO: implement this method !
+<span class="nc" id="L76">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    @Override
+    public boolean canBePropagatedMultipleTimes() {
+<span class="nc" id="L81">        return false;</span>
+    }
+
+    @Override
+    public String toString(VarMapper mapper) {
+<span class="nc" id="L86">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    @Override
+    public boolean propagate(UnitPropagationListener s, int p) {
+        // we use the same trick as for clauses: we move the variables inside
+        // the constraint
+        // to keep the two doubly watched literals in front of the constraints
+<span class="fc" id="L94">        int tmp, nbSatisfied = 0;</span>
+<span class="fc bfc" id="L95" title="All 4 branches covered.">        if (p == lits[0] || LiteralsUtils.neg(p) == lits[0]) {</span>
+<span class="fc" id="L96">            tmp = lits[1];</span>
+<span class="fc" id="L97">            lits[1] = lits[0];</span>
+<span class="fc" id="L98">            lits[0] = tmp;</span>
+        }
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        if (this.voc.isSatisfied(lits[1])) {</span>
+<span class="fc" id="L101">            nbSatisfied = 1;</span>
+        }
+        // look for new literal to watch and counting satisfied literals
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        for (int i = 2; i &lt; lits.length; i++) {</span>
+<span class="fc bfc" id="L105" title="All 2 branches covered.">            if (this.voc.isSatisfied(lits[i])) {</span>
+<span class="fc" id="L106">                nbSatisfied++;</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">            } else if (this.voc.isUnassigned(lits[i])) {</span>
+<span class="fc" id="L108">                tmp = lits[1];</span>
+<span class="fc" id="L109">                lits[1] = lits[i];</span>
+<span class="fc" id="L110">                lits[i] = tmp;</span>
+<span class="fc" id="L111">                this.voc.watch(lits[1] ^ 1, this);</span>
+<span class="fc" id="L112">                this.voc.watch(lits[1], this);</span>
+<span class="fc" id="L113">                this.voc.watches(p ^ 1).remove(this);</span>
+<span class="fc" id="L114">                return true;</span>
+            }
+        }
+<span class="fc" id="L117">        this.voc.watch(p, this);</span>
+        // propagates first watched literal, depending on the number of
+        // satisfied literals
+<span class="fc bfc" id="L120" title="All 4 branches covered.">        int toPropagate = ((nbSatisfied &amp; 1) == 1) == parity ? lits[0]</span>
+<span class="fc" id="L121">                : LiteralsUtils.neg(lits[0]);</span>
+<span class="fc" id="L122">        return s.enqueue(toPropagate, this);</span>
+    }
+
+    @Override
+    public boolean propagatePI(MandatoryLiteralListener l, int p) {
+<span class="nc" id="L127">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    @Override
+    public Constr toConstraint() {
+<span class="fc" id="L132">        return this;</span>
+    }
+
+    @Override
+    public void remove(UnitPropagationListener upl) {
+<span class="nc" id="L137">        this.voc.watches(this.lits[0]).remove(this);</span>
+<span class="nc" id="L138">        this.voc.watches(this.lits[0] ^ 1).remove(this);</span>
+<span class="nc" id="L139">        this.voc.watches(this.lits[1]).remove(this);</span>
+<span class="nc" id="L140">        this.voc.watches(this.lits[1] ^ 1).remove(this);</span>
+<span class="nc" id="L141">    }</span>
+
+    @Override
+    public boolean simplify() {
+<span class="nc" id="L145">        return false;</span>
+    }
+
+    @Override
+    public void calcReason(int p, IVecInt outReason) {
+<span class="fc bfc" id="L150" title="All 4 branches covered.">        for (int i = p == ILits.UNDEFINED ? 0 : 1; i &lt; lits.length; i++) {</span>
+<span class="fc bfc" id="L151" title="All 2 branches covered.">            if (this.voc.isFalsified(lits[i])) {</span>
+<span class="fc" id="L152">                outReason.push(lits[i] ^ 1);</span>
+            } else {
+<span class="pc bpc" id="L154" title="2 of 4 branches missed.">                assert this.voc.isSatisfied(lits[i]);</span>
+<span class="fc" id="L155">                outReason.push(lits[i]);</span>
+            }
+        }
+<span class="fc" id="L158">    }</span>
+
+    @Override
+    public void calcReasonOnTheFly(int p, IVecInt trail, IVecInt outReason) {
+<span class="nc" id="L162">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    @Override
+    public void incActivity(double claInc) {
+<span class="nc" id="L167">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    @Override
+    public void forwardActivity(double claInc) {
+<span class="nc" id="L172">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    @Override
+    public boolean locked() {
+<span class="nc" id="L177">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    @Override
+    public void setLearnt() {
+<span class="nc" id="L182">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    @Override
+    public void register() {
+<span class="fc" id="L187">        this.voc.watch(this.lits[0], this);</span>
+<span class="fc" id="L188">        this.voc.watch(this.lits[0] ^ 1, this);</span>
+<span class="fc" id="L189">        this.voc.watch(this.lits[1], this);</span>
+<span class="fc" id="L190">        this.voc.watch(this.lits[1] ^ 1, this);</span>
+<span class="fc" id="L191">    }</span>
+
+    @Override
+    public void rescaleBy(double d) {
+<span class="nc" id="L195">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    @Override
+    public void setActivity(double d) {
+<span class="nc" id="L200">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    @Override
+    public void assertConstraint(UnitPropagationListener s) {
+<span class="nc" id="L205">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    @Override
+    public void assertConstraintIfNeeded(UnitPropagationListener s) {
+<span class="nc" id="L210">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    @Override
+    public boolean canBeSatisfiedByCountingLiterals() {
+<span class="nc" id="L215">        return true;</span>
+    }
+
+    @Override
+    public int requiredNumberOfSatisfiedLiterals() {
+<span class="nc" id="L220">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    @Override
+    public boolean isSatisfied() {
+<span class="nc" id="L225">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    @Override
+    public int getAssertionLevel(IVecInt trail, int decisionLevel) {
+<span class="nc" id="L230">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

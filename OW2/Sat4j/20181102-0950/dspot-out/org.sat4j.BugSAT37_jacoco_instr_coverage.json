@@ -1,0 +1,11 @@
+{
+  "name": "org.sat4j.BugSAT37",
+  "nbOriginalTestCases": 1,
+  "initialInstructionCovered": 2755,
+  "initialInstructionTotal": 43713,
+  "percentageinitialInstructionCovered": 6.302472948550775,
+  "amplifiedInstructionCovered": 3988,
+  "amplifiedInstructionTotal": 43713,
+  "percentageamplifiedInstructionCovered": 9.123144144762428,
+  "testCases": []
+}

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OptimizationMode.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SAT4J core</a> &gt; <a href="index.source.html" class="el_package">org.sat4j</a> &gt; <span class="el_source">OptimizationMode.java</span></div><h1>OptimizationMode.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * SAT4J: a SATisfiability library for Java Copyright (C) 2004, 2012 Artois University and CNRS
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU Lesser General Public License Version 2.1 or later (the
+ * &quot;LGPL&quot;), in which case the provisions of the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of the LGPL, and not to allow others to use your version of
+ * this file under the terms of the EPL, indicate your decision by deleting
+ * the provisions above and replace them with the notice and other provisions
+ * required by the LGPL. If you do not delete the provisions above, a recipient
+ * may use your version of this file under the terms of the EPL or the LGPL.
+ *
+ * Based on the original MiniSat specification from:
+ *
+ * An extensible SAT solver. Niklas Een and Niklas Sorensson. Proceedings of the
+ * Sixth International Conference on Theory and Applications of Satisfiability
+ * Testing, LNCS 2919, pp 502-518, 2003.
+ *
+ * See www.minisat.se for the original solver in C++.
+ *
+ * Contributors:
+ *   CRIL - initial API and implementation
+ *******************************************************************************/
+package org.sat4j;
+
+import java.io.PrintWriter;
+
+import org.sat4j.core.Vec;
+import org.sat4j.core.VecInt;
+import org.sat4j.reader.Reader;
+import org.sat4j.specs.ContradictionException;
+import org.sat4j.specs.ILogAble;
+import org.sat4j.specs.IOptimizationProblem;
+import org.sat4j.specs.IProblem;
+import org.sat4j.specs.ISolver;
+import org.sat4j.specs.IVec;
+import org.sat4j.specs.IVecInt;
+import org.sat4j.specs.TimeoutException;
+import org.sat4j.tools.LexicoDecorator;
+
+/**
+ * Behavior of the solver when an optimal solution is needed.
+ * 
+ * @author leberre
+ * 
+ */
+<span class="nc bnc" id="L53" title="All 2 branches missed.">final class OptimizationMode implements ILauncherMode {</span>
+    private int nbSolutions;
+<span class="nc" id="L55">    private volatile ExitCode exitCode = ExitCode.UNKNOWN;</span>
+<span class="nc" id="L56">    private boolean isIncomplete = false;</span>
+    private PrintWriter out;
+    private long beginTime;
+    private IOptimizationProblem problem;
+
+    public void setIncomplete(boolean isIncomplete) {
+<span class="nc" id="L62">        this.isIncomplete = isIncomplete;</span>
+<span class="nc" id="L63">    }</span>
+
+    public void displayResult(ISolver solver, IProblem problem, ILogAble logger,
+            PrintWriter out, Reader reader, long beginTime,
+            boolean displaySolutionLine) {
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (solver == null) {</span>
+<span class="nc" id="L69">            return;</span>
+        }
+<span class="nc" id="L71">        System.out.flush();</span>
+<span class="nc" id="L72">        out.flush();</span>
+<span class="nc" id="L73">        solver.printStat(out);</span>
+<span class="nc" id="L74">        out.println(ANSWER_PREFIX + exitCode);</span>
+<span class="nc bnc" id="L75" title="All 8 branches missed.">        if (exitCode == ExitCode.SATISFIABLE</span>
+                || exitCode == ExitCode.OPTIMUM_FOUND
+                || isIncomplete &amp;&amp; exitCode == ExitCode.UPPER_BOUND) {
+<span class="nc bnc" id="L78" title="All 4 branches missed.">            assert this.nbSolutions &gt; 0;</span>
+<span class="nc" id="L79">            logger.log(&quot;Found &quot; + this.nbSolutions + &quot; solution(s)&quot;);</span>
+
+<span class="nc bnc" id="L81" title="All 2 branches missed.">            if (displaySolutionLine) {</span>
+<span class="nc" id="L82">                out.print(SOLUTION_PREFIX);</span>
+<span class="nc" id="L83">                reader.decode(problem.model(), out);</span>
+<span class="nc" id="L84">                out.println();</span>
+            }
+<span class="nc" id="L86">            IOptimizationProblem optproblem = (IOptimizationProblem) problem;</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">            if (!optproblem.hasNoObjectiveFunction()) {</span>
+                String objvalue;
+<span class="nc bnc" id="L89" title="All 2 branches missed.">                if (optproblem instanceof LexicoDecorator&lt;?&gt;) {</span>
+<span class="nc" id="L90">                    IVec&lt;Number&gt; values = new Vec&lt;Number&gt;();</span>
+<span class="nc" id="L91">                    LexicoDecorator&lt;?&gt; lexico = (LexicoDecorator&lt;?&gt;) optproblem;</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">                    for (int i = 0; i &lt; lexico.numberOfCriteria(); i++) {</span>
+<span class="nc" id="L93">                        values.push(lexico.getObjectiveValue(i));</span>
+                    }
+<span class="nc" id="L95">                    objvalue = values.toString();</span>
+
+<span class="nc" id="L97">                } else {</span>
+<span class="nc" id="L98">                    objvalue = optproblem.getObjectiveValue().toString();</span>
+                }
+<span class="nc" id="L100">                logger.log(&quot;objective function=&quot; + objvalue); //$NON-NLS-1$</span>
+            }
+        }
+
+<span class="nc" id="L104">        logger.log(&quot;Total wall clock time (in seconds): &quot; //$NON-NLS-1$</span>
+<span class="nc" id="L105">                + (System.currentTimeMillis() - beginTime) / 1000.0);</span>
+<span class="nc" id="L106">        out.flush();</span>
+<span class="nc" id="L107">    }</span>
+
+    public void solve(IProblem problem, Reader reader, ILogAble logger,
+            PrintWriter out, long beginTime) {
+<span class="nc" id="L111">        boolean isSatisfiable = false;</span>
+<span class="nc" id="L112">        this.nbSolutions = 0;</span>
+<span class="nc" id="L113">        IOptimizationProblem optproblem = (IOptimizationProblem) problem;</span>
+<span class="nc" id="L114">        exitCode = ExitCode.UNKNOWN;</span>
+
+<span class="nc" id="L116">        this.out = out;</span>
+<span class="nc" id="L117">        this.beginTime = beginTime;</span>
+<span class="nc" id="L118">        this.problem = optproblem;</span>
+
+        try {
+<span class="nc bnc" id="L121" title="All 2 branches missed.">            while (optproblem.admitABetterSolution()) {</span>
+<span class="nc" id="L122">                ++this.nbSolutions;</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">                if (!isSatisfiable) {</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">                    if (optproblem.nonOptimalMeansSatisfiable()) {</span>
+<span class="nc" id="L125">                        logger.log(&quot;SATISFIABLE&quot;);</span>
+<span class="nc" id="L126">                        exitCode = ExitCode.SATISFIABLE;</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">                        if (optproblem.hasNoObjectiveFunction()) {</span>
+<span class="nc" id="L128">                            return;</span>
+                        }
+<span class="nc bnc" id="L130" title="All 2 branches missed.">                    } else if (isIncomplete) {</span>
+<span class="nc" id="L131">                        exitCode = ExitCode.UPPER_BOUND;</span>
+                    }
+<span class="nc" id="L133">                    isSatisfiable = true;</span>
+<span class="nc" id="L134">                    logger.log(&quot;OPTIMIZING...&quot;); //$NON-NLS-1$</span>
+                }
+<span class="nc" id="L136">                logger.log(&quot;Got one! Elapsed wall clock time (in seconds):&quot; //$NON-NLS-1$</span>
+<span class="nc" id="L137">                        + (System.currentTimeMillis() - beginTime) / 1000.0);</span>
+<span class="nc" id="L138">                out.println(CURRENT_OPTIMUM_VALUE_PREFIX</span>
+<span class="nc" id="L139">                        + optproblem.getObjectiveValue());</span>
+<span class="nc" id="L140">                optproblem.discardCurrentSolution();</span>
+            }
+<span class="nc bnc" id="L142" title="All 2 branches missed.">            if (isSatisfiable) {</span>
+<span class="nc" id="L143">                exitCode = ExitCode.OPTIMUM_FOUND;</span>
+            } else {
+<span class="nc" id="L145">                exitCode = ExitCode.UNSATISFIABLE;</span>
+            }
+<span class="nc" id="L147">        } catch (ContradictionException ex) {</span>
+<span class="nc bnc" id="L148" title="All 4 branches missed.">            assert isSatisfiable;</span>
+<span class="nc" id="L149">            exitCode = ExitCode.OPTIMUM_FOUND;</span>
+<span class="nc" id="L150">        } catch (TimeoutException e) {</span>
+<span class="nc" id="L151">            logger.log(&quot;timeout&quot;);</span>
+<span class="nc" id="L152">        }</span>
+
+<span class="nc" id="L154">    }</span>
+
+    public ExitCode getCurrentExitCode() {
+<span class="nc" id="L157">        return exitCode;</span>
+    }
+
+    public void onSolutionFound(int[] solution) {
+<span class="nc" id="L161">        this.nbSolutions++;</span>
+        // this.exitCode = ExitCode.SATISFIABLE;
+<span class="nc" id="L163">        this.out.printf(&quot;c Found solution #%d  (%.2f)s%n&quot;, nbSolutions,</span>
+<span class="nc" id="L164">                (System.currentTimeMillis() - beginTime) / 1000.0);</span>
+<span class="nc" id="L165">        this.out.println(&quot;c Value of objective function : &quot;</span>
+<span class="nc" id="L166">                + problem.getObjectiveValue());</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">        if (System.getProperty(&quot;printallmodels&quot;) != null) {</span>
+<span class="nc" id="L168">            this.out.println(new VecInt(solution));</span>
+        }
+<span class="nc" id="L170">    }</span>
+
+    public void onSolutionFound(IVecInt solution) {
+<span class="nc" id="L173">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public void onUnsatTermination() {
+        // do nothing
+<span class="nc" id="L178">    }</span>
+
+    public void setExitCode(ExitCode exitCode) {
+<span class="nc" id="L181">        this.exitCode = exitCode;</span>
+<span class="nc" id="L182">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

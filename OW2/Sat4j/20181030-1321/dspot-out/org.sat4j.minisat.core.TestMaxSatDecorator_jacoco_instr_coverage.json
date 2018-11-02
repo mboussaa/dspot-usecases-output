@@ -1,0 +1,11 @@
+{
+  "name": "org.sat4j.minisat.core.TestMaxSatDecorator",
+  "nbOriginalTestCases": 2,
+  "initialInstructionCovered": 5596,
+  "initialInstructionTotal": 43674,
+  "percentageinitialInstructionCovered": 12.81311535467326,
+  "amplifiedInstructionCovered": 5808,
+  "amplifiedInstructionTotal": 43674,
+  "percentageamplifiedInstructionCovered": 13.298530017859598,
+  "testCases": []
+}

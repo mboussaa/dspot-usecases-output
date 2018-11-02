@@ -1,0 +1,11 @@
+{
+  "name": "org.sat4j.BugSAT145",
+  "nbOriginalTestCases": 2,
+  "initialInstructionCovered": 953,
+  "initialInstructionTotal": 43713,
+  "percentageinitialInstructionCovered": 2.180129480932446,
+  "amplifiedInstructionCovered": 967,
+  "amplifiedInstructionTotal": 43713,
+  "percentageamplifiedInstructionCovered": 2.212156566696406,
+  "testCases": []
+}

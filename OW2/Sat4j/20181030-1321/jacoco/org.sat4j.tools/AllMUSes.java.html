@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AllMUSes.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SAT4J core</a> &gt; <a href="index.source.html" class="el_package">org.sat4j.tools</a> &gt; <span class="el_source">AllMUSes.java</span></div><h1>AllMUSes.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * SAT4J: a SATisfiability library for Java Copyright (C) 2004, 2012 Artois University and CNRS
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU Lesser General Public License Version 2.1 or later (the
+ * &quot;LGPL&quot;), in which case the provisions of the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of the LGPL, and not to allow others to use your version of
+ * this file under the terms of the EPL, indicate your decision by deleting
+ * the provisions above and replace them with the notice and other provisions
+ * required by the LGPL. If you do not delete the provisions above, a recipient
+ * may use your version of this file under the terms of the EPL or the LGPL.
+ *
+ * Based on the original MiniSat specification from:
+ *
+ * An extensible SAT solver. Niklas Een and Niklas Sorensson. Proceedings of the
+ * Sixth International Conference on Theory and Applications of Satisfiability
+ * Testing, LNCS 2919, pp 502-518, 2003.
+ *
+ * See www.minisat.se for the original solver in C++.
+ *
+ * Contributors:
+ *   CRIL - initial API and implementation
+ *******************************************************************************/
+package org.sat4j.tools;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.sat4j.core.ASolverFactory;
+import org.sat4j.core.VecInt;
+import org.sat4j.specs.ContradictionException;
+import org.sat4j.specs.ISolver;
+import org.sat4j.specs.IVecInt;
+import org.sat4j.specs.TimeoutException;
+
+/**
+ * This is a tool for computing all the MUSes (Minimum Unsatisfiable Sets) of a
+ * set of clauses.
+ * 
+ * @author sroussel
+ * @since 2.3.3
+ */
+public class AllMUSes {
+
+    private final AbstractClauseSelectorSolver&lt;? extends ISolver&gt; css;
+    private final List&lt;IVecInt&gt; mssList;
+    private final List&lt;IVecInt&gt; secondPhaseClauses;
+    private final List&lt;IVecInt&gt; musList;
+    private final ASolverFactory&lt;? extends ISolver&gt; factory;
+
+    public AllMUSes(boolean group, ASolverFactory&lt;? extends ISolver&gt; factory) {
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        this(group</span>
+                ? new GroupClauseSelectorSolver&lt;ISolver&gt;(
+<span class="fc" id="L62">                        factory.defaultSolver())</span>
+<span class="fc" id="L63">                : new FullClauseSelectorSolver&lt;ISolver&gt;(factory.defaultSolver(),</span>
+                        false),
+                factory);
+<span class="fc" id="L66">    }</span>
+
+    public AllMUSes(ASolverFactory&lt;? extends ISolver&gt; factory) {
+<span class="fc" id="L69">        this(false, factory);</span>
+<span class="fc" id="L70">    }</span>
+
+    public AllMUSes(AbstractClauseSelectorSolver&lt;? extends ISolver&gt; css,
+<span class="fc" id="L73">            ASolverFactory&lt;? extends ISolver&gt; factory) {</span>
+<span class="fc" id="L74">        this.css = css;</span>
+<span class="fc" id="L75">        this.factory = factory;</span>
+<span class="fc" id="L76">        this.mssList = new ArrayList&lt;IVecInt&gt;();</span>
+<span class="fc" id="L77">        this.musList = new ArrayList&lt;IVecInt&gt;();</span>
+<span class="fc" id="L78">        this.secondPhaseClauses = new ArrayList&lt;IVecInt&gt;();</span>
+<span class="fc" id="L79">    }</span>
+
+    /**
+     * Gets an instance of ISolver that can be used to compute all MUSes
+     * 
+     * @return the instance of ISolver to which the clauses will be added
+     */
+    public &lt;T extends ISolver&gt; T getSolverInstance() {
+<span class="fc" id="L87">        return (T) this.css;</span>
+    }
+
+    public List&lt;IVecInt&gt; computeAllMUSes() {
+<span class="fc" id="L91">        return computeAllMUSes(VecInt.EMPTY);</span>
+    }
+
+    /**
+     * Reset the state of the object to allow computing new MUSes or MSSes.
+     */
+    public void reset() {
+<span class="nc" id="L98">        this.secondPhaseClauses.clear();</span>
+<span class="nc" id="L99">    }</span>
+
+    public List&lt;IVecInt&gt; computeAllMUSes(SolutionFoundListener listener) {
+<span class="fc" id="L102">        return computeAllMUSes(VecInt.EMPTY, listener);</span>
+    }
+
+    public List&lt;IVecInt&gt; computeAllMUSes(IVecInt assumptions) {
+<span class="fc" id="L106">        return computeAllMUSes(assumptions, SolutionFoundListener.VOID);</span>
+    }
+
+    /**
+     * Computes all the MUSes associated to the set of constraints added to the
+     * solver
+     * 
+     * @param assumptions
+     *            the assumptions under which the MUSes must be computed.
+     * @param listener
+     *            a listener to call when an MUS is found
+     * @return a list containing all the MUSes
+     */
+    public List&lt;IVecInt&gt; computeAllMUSes(IVecInt assumptions,
+            SolutionFoundListener listener) {
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">        if (secondPhaseClauses.isEmpty()) {</span>
+<span class="fc" id="L122">            computeAllMSS(assumptions);</span>
+        }
+<span class="fc" id="L124">        ISolver solver = factory.defaultSolver();</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">        for (IVecInt v : secondPhaseClauses) {</span>
+            try {
+<span class="fc" id="L127">                solver.addClause(v);</span>
+<span class="fc" id="L128">            } catch (ContradictionException e) {</span>
+<span class="fc" id="L129">                return musList;</span>
+<span class="fc" id="L130">            }</span>
+<span class="fc" id="L131">        }</span>
+<span class="fc" id="L132">        AbstractMinimalModel minSolver = new Minimal4InclusionModel(solver,</span>
+<span class="fc" id="L133">                Minimal4InclusionModel.positiveLiterals(solver));</span>
+<span class="fc" id="L134">        return computeAllMUSes(assumptions, listener, minSolver);</span>
+    }
+
+    public List&lt;IVecInt&gt; computeAllMUSesOrdered(
+            SolutionFoundListener listener) {
+<span class="nc" id="L139">        return computeAllMUSesOrdered(VecInt.EMPTY, listener);</span>
+    }
+
+    public List&lt;IVecInt&gt; computeAllMUSesOrdered(IVecInt assumptions,
+            SolutionFoundListener listener) {
+<span class="nc bnc" id="L144" title="All 2 branches missed.">        if (secondPhaseClauses.isEmpty()) {</span>
+<span class="nc" id="L145">            computeAllMSS();</span>
+        }
+<span class="nc" id="L147">        ISolver solver = factory.defaultSolver();</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">        for (IVecInt v : secondPhaseClauses) {</span>
+            try {
+<span class="nc" id="L150">                solver.addClause(v);</span>
+<span class="nc" id="L151">            } catch (ContradictionException e) {</span>
+<span class="nc" id="L152">                return musList;</span>
+<span class="nc" id="L153">            }</span>
+<span class="nc" id="L154">        }</span>
+<span class="nc" id="L155">        AbstractMinimalModel minSolver = new Minimal4CardinalityModel(solver,</span>
+<span class="nc" id="L156">                Minimal4InclusionModel.positiveLiterals(solver));</span>
+<span class="nc" id="L157">        return computeAllMUSes(assumptions, listener, minSolver);</span>
+    }
+
+    private List&lt;IVecInt&gt; computeAllMUSes(IVecInt assumptions,
+            SolutionFoundListener listener, ISolver minSolver) {
+<span class="pc bpc" id="L162" title="1 of 2 branches missed.">        if (css.isVerbose()) {</span>
+<span class="nc" id="L163">            System.out.println(css.getLogPrefix() + &quot;Computing all MUSes ...&quot;);</span>
+        }
+<span class="fc" id="L165">        css.internalState();</span>
+
+        IVecInt mus;
+
+        IVecInt blockingClause;
+
+        try {
+
+<span class="fc bfc" id="L173" title="All 2 branches covered.">            while (minSolver.isSatisfiable(assumptions)) {</span>
+<span class="fc" id="L174">                blockingClause = new VecInt();</span>
+<span class="fc" id="L175">                mus = new VecInt();</span>
+
+<span class="fc" id="L177">                int[] model = minSolver.model();</span>
+
+<span class="fc bfc" id="L179" title="All 2 branches covered.">                for (int i = 0; i &lt; model.length; i++) {</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">                    if (model[i] &gt; 0) {</span>
+<span class="fc" id="L181">                        blockingClause.push(-model[i]);</span>
+<span class="fc" id="L182">                        mus.push(model[i]);</span>
+                    }
+                }
+<span class="fc" id="L185">                musList.add(mus);</span>
+<span class="fc" id="L186">                listener.onSolutionFound(mus);</span>
+                try {
+<span class="fc" id="L188">                    minSolver.addBlockingClause(blockingClause);</span>
+<span class="fc" id="L189">                } catch (ContradictionException e) {</span>
+<span class="fc" id="L190">                    break;</span>
+<span class="fc" id="L191">                }</span>
+<span class="fc" id="L192">            }</span>
+<span class="nc" id="L193">        } catch (TimeoutException e) {</span>
+<span class="nc" id="L194">            Logger.getLogger(&quot;org.sat4j.core&quot;).log(Level.INFO,</span>
+                    &quot;Timeout when computing all muses&quot;, e);
+<span class="fc" id="L196">        }</span>
+<span class="pc bpc" id="L197" title="1 of 2 branches missed.">        if (css.isVerbose()) {</span>
+<span class="nc" id="L198">            System.out.println(css.getLogPrefix() + &quot;... done.&quot;);</span>
+        }
+<span class="fc" id="L200">        css.externalState();</span>
+<span class="fc" id="L201">        return musList;</span>
+    }
+
+    public List&lt;IVecInt&gt; computeAllMSS() {
+<span class="nc" id="L205">        return computeAllMSS(VecInt.EMPTY);</span>
+    }
+
+    public List&lt;IVecInt&gt; computeAllMSS(IVecInt assumptions) {
+<span class="fc" id="L209">        return computeAllMSS(assumptions, SolutionFoundListener.VOID);</span>
+    }
+
+    public List&lt;IVecInt&gt; computeAllMSS(SolutionFoundListener mssListener) {
+<span class="nc" id="L213">        return computeAllMSS(VecInt.EMPTY, mssListener);</span>
+    }
+
+    public List&lt;IVecInt&gt; computeAllMSS(IVecInt assumptions,
+            SolutionFoundListener listener) {
+<span class="fc" id="L218">        IVecInt pLits = new VecInt();</span>
+<span class="fc bfc" id="L219" title="All 2 branches covered.">        for (Integer i : css.getAddedVars()) {</span>
+<span class="fc" id="L220">            pLits.push(i);</span>
+<span class="fc" id="L221">        }</span>
+
+<span class="fc" id="L223">        AbstractMinimalModel min4Inc = new Minimal4InclusionModel(css, pLits);</span>
+<span class="fc" id="L224">        return computeAllMSS(assumptions, listener, min4Inc, pLits);</span>
+    }
+
+    public List&lt;IVecInt&gt; computeAllMSSOrdered(IVecInt assumptions,
+            SolutionFoundListener listener) {
+<span class="nc" id="L229">        IVecInt pLits = new VecInt();</span>
+<span class="nc bnc" id="L230" title="All 2 branches missed.">        for (Integer i : css.getAddedVars()) {</span>
+<span class="nc" id="L231">            pLits.push(i);</span>
+<span class="nc" id="L232">        }</span>
+
+<span class="nc" id="L234">        AbstractMinimalModel min4Inc = new Minimal4CardinalityModel(css, pLits);</span>
+<span class="nc" id="L235">        return computeAllMSS(assumptions, listener, min4Inc, pLits);</span>
+    }
+
+    private List&lt;IVecInt&gt; computeAllMSS(IVecInt assumptions,
+            SolutionFoundListener listener, ISolver min4Inc, IVecInt pLits) {
+<span class="pc bpc" id="L240" title="1 of 2 branches missed.">        if (css.isVerbose()) {</span>
+<span class="nc" id="L241">            System.out.println(css.getLogPrefix() + &quot;Computing all MSSes ...&quot;);</span>
+        }
+<span class="fc" id="L243">        css.internalState();</span>
+<span class="fc" id="L244">        int nVar = css.nVars();</span>
+
+        IVecInt blockingClause;
+
+        IVecInt secondPhaseClause;
+
+<span class="fc" id="L250">        IVecInt fullMSS = new VecInt();</span>
+        IVecInt mss;
+
+        int clause;
+
+<span class="fc bfc" id="L255" title="All 2 branches covered.">        for (int i = 0; i &lt; css.getAddedVars().size(); i++) {</span>
+<span class="fc" id="L256">            fullMSS.push(i + 1);</span>
+        }
+
+        // first phase
+        try {
+
+<span class="fc bfc" id="L262" title="All 2 branches covered.">            while (min4Inc.isSatisfiable(assumptions)) {</span>
+<span class="fc" id="L263">                int[] fullmodel = min4Inc.modelWithInternalVariables();</span>
+
+<span class="fc" id="L265">                mss = new VecInt();</span>
+<span class="fc" id="L266">                fullMSS.copyTo(mss);</span>
+
+<span class="fc" id="L268">                blockingClause = new VecInt();</span>
+<span class="fc" id="L269">                secondPhaseClause = new VecInt();</span>
+<span class="fc bfc" id="L270" title="All 2 branches covered.">                for (int i = 0; i &lt; pLits.size(); i++) {</span>
+<span class="fc" id="L271">                    clause = Math.abs(pLits.get(i));</span>
+<span class="fc bfc" id="L272" title="All 2 branches covered.">                    if (fullmodel[clause - 1] &gt; 0) {</span>
+<span class="fc" id="L273">                        blockingClause.push(-clause);</span>
+<span class="fc" id="L274">                        secondPhaseClause.push(clause - nVar);</span>
+<span class="fc" id="L275">                        mss.remove(clause - nVar);</span>
+                    }
+                }
+
+<span class="fc" id="L279">                mssList.add(mss);</span>
+
+<span class="fc" id="L281">                listener.onSolutionFound(mss);</span>
+
+<span class="fc" id="L283">                secondPhaseClauses.add(secondPhaseClause);</span>
+                try {
+<span class="fc" id="L285">                    css.addBlockingClause(blockingClause);</span>
+<span class="fc" id="L286">                } catch (ContradictionException e) {</span>
+<span class="fc" id="L287">                    Logger.getLogger(&quot;org.sat4j.core&quot;).log(Level.INFO,</span>
+                            &quot;Trivial inconsistency&quot;, e);
+<span class="fc" id="L289">                    break;</span>
+<span class="fc" id="L290">                }</span>
+<span class="fc" id="L291">            }</span>
+
+<span class="nc" id="L293">        } catch (TimeoutException e) {</span>
+<span class="nc" id="L294">            Logger.getLogger(&quot;org.sat4j.core&quot;).log(Level.INFO,</span>
+                    &quot;Timeout during the first stage&quot;, e);
+<span class="fc" id="L296">        }</span>
+<span class="pc bpc" id="L297" title="1 of 2 branches missed.">        if (css.isVerbose()) {</span>
+<span class="nc" id="L298">            System.out.println(css.getLogPrefix() + &quot;... done.&quot;);</span>
+        }
+<span class="fc" id="L300">        css.externalState();</span>
+<span class="fc" id="L301">        return mssList;</span>
+    }
+
+    public List&lt;IVecInt&gt; getMssList() {
+<span class="fc" id="L305">        return mssList;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
