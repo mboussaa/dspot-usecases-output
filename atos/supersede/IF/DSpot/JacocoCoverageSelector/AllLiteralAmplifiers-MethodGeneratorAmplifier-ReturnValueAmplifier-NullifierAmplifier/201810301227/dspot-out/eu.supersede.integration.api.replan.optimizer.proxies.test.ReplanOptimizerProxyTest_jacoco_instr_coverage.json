@@ -1,0 +1,11 @@
+{
+  "name": "eu.supersede.integration.api.replan.optimizer.proxies.test.ReplanOptimizerProxyTest",
+  "nbOriginalTestCases": 5,
+  "initialInstructionCovered": 465,
+  "initialInstructionTotal": 33519,
+  "percentageinitialInstructionCovered": 1.3872728900026852,
+  "amplifiedInstructionCovered": 492,
+  "amplifiedInstructionTotal": 33519,
+  "percentageamplifiedInstructionCovered": 1.4678242190996151,
+  "testCases": []
+}
