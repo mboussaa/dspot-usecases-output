@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Policy.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SAT4J core</a> &gt; <a href="index.source.html" class="el_package">org.sat4j.tools.encoding</a> &gt; <span class="el_source">Policy.java</span></div><h1>Policy.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * SAT4J: a SATisfiability library for Java Copyright (C) 2004, 2012 Artois University and CNRS
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU Lesser General Public License Version 2.1 or later (the
+ * &quot;LGPL&quot;), in which case the provisions of the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of the LGPL, and not to allow others to use your version of
+ * this file under the terms of the EPL, indicate your decision by deleting
+ * the provisions above and replace them with the notice and other provisions
+ * required by the LGPL. If you do not delete the provisions above, a recipient
+ * may use your version of this file under the terms of the EPL or the LGPL.
+ *
+ * Based on the original MiniSat specification from:
+ *
+ * An extensible SAT solver. Niklas Een and Niklas Sorensson. Proceedings of the
+ * Sixth International Conference on Theory and Applications of Satisfiability
+ * Testing, LNCS 2919, pp 502-518, 2003.
+ *
+ * See www.minisat.se for the original solver in C++.
+ *
+ * Contributors:
+ *   CRIL - initial API and implementation
+ *******************************************************************************/
+
+package org.sat4j.tools.encoding;
+
+import org.sat4j.specs.ContradictionException;
+import org.sat4j.specs.IConstr;
+import org.sat4j.specs.ISolver;
+import org.sat4j.specs.IVecInt;
+
+/**
+ * This class allows the use of different encodings for different cardinality
+ * constraints.
+ * 
+ * @author stephanieroussel
+ * @since 2.3.1
+ */
+<span class="fc" id="L45">public class Policy extends EncodingStrategyAdapter {</span>
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+<span class="fc" id="L51">    private static final Sequential seq = new Sequential();</span>
+<span class="fc" id="L52">    private static final Binary binary = new Binary();</span>
+<span class="fc" id="L53">    private static final Product product = new Product();</span>
+<span class="fc" id="L54">    private static final Commander commander = new Commander();</span>
+<span class="fc" id="L55">    private static final Binomial binomial = new Binomial();</span>
+<span class="fc" id="L56">    private static final Ladder ladder = new Ladder();</span>
+
+<span class="fc" id="L58">    private EncodingStrategyAdapter atMostOneEncoding = null;</span>
+<span class="fc" id="L59">    private EncodingStrategyAdapter atMostKEncoding = null;</span>
+<span class="fc" id="L60">    private EncodingStrategyAdapter exactlyOneEncoding = null;</span>
+<span class="fc" id="L61">    private EncodingStrategyAdapter exactlyKEncoding = null;</span>
+<span class="fc" id="L62">    private EncodingStrategyAdapter atLeastOneEncoding = null;</span>
+<span class="fc" id="L63">    private EncodingStrategyAdapter atLeastKEncoding = null;</span>
+
+    public static EncodingStrategyAdapter getAdapterFromEncodingName(
+            EncodingStrategy encodingName) {
+<span class="pc bpc" id="L67" title="1 of 7 branches missed.">        switch (encodingName) {</span>
+        case BINARY:
+<span class="fc" id="L69">            return binary;</span>
+        case BINOMIAL:
+<span class="fc" id="L71">            return binomial;</span>
+        case COMMANDER:
+<span class="fc" id="L73">            return commander;</span>
+        case LADDER:
+<span class="fc" id="L75">            return ladder;</span>
+        case PRODUCT:
+<span class="fc" id="L77">            return product;</span>
+        case SEQUENTIAL:
+<span class="fc" id="L79">            return seq;</span>
+        case NATIVE:
+        default:
+<span class="nc" id="L82">            throw new IllegalStateException(</span>
+                    &quot;The switch does not cover all encodings&quot;);
+        }
+    }
+
+    public static EncodingStrategy getEncodingTypeFromAdapter(
+            EncodingStrategyAdapter adapter) {
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (adapter instanceof Binary) {</span>
+<span class="nc" id="L90">            return EncodingStrategy.BINARY;</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        } else if (adapter instanceof Binomial) {</span>
+<span class="nc" id="L92">            return EncodingStrategy.BINOMIAL;</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        } else if (adapter instanceof Commander) {</span>
+<span class="nc" id="L94">            return EncodingStrategy.COMMANDER;</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        } else if (adapter instanceof Ladder) {</span>
+<span class="nc" id="L96">            return EncodingStrategy.LADDER;</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        } else if (adapter instanceof Product) {</span>
+<span class="nc" id="L98">            return EncodingStrategy.PRODUCT;</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        } else if (adapter instanceof Sequential) {</span>
+<span class="nc" id="L100">            return EncodingStrategy.SEQUENTIAL;</span>
+        } else {
+<span class="nc" id="L102">            return EncodingStrategy.NATIVE;</span>
+        }
+
+    }
+
+    public EncodingStrategyAdapter getAtMostOneEncoding() {
+<span class="nc" id="L108">        return this.atMostOneEncoding;</span>
+    }
+
+    public void setAtMostOneEncoding(EncodingStrategyAdapter atMostOneEncoding) {
+<span class="nc" id="L112">        this.atMostOneEncoding = atMostOneEncoding;</span>
+<span class="nc" id="L113">    }</span>
+
+    public void setAtMostOneEncoding(EncodingStrategy atMostOneEncoding) {
+<span class="fc" id="L116">        this.atMostOneEncoding = getAdapterFromEncodingName(atMostOneEncoding);</span>
+<span class="fc" id="L117">    }</span>
+
+    public EncodingStrategyAdapter getAtMostKEncoding() {
+<span class="nc" id="L120">        return this.atMostKEncoding;</span>
+    }
+
+    public void setAtMostKEncoding(EncodingStrategyAdapter atMostKEncoding) {
+<span class="nc" id="L124">        this.atMostKEncoding = atMostKEncoding;</span>
+<span class="nc" id="L125">    }</span>
+
+    public void setAtMostKEncoding(EncodingStrategy atMostKEncoding) {
+<span class="fc" id="L128">        this.atMostKEncoding = getAdapterFromEncodingName(atMostKEncoding);</span>
+<span class="fc" id="L129">    }</span>
+
+    public EncodingStrategyAdapter getExactlyOneEncoding() {
+<span class="nc" id="L132">        return this.exactlyOneEncoding;</span>
+    }
+
+    public void setExactlyOneEncoding(EncodingStrategyAdapter exactlyOneEncoding) {
+<span class="nc" id="L136">        this.exactlyOneEncoding = exactlyOneEncoding;</span>
+<span class="nc" id="L137">    }</span>
+
+    public void setExactlyOneEncoding(EncodingStrategy exactlyOneEncoding) {
+<span class="fc" id="L140">        this.exactlyOneEncoding = getAdapterFromEncodingName(exactlyOneEncoding);</span>
+<span class="fc" id="L141">    }</span>
+
+    public EncodingStrategyAdapter getExactlyKEncoding() {
+<span class="nc" id="L144">        return this.exactlyKEncoding;</span>
+    }
+
+    public void setExactlyKEncoding(EncodingStrategyAdapter exactlyKEncoding) {
+<span class="nc" id="L148">        this.exactlyKEncoding = exactlyKEncoding;</span>
+<span class="nc" id="L149">    }</span>
+
+    public void setExactlyKEncoding(EncodingStrategy exactlyKEncoding) {
+<span class="fc" id="L152">        this.exactlyKEncoding = getAdapterFromEncodingName(exactlyKEncoding);</span>
+<span class="fc" id="L153">    }</span>
+
+    public EncodingStrategyAdapter getAtLeastOneEncoding() {
+<span class="nc" id="L156">        return this.atLeastOneEncoding;</span>
+    }
+
+    public void setAtLeastOneEncoding(EncodingStrategyAdapter atLeastOneEncoding) {
+<span class="nc" id="L160">        this.atLeastOneEncoding = atLeastOneEncoding;</span>
+<span class="nc" id="L161">    }</span>
+
+    public void setAtLeastOneEncoding(EncodingStrategy atLeastOneEncoding) {
+<span class="fc" id="L164">        this.atLeastOneEncoding = getAdapterFromEncodingName(atLeastOneEncoding);</span>
+<span class="fc" id="L165">    }</span>
+
+    public EncodingStrategyAdapter getAtLeastKEncoding() {
+<span class="nc" id="L168">        return this.atLeastKEncoding;</span>
+    }
+
+    public void setAtLeastKEncoding(EncodingStrategyAdapter atLeastKEncoding) {
+<span class="nc" id="L172">        this.atLeastKEncoding = atLeastKEncoding;</span>
+<span class="nc" id="L173">    }</span>
+
+    public void setAtLeastKEncoding(EncodingStrategy atLeastKEncoding) {
+<span class="fc" id="L176">        this.atLeastKEncoding = getAdapterFromEncodingName(atLeastKEncoding);</span>
+<span class="fc" id="L177">    }</span>
+
+    @Override
+    public IConstr addAtMost(ISolver solver, IVecInt literals, int k)
+            throws ContradictionException {
+
+<span class="pc bpc" id="L183" title="2 of 4 branches missed.">        if (k == 0 || literals.size() == 1) {</span>
+            // will propagate unit literals
+<span class="nc" id="L185">            return super.addAtMost(solver, literals, k);</span>
+        }
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">        if (literals.size() &lt;= 1) {</span>
+<span class="nc" id="L188">            throw new UnsupportedOperationException(</span>
+                    &quot;requires at least 2 literals&quot;);
+        }
+<span class="pc bpc" id="L191" title="1 of 4 branches missed.">        if (k == 1 &amp;&amp; this.atMostOneEncoding != null) {</span>
+<span class="fc" id="L192">            return this.atMostOneEncoding.addAtMostOne(solver, literals);</span>
+        }
+<span class="pc bpc" id="L194" title="1 of 2 branches missed.">        if (this.atMostKEncoding != null) {</span>
+<span class="pc bpc" id="L195" title="1 of 2 branches missed.">            if (k == 1) {</span>
+<span class="nc" id="L196">                return this.atMostKEncoding.addAtMostOne(solver, literals);</span>
+            } else {
+<span class="fc" id="L198">                return this.atMostKEncoding.addAtMost(solver, literals, k);</span>
+            }
+        }
+<span class="nc" id="L201">        return super.addAtMost(solver, literals, k);</span>
+    }
+
+    @Override
+    public IConstr addExactly(ISolver solver, IVecInt literals, int n)
+            throws ContradictionException {
+<span class="pc bpc" id="L207" title="1 of 4 branches missed.">        if (n == 1 &amp;&amp; this.exactlyOneEncoding != null) {</span>
+<span class="fc" id="L208">            return this.exactlyOneEncoding.addExactlyOne(solver, literals);</span>
+<span class="pc bpc" id="L209" title="1 of 2 branches missed.">        } else if (this.exactlyKEncoding != null) {</span>
+<span class="pc bpc" id="L210" title="1 of 2 branches missed.">            if (n == 1) {</span>
+<span class="nc" id="L211">                return this.exactlyKEncoding.addExactlyOne(solver, literals);</span>
+            } else {
+<span class="fc" id="L213">                return this.exactlyKEncoding.addExactly(solver, literals, n);</span>
+            }
+        }
+
+<span class="nc" id="L217">        return super.addExactly(solver, literals, n);</span>
+    }
+
+    @Override
+    public IConstr addAtLeast(ISolver solver, IVecInt literals, int n)
+            throws ContradictionException {
+<span class="pc bpc" id="L223" title="1 of 2 branches missed.">        if (n == 1) {</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">            if (this.atLeastOneEncoding != null) {</span>
+<span class="nc" id="L225">                return this.atLeastOneEncoding.addAtLeastOne(solver, literals);</span>
+            }
+<span class="pc bpc" id="L227" title="1 of 2 branches missed.">        } else if (this.atLeastKEncoding != null) {</span>
+<span class="fc" id="L228">            return this.atLeastKEncoding.addAtLeast(solver, literals, n);</span>
+        }
+
+<span class="nc" id="L231">        return super.addAtLeast(solver, literals, n);</span>
+
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L237">        String s = &quot;&quot;;</span>
+<span class="nc" id="L238">        s += &quot;Policy = [At most K: &quot;</span>
+<span class="nc" id="L239">                + getEncodingTypeFromAdapter(getAtMostKEncoding())</span>
+                + &quot;, at most 1: &quot;
+<span class="nc" id="L241">                + getEncodingTypeFromAdapter(getAtMostOneEncoding())</span>
+                + &quot;, exactly K: &quot;
+<span class="nc" id="L243">                + getEncodingTypeFromAdapter(getExactlyKEncoding())</span>
+                + &quot;, exactly 1: &quot;
+<span class="nc" id="L245">                + getEncodingTypeFromAdapter(getExactlyOneEncoding()) + &quot;]&quot;;</span>
+
+<span class="nc" id="L247">        return s;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Ladder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SAT4J core</a> &gt; <a href="index.source.html" class="el_package">org.sat4j.tools.encoding</a> &gt; <span class="el_source">Ladder.java</span></div><h1>Ladder.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * SAT4J: a SATisfiability library for Java Copyright (C) 2004, 2012 Artois University and CNRS
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU Lesser General Public License Version 2.1 or later (the
+ * &quot;LGPL&quot;), in which case the provisions of the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of the LGPL, and not to allow others to use your version of
+ * this file under the terms of the EPL, indicate your decision by deleting
+ * the provisions above and replace them with the notice and other provisions
+ * required by the LGPL. If you do not delete the provisions above, a recipient
+ * may use your version of this file under the terms of the EPL or the LGPL.
+ *
+ * Based on the original MiniSat specification from:
+ *
+ * An extensible SAT solver. Niklas Een and Niklas Sorensson. Proceedings of the
+ * Sixth International Conference on Theory and Applications of Satisfiability
+ * Testing, LNCS 2919, pp 502-518, 2003.
+ *
+ * See www.minisat.se for the original solver in C++.
+ *
+ * Contributors:
+ *   CRIL - initial API and implementation
+ *******************************************************************************/
+
+package org.sat4j.tools.encoding;
+
+import org.sat4j.core.ConstrGroup;
+import org.sat4j.core.VecInt;
+import org.sat4j.specs.ContradictionException;
+import org.sat4j.specs.IConstr;
+import org.sat4j.specs.ISolver;
+import org.sat4j.specs.IVecInt;
+
+/**
+ * 
+ * Ladder encoding for the &quot;at most one&quot; and &quot;exactly one&quot; cases.
+ * 
+ * The ladder encoding described in: I. P. Gent and P. Nightingale,
+ * &quot;A new encoding for AllDifferent into SAT&quot;, in International Workshop on
+ * Modeling and Reformulating Constraint Satisfaction Problems, 2004
+ * 
+ * @author sroussel
+ * @since 2.3.1
+ */
+<span class="fc" id="L51">public class Ladder extends EncodingStrategyAdapter {</span>
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    /**
+     * If n is the number of variables in the constraint, 
+     * this encoding adds n variables and 4n clauses 
+     * (3n+1 size 2 clauses and n-1 size 3 clauses)
+     */
+    public IConstr addAtMostOne(ISolver solver, IVecInt literals)
+            throws ContradictionException {
+<span class="fc" id="L66">        ConstrGroup group = new ConstrGroup(false);</span>
+<span class="fc" id="L67">        final int n = literals.size() + 1;</span>
+
+<span class="fc" id="L69">        int xN = solver.nextFreeVarId(true);</span>
+<span class="fc" id="L70">        int y[] = new int[n - 1];</span>
+
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        for (int i = 0; i &lt; n - 1; i++) {</span>
+<span class="fc" id="L73">            y[i] = solver.nextFreeVarId(true);</span>
+        }
+
+<span class="fc" id="L76">        IVecInt clause = new VecInt();</span>
+
+        // Constraint \bigwedge_{i=1}{n-2} (\neg y_{i+1} \vee y_i)
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        for (int i = 1; i &lt;= n - 2; i++) {</span>
+<span class="fc" id="L80">            clause.push(-y[i]);</span>
+<span class="fc" id="L81">            clause.push(y[i - 1]);</span>
+<span class="fc" id="L82">            group.add(solver.addClause(clause));</span>
+<span class="fc" id="L83">            clause.clear();</span>
+        }
+
+        // Constraint \bigwedge_{i=2}{n-1} (\neg y_{i-1} \vee y_i \vee x_i)
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        for (int i = 2; i &lt;= n - 1; i++) {</span>
+<span class="fc" id="L88">            clause.push(-y[i - 2]);</span>
+<span class="fc" id="L89">            clause.push(y[i - 1]);</span>
+<span class="fc" id="L90">            clause.push(literals.get(i - 1));</span>
+<span class="fc" id="L91">            group.add(solver.addClause(clause));</span>
+<span class="fc" id="L92">            clause.clear();</span>
+        }
+
+        // Constraint \bigwedge_{i=2}{n-1} (\neg x_i \vee y_{i-1)})
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        for (int i = 2; i &lt;= n - 1; i++) {</span>
+<span class="fc" id="L97">            clause.push(-literals.get(i - 1));</span>
+<span class="fc" id="L98">            clause.push(y[i - 2]);</span>
+<span class="fc" id="L99">            group.add(solver.addClause(clause));</span>
+<span class="fc" id="L100">            clause.clear();</span>
+        }
+
+        // Constraint \bigwedge_{i=2}{n-1} (\neg x_i \vee \neg y_i)
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        for (int i = 2; i &lt;= n - 1; i++) {</span>
+<span class="fc" id="L105">            clause.push(-literals.get(i - 1));</span>
+<span class="fc" id="L106">            clause.push(-y[i - 1]);</span>
+<span class="fc" id="L107">            group.add(solver.addClause(clause));</span>
+<span class="fc" id="L108">            clause.clear();</span>
+        }
+
+        // Constraint y_1 \vee x_1
+<span class="fc" id="L112">        clause.push(y[0]);</span>
+<span class="fc" id="L113">        clause.push(literals.get(0));</span>
+<span class="fc" id="L114">        group.add(solver.addClause(clause));</span>
+<span class="fc" id="L115">        clause.clear();</span>
+
+        // Constraint \neg y_1 \vee \neg x_1
+<span class="fc" id="L118">        clause.push(-y[0]);</span>
+<span class="fc" id="L119">        clause.push(-literals.get(0));</span>
+<span class="fc" id="L120">        group.add(solver.addClause(clause));</span>
+<span class="fc" id="L121">        clause.clear();</span>
+
+        // Constraint \neg y_{n-1} \vee x_n
+<span class="fc" id="L124">        clause.push(-y[n - 2]);</span>
+<span class="fc" id="L125">        clause.push(xN);</span>
+<span class="fc" id="L126">        group.add(solver.addClause(clause));</span>
+<span class="fc" id="L127">        clause.clear();</span>
+
+        // Constraint y_{n-1} \vee \neg x_n
+<span class="fc" id="L130">        clause.push(y[n - 2]);</span>
+<span class="fc" id="L131">        clause.push(-xN);</span>
+<span class="fc" id="L132">        group.add(solver.addClause(clause));</span>
+<span class="fc" id="L133">        clause.clear();</span>
+
+<span class="fc" id="L135">        return group;</span>
+    }
+
+    @Override
+    /**
+     * If n is the number of variables in the constraint, 
+     * this encoding adds n-1 variables and 4(n-1) clauses 
+     * (3n-2 size 2 clauses and n-2 size 3 clauses)
+     */
+    public IConstr addExactlyOne(ISolver solver, IVecInt literals)
+            throws ContradictionException {
+<span class="fc" id="L146">        ConstrGroup group = new ConstrGroup(false);</span>
+<span class="fc" id="L147">        final int n = literals.size();</span>
+
+<span class="fc" id="L149">        IVecInt clause = new VecInt();</span>
+
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">        if (n == 1) {</span>
+<span class="nc" id="L152">            clause.push(literals.get(0));</span>
+<span class="nc" id="L153">            group.add(solver.addClause(clause));</span>
+<span class="nc" id="L154">            return group;</span>
+        }
+
+<span class="fc" id="L157">        int y[] = new int[n - 1];</span>
+
+<span class="fc bfc" id="L159" title="All 2 branches covered.">        for (int i = 0; i &lt; n - 1; i++) {</span>
+<span class="fc" id="L160">            y[i] = solver.nextFreeVarId(true);</span>
+        }
+
+        // Constraint \bigwedge_{i=1}{n-2} (\neg y_{i+1} \vee y_i)
+<span class="fc bfc" id="L164" title="All 2 branches covered.">        for (int i = 1; i &lt;= n - 2; i++) {</span>
+<span class="fc" id="L165">            clause.push(-y[i]);</span>
+<span class="fc" id="L166">            clause.push(y[i - 1]);</span>
+<span class="fc" id="L167">            group.add(solver.addClause(clause));</span>
+<span class="fc" id="L168">            clause.clear();</span>
+        }
+
+        // Constraint \bigwedge_{i=2}{n-1} (\neg y_{i-1} \vee y_i \vee x_i)
+<span class="fc bfc" id="L172" title="All 2 branches covered.">        for (int i = 2; i &lt;= n - 1; i++) {</span>
+<span class="fc" id="L173">            clause.push(-y[i - 2]);</span>
+<span class="fc" id="L174">            clause.push(y[i - 1]);</span>
+<span class="fc" id="L175">            clause.push(literals.get(i - 1));</span>
+<span class="fc" id="L176">            group.add(solver.addClause(clause));</span>
+<span class="fc" id="L177">            clause.clear();</span>
+        }
+
+        // Constraint \bigwedge_{i=2}{n-1} (\neg x_i \vee y_{i-1)})
+<span class="fc bfc" id="L181" title="All 2 branches covered.">        for (int i = 2; i &lt;= n - 1; i++) {</span>
+<span class="fc" id="L182">            clause.push(-literals.get(i - 1));</span>
+<span class="fc" id="L183">            clause.push(y[i - 2]);</span>
+<span class="fc" id="L184">            group.add(solver.addClause(clause));</span>
+<span class="fc" id="L185">            clause.clear();</span>
+        }
+
+        // Constraint \bigwedge_{i=2}{n-1} (\neg x_i \vee \neg y_i)
+<span class="fc bfc" id="L189" title="All 2 branches covered.">        for (int i = 2; i &lt;= n - 1; i++) {</span>
+<span class="fc" id="L190">            clause.push(-literals.get(i - 1));</span>
+<span class="fc" id="L191">            clause.push(-y[i - 1]);</span>
+<span class="fc" id="L192">            group.add(solver.addClause(clause));</span>
+<span class="fc" id="L193">            clause.clear();</span>
+        }
+
+        // Constraint y_1 \vee x_1
+<span class="fc" id="L197">        clause.push(y[0]);</span>
+<span class="fc" id="L198">        clause.push(literals.get(0));</span>
+<span class="fc" id="L199">        group.add(solver.addClause(clause));</span>
+<span class="fc" id="L200">        clause.clear();</span>
+
+        // Constraint \neg y_1 \vee \neg x_1
+<span class="fc" id="L203">        clause.push(-y[0]);</span>
+<span class="fc" id="L204">        clause.push(-literals.get(0));</span>
+<span class="fc" id="L205">        group.add(solver.addClause(clause));</span>
+<span class="fc" id="L206">        clause.clear();</span>
+
+        // Constraint \neg y_{n-1} \vee x_n
+<span class="fc" id="L209">        clause.push(-y[n - 2]);</span>
+<span class="fc" id="L210">        clause.push(literals.get(n - 1));</span>
+<span class="fc" id="L211">        group.add(solver.addClause(clause));</span>
+<span class="fc" id="L212">        clause.clear();</span>
+
+        // Constraint y_{n-1} \vee \neg x_n
+<span class="fc" id="L215">        clause.push(y[n - 2]);</span>
+<span class="fc" id="L216">        clause.push(-literals.get(n - 1));</span>
+<span class="fc" id="L217">        group.add(solver.addClause(clause));</span>
+<span class="fc" id="L218">        clause.clear();</span>
+
+<span class="fc" id="L220">        return group;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
