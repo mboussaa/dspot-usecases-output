@@ -1,0 +1,71 @@
+2018-11-04 14:09:17,459 INFO eu.stamp_project.testrunner.EntryPoint - Path to runner Classes: E:\Dev\tellu_github\tellulib\dspot.jar
+2018-11-04 14:09:17,459 INFO eu.stamp_project.testrunner.EntryPoint - E:\Dev\tellu_github\tellulib\dspot.jar
+2018-11-04 14:09:17,459 INFO eu.stamp_project.testrunner.EntryPoint - E:\Dev\tellu_github\tellulib\dspot.jar
+2018-11-04 14:09:17,459 INFO eu.stamp_project.testrunner.EntryPoint - E:\Dev\tellu_github\tellulib\dspot.jar
+2018-11-04 14:09:17,459 WARN eu.stamp_project.program.InputConfiguration - No builder has been specified.
+2018-11-04 14:09:17,459 WARN eu.stamp_project.program.InputConfiguration - Using Maven as a default builder.
+2018-11-04 14:09:17,459 WARN eu.stamp_project.program.InputConfiguration - You can use the command-line option --automatic-builder
+2018-11-04 14:09:17,459 WARN eu.stamp_project.program.InputConfiguration - or the properties automaticBuilderName to configure it.
+2018-11-04 14:09:17,459 INFO eu.stamp_project.automaticbuilder.AutomaticBuilderFactory - Selected Maven automatic builder.
+2018-11-04 14:09:17,475 INFO eu.stamp_project.automaticbuilder.MavenAutomaticBuilder - Using C:\Dev\maven for maven home
+2018-11-04 14:09:17,475 INFO eu.stamp_project.automaticbuilder.MavenAutomaticBuilder - run maven: C:\Dev\maven/bin/mvn clean test -DskipTests dependency:build-classpath -Dmdep.outputFile=target/dspot/classpath
+[WARN] Maven will be executed in interactive mode, but no input stream has been configured for this MavenInvoker instance.
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Tellu Utilities Library 3.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ tellulib ---
+[INFO] Deleting E:\Dev\tellu_github\tellulib\target
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ tellulib ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\Dev\tellu_github\tellulib\src\main\resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ tellulib ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 70 source files to E:\Dev\tellu_github\tellulib\target\classes
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ tellulib ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 4 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ tellulib ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 15 source files to E:\Dev\tellu_github\tellulib\target\test-classes
+[INFO]
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ tellulib ---
+[INFO] Tests are skipped.
+[INFO]
+[INFO] --- maven-dependency-plugin:2.8:build-classpath (default-cli) @ tellulib ---
+[INFO] Wrote classpath file 'E:\Dev\tellu_github\tellulib\target\dspot\classpath'.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 4.424 s
+[INFO] Finished at: 2018-11-04T14:09:23+01:00
+[INFO] Final Memory: 22M/192M
+[INFO] ------------------------------------------------------------------------
+2018-11-04 14:09:25,623 INFO eu.stamp_project.automaticbuilder.MavenAutomaticBuilder - Using C:\Dev\maven for maven home
+2018-11-04 14:09:25,623 INFO eu.stamp_project.automaticbuilder.MavenAutomaticBuilder - run maven: C:\Dev\maven/bin/mvn org.pitest:pitest-maven:1.4.0:mutationCoverage -DtargetClasses=no.tellu.* -DreportsDirectory=target/pit-reports -DoutputFormats=CSV,HTML -DtimeoutConst=10000 -DjvmArgs=16G -DmutationEngine=descartes  -DadditionalClasspathElements=E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/
+[WARN] Maven will be executed in interactive mode, but no input stream has been configured for this MavenInvoker instance.
+2018-11-04 14:10:22,445 INFO eu.stamp_project.dspot.selector.PitMutantScoreSelector - The original test suite kill 376 / 789
+2018-11-04 14:10:23,695 INFO eu.stamp_project.dspot.Amplification - Amplification of no.tellu.lib.data.model.ModelTest (12 test(s))
+2018-11-04 14:10:23,695 INFO eu.stamp_project.dspot.Amplification - Assertion amplification of no.tellu.lib.data.model.ModelTest (12 test(s))
+2018-11-04 14:10:23,914 INFO eu.stamp_project.utils.compilation.DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+2018-11-04 14:10:37,109 WARN eu.stamp_project.testrunner.EntryPoint - Timeout when running java  -classpath E:\Dev\tellu_github\tellulib\.\.\target\test-classes;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/;E:\Dev\tellu_github\tellulib\dspot.jar eu.stamp_project.testrunner.runner.test.TestRunner no.tellu.lib.data.model.ModelTest testCopyModel;testDataTransaction;testInitFromFile;testInitFromMeta;testInitFromModel;testMergeNodes;testPath;testProcessor;testReset;testRuleCondition;testRuleTrigger;testSubscribers
+2018-11-04 14:10:37,109 WARN eu.stamp_project.utils.compilation.TestRunner - Timeout during execution of no.tellu.lib.data.model.ModelTest: testCopyModel,testDataTransaction,testInitFromFile,testInitFromMeta,testInitFromModel,testMergeNodes,testPath,testProcessor,testReset,testRuleCondition,testRuleTrigger,testSubscribers
+2018-11-04 14:10:37,109 INFO eu.stamp_project.dspot.Amplification - 0 amplified test methods has been selected to be kept. (global: 0)
+2018-11-04 14:10:37,109 INFO eu.stamp_project.dspot.DSpot - elapsedTime 13414
+2018-11-04 14:10:37,757 WARN eu.stamp_project.dspot.DSpot - DSpot could not obtain any amplified test method.
+2018-11-04 14:10:37,757 WARN eu.stamp_project.dspot.DSpot - You can customize the following options: --amplifiers, --test-criterion, --iteration, --budgetizer etc, and retry with a new configuration.
+
+======= REPORT =======
+PitMutantScoreSelector:
+The original test suite kills 376 mutants
+The amplification results with 0 new tests
+it kills 0 more mutants
+
+2018-11-04 14:10:37,819 INFO eu.stamp_project.Main - Amplification succeed.
+2018-11-04 14:10:37,819 INFO eu.stamp_project.Main - Elapsed time 15374 ms
