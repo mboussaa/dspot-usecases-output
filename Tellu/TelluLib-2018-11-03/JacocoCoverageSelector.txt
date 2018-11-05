@@ -1,0 +1,75 @@
+2018-11-03 15:17:44,806 INFO eu.stamp_project.testrunner.EntryPoint - Path to runner Classes: E:\Dev\tellu_github\tellulib\dspot.jar
+2018-11-03 15:17:44,822 INFO eu.stamp_project.testrunner.EntryPoint - E:\Dev\tellu_github\tellulib\dspot.jar
+2018-11-03 15:17:44,822 INFO eu.stamp_project.testrunner.EntryPoint - E:\Dev\tellu_github\tellulib\dspot.jar
+2018-11-03 15:17:44,822 INFO eu.stamp_project.testrunner.EntryPoint - E:\Dev\tellu_github\tellulib\dspot.jar
+2018-11-03 15:17:44,822 WARN eu.stamp_project.program.InputConfiguration - No builder has been specified.
+2018-11-03 15:17:44,822 WARN eu.stamp_project.program.InputConfiguration - Using Maven as a default builder.
+2018-11-03 15:17:44,822 WARN eu.stamp_project.program.InputConfiguration - You can use the command-line option --automatic-builder
+2018-11-03 15:17:44,822 WARN eu.stamp_project.program.InputConfiguration - or the properties automaticBuilderName to configure it.
+2018-11-03 15:17:44,822 INFO eu.stamp_project.automaticbuilder.AutomaticBuilderFactory - Selected Maven automatic builder.
+2018-11-03 15:17:44,822 INFO eu.stamp_project.automaticbuilder.MavenAutomaticBuilder - Using C:\Dev\maven for maven home
+2018-11-03 15:17:44,822 INFO eu.stamp_project.automaticbuilder.MavenAutomaticBuilder - run maven: C:\Dev\maven/bin/mvn clean test -DskipTests dependency:build-classpath -Dmdep.outputFile=target/dspot/classpath
+[WARN] Maven will be executed in interactive mode, but no input stream has been configured for this MavenInvoker instance.
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Tellu Utilities Library 3.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ tellulib ---
+[INFO] Deleting E:\Dev\tellu_github\tellulib\target
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ tellulib ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\Dev\tellu_github\tellulib\src\main\resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ tellulib ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 70 source files to E:\Dev\tellu_github\tellulib\target\classes
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ tellulib ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 4 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ tellulib ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 15 source files to E:\Dev\tellu_github\tellulib\target\test-classes
+[INFO]
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ tellulib ---
+[INFO] Tests are skipped.
+[INFO]
+[INFO] --- maven-dependency-plugin:2.8:build-classpath (default-cli) @ tellulib ---
+[INFO] Wrote classpath file 'E:\Dev\tellu_github\tellulib\target\dspot\classpath'.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 4.538 s
+[INFO] Finished at: 2018-11-03T15:17:50+01:00
+[INFO] Final Memory: 22M/194M
+[INFO] ------------------------------------------------------------------------
+2018-11-03 15:17:54,839 INFO eu.stamp_project.dspot.Amplification - Amplification of no.tellu.lib.data.BooleanOpTest (4 test(s))
+2018-11-03 15:17:54,839 INFO eu.stamp_project.dspot.Amplification - Assertion amplification of no.tellu.lib.data.BooleanOpTest (4 test(s))
+2018-11-03 15:17:54,891 INFO eu.stamp_project.utils.compilation.DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\BooleanOpTest.java
+Loading E:\Dev\tellu_github\tellulib\target\dspot\TestListener.ser
+Exception in thread "main" java.lang.RuntimeException: java.io.FileNotFoundException: E:\Dev\tellu_github\tellulib\target\dspot\globalCoverageResult.ser does not exist.
+        at eu.stamp_project.testrunner.runner.test.Loader.load(Loader.java:23)
+        at eu.stamp_project.testrunner.runner.coverage.Coverage.load(Coverage.java:100)
+        at eu.stamp_project.testrunner.EntryPoint.runCoverage(EntryPoint.java:313)
+        at eu.stamp_project.testrunner.EntryPoint.runCoverageOnTestClasses(EntryPoint.java:212)
+        at eu.stamp_project.dspot.selector.JacocoCoverageSelector.selectToAmplify(JacocoCoverageSelector.java:61)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:83)
+        at eu.stamp_project.dspot.DSpot._amplify(DSpot.java:231)
+        at eu.stamp_project.dspot.DSpot._amplifyTestClass(DSpot.java:221)
+        at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+        at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+        at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+        at eu.stamp_project.dspot.DSpot._amplifyTestClasses(DSpot.java:217)
+        at eu.stamp_project.dspot.DSpot.amplifyAllTests(DSpot.java:142)
+        at eu.stamp_project.Main.run(Main.java:56)
+        at eu.stamp_project.Main.main(Main.java:40)
+Caused by: java.io.FileNotFoundException: E:\Dev\tellu_github\tellulib\target\dspot\globalCoverageResult.ser does not exist.
+        ... 19 more

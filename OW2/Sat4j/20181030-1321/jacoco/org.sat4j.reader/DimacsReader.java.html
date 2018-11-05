@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DimacsReader.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SAT4J core</a> &gt; <a href="index.source.html" class="el_package">org.sat4j.reader</a> &gt; <span class="el_source">DimacsReader.java</span></div><h1>DimacsReader.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * SAT4J: a SATisfiability library for Java Copyright (C) 2004, 2012 Artois University and CNRS
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU Lesser General Public License Version 2.1 or later (the
+ * &quot;LGPL&quot;), in which case the provisions of the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of the LGPL, and not to allow others to use your version of
+ * this file under the terms of the EPL, indicate your decision by deleting
+ * the provisions above and replace them with the notice and other provisions
+ * required by the LGPL. If you do not delete the provisions above, a recipient
+ * may use your version of this file under the terms of the EPL or the LGPL.
+ *
+ * Based on the original MiniSat specification from:
+ *
+ * An extensible SAT solver. Niklas Een and Niklas Sorensson. Proceedings of the
+ * Sixth International Conference on Theory and Applications of Satisfiability
+ * Testing, LNCS 2919, pp 502-518, 2003.
+ *
+ * See www.minisat.se for the original solver in C++.
+ *
+ * Contributors:
+ *   CRIL - initial API and implementation
+ *******************************************************************************/
+package org.sat4j.reader;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.Serializable;
+
+import org.sat4j.core.VecInt;
+import org.sat4j.specs.ContradictionException;
+import org.sat4j.specs.IProblem;
+import org.sat4j.specs.ISolver;
+import org.sat4j.specs.IVecInt;
+
+/**
+ * Very simple Dimacs file parser. Allow solvers to read the constraints from a
+ * Dimacs formatted file. It should be used that way:
+ * 
+ * &lt;pre&gt;
+ * DimacsReader solver = new DimacsReader(SolverFactory.OneSolver());
+ * solver.readInstance(&amp;quot;mybench.cnf&amp;quot;);
+ * if (solver.isSatisfiable()) {
+ *     // SAT case
+ * } else {
+ *     // UNSAT case
+ * }
+ * &lt;/pre&gt;
+ * 
+ * That parser is not used for efficiency reasons. It will be updated with Java
+ * 1.5 scanner feature.
+ * 
+ * @version 1.0
+ * @author dlb
+ * @author or
+ */
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">public class DimacsReader extends Reader implements Serializable {</span>
+
+    private static final long serialVersionUID = 1L;
+
+    protected int expectedNbOfConstr; // as announced on the p cnf line
+
+    protected final ISolver solver;
+
+<span class="fc" id="L72">    private boolean checkConstrNb = true;</span>
+
+    protected final String formatString;
+
+    /**
+     * @since 2.1
+     */
+    protected EfficientScanner scanner;
+
+    public DimacsReader(ISolver solver) {
+<span class="fc" id="L82">        this(solver, &quot;cnf&quot;);</span>
+<span class="fc" id="L83">    }</span>
+
+<span class="fc" id="L85">    public DimacsReader(ISolver solver, String format) {</span>
+<span class="fc" id="L86">        this.solver = solver;</span>
+<span class="fc" id="L87">        this.formatString = format;</span>
+<span class="fc" id="L88">    }</span>
+
+    public void disableNumberOfConstraintCheck() {
+<span class="nc" id="L91">        this.checkConstrNb = false;</span>
+<span class="nc" id="L92">    }</span>
+
+    /**
+     * Skip comments at the beginning of the input stream.
+     * 
+     * @throws IOException
+     *             if an IO problem occurs.
+     * @since 2.1
+     */
+    protected void skipComments() throws IOException {
+<span class="fc" id="L102">        this.scanner.skipComments();</span>
+<span class="fc" id="L103">    }</span>
+
+    /**
+     * @throws IOException
+     *             iff an IO occurs
+     * @throws ParseFormatException
+     *             if the input stream does not comply with the DIMACS format.
+     * @since 2.1
+     */
+    protected void readProblemLine() throws IOException, ParseFormatException {
+
+<span class="fc" id="L114">        String line = this.scanner.nextLine().trim();</span>
+
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">        if (line == null) {</span>
+<span class="nc" id="L117">            throw new ParseFormatException(</span>
+                    &quot;premature end of file: &lt;p cnf ...&gt; expected&quot;);
+        }
+<span class="fc" id="L120">        String[] tokens = line.split(&quot;\\s+&quot;);</span>
+<span class="pc bpc" id="L121" title="2 of 4 branches missed.">        if (tokens.length &lt; 4 || !&quot;p&quot;.equals(tokens[0])</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">                || !this.formatString.equals(tokens[1])) {</span>
+<span class="nc" id="L123">            throw new ParseFormatException(&quot;problem line expected (p cnf ...)&quot;);</span>
+        }
+
+        int vars;
+
+        // reads the max var id
+<span class="fc" id="L129">        vars = Integer.parseInt(tokens[2]);</span>
+<span class="pc bpc" id="L130" title="2 of 4 branches missed.">        assert vars &gt; 0;</span>
+<span class="fc" id="L131">        this.solver.newVar(vars);</span>
+        // reads the number of clauses
+<span class="fc" id="L133">        this.expectedNbOfConstr = Integer.parseInt(tokens[3]);</span>
+<span class="pc bpc" id="L134" title="2 of 4 branches missed.">        assert this.expectedNbOfConstr &gt; 0;</span>
+<span class="fc" id="L135">        this.solver.setExpectedNumberOfClauses(this.expectedNbOfConstr);</span>
+<span class="fc" id="L136">    }</span>
+
+    /**
+     * @since 2.1
+     */
+<span class="fc" id="L141">    protected IVecInt literals = new VecInt();</span>
+
+    /**
+     * @throws IOException
+     *             iff an IO problems occurs
+     * @throws ParseFormatException
+     *             if the input stream does not comply with the DIMACS format.
+     * @throws ContradictionException
+     *             si le probl?me est trivialement inconsistant.
+     * @since 2.1
+     */
+    protected void readConstrs()
+            throws IOException, ParseFormatException, ContradictionException {
+<span class="fc" id="L154">        int realNbOfConstr = 0;</span>
+
+<span class="fc" id="L156">        this.literals.clear();</span>
+<span class="fc" id="L157">        boolean needToContinue = true;</span>
+
+<span class="fc bfc" id="L159" title="All 2 branches covered.">        while (needToContinue) {</span>
+<span class="fc" id="L160">            boolean added = false;</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">            if (this.scanner.eof()) {</span>
+                // end of file
+<span class="pc bpc" id="L163" title="1 of 2 branches missed.">                if (this.literals.size() &gt; 0) {</span>
+                    // no 0 end the last clause
+<span class="nc" id="L165">                    flushConstraint();</span>
+<span class="nc" id="L166">                    added = true;</span>
+                }
+<span class="fc" id="L168">                needToContinue = false;</span>
+            } else {
+<span class="fc bfc" id="L170" title="All 2 branches covered.">                if (this.scanner.currentChar() == 'c') {</span>
+                    // ignore comment line
+<span class="fc" id="L172">                    this.scanner.skipRestOfLine();</span>
+<span class="fc" id="L173">                    continue;</span>
+                }
+<span class="pc bpc" id="L175" title="3 of 4 branches missed.">                if (this.scanner.currentChar() == '%'</span>
+                        &amp;&amp; this.expectedNbOfConstr == realNbOfConstr) {
+<span class="nc bnc" id="L177" title="All 2 branches missed.">                    if (this.solver.isVerbose()) {</span>
+<span class="nc" id="L178">                        System.out.println(</span>
+                                &quot;Ignoring the rest of the file (SATLIB format&quot;);
+                    }
+                    break;
+                }
+<span class="fc" id="L183">                added = handleLine();</span>
+            }
+<span class="fc bfc" id="L185" title="All 2 branches covered.">            if (added) {</span>
+<span class="fc" id="L186">                realNbOfConstr++;</span>
+            }
+<span class="fc" id="L188">        }</span>
+<span class="pc bpc" id="L189" title="2 of 4 branches missed.">        if (this.checkConstrNb &amp;&amp; this.expectedNbOfConstr != realNbOfConstr) {</span>
+<span class="nc" id="L190">            throw new ParseFormatException(</span>
+                    &quot;wrong nbclauses parameter. Found &quot; + realNbOfConstr + &quot;, &quot;
+                            + this.expectedNbOfConstr + &quot; expected&quot;);
+        }
+<span class="fc" id="L194">    }</span>
+
+    /**
+     * 
+     * @throws ContradictionException
+     * @since 2.1
+     */
+    protected void flushConstraint() throws ContradictionException {
+        try {
+<span class="fc" id="L203">            this.solver.addClause(this.literals);</span>
+<span class="nc" id="L204">        } catch (IllegalArgumentException ex) {</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">            if (isVerbose()) {</span>
+<span class="nc" id="L206">                System.err.println(&quot;c Skipping constraint &quot; + this.literals);</span>
+            }
+<span class="fc" id="L208">        }</span>
+<span class="fc" id="L209">    }</span>
+
+    /**
+     * @since 2.1
+     */
+    protected boolean handleLine()
+            throws ContradictionException, IOException, ParseFormatException {
+        int lit;
+<span class="fc" id="L217">        boolean added = false;</span>
+<span class="pc bpc" id="L218" title="1 of 2 branches missed.">        while (!this.scanner.eof()) {</span>
+<span class="fc" id="L219">            lit = this.scanner.nextInt();</span>
+<span class="fc bfc" id="L220" title="All 2 branches covered.">            if (lit == 0) {</span>
+<span class="pc bpc" id="L221" title="1 of 2 branches missed.">                if (this.literals.size() &gt; 0) {</span>
+<span class="fc" id="L222">                    flushConstraint();</span>
+<span class="fc" id="L223">                    this.literals.clear();</span>
+<span class="fc" id="L224">                    added = true;</span>
+                }
+                break;
+            }
+<span class="fc" id="L228">            this.literals.push(lit);</span>
+        }
+<span class="fc" id="L230">        return added;</span>
+    }
+
+    @Override
+    public IProblem parseInstance(InputStream in)
+            throws ParseFormatException, ContradictionException, IOException {
+<span class="fc" id="L236">        this.scanner = new EfficientScanner(in);</span>
+<span class="fc" id="L237">        return parseInstance();</span>
+    }
+
+    /**
+     * @param in
+     *            the input stream
+     * @throws ParseFormatException
+     *             if the input stream does not comply with the DIMACS format.
+     * @throws ContradictionException
+     *             si le probl?me est trivialement inconsitant
+     */
+    private IProblem parseInstance()
+            throws ParseFormatException, ContradictionException {
+<span class="fc" id="L250">        this.solver.reset();</span>
+        try {
+<span class="fc" id="L252">            skipComments();</span>
+<span class="fc" id="L253">            readProblemLine();</span>
+<span class="fc" id="L254">            readConstrs();</span>
+<span class="fc" id="L255">            this.scanner.close();</span>
+<span class="fc" id="L256">            return this.solver;</span>
+<span class="nc" id="L257">        } catch (IOException e) {</span>
+<span class="nc" id="L258">            throw new ParseFormatException(e);</span>
+<span class="nc" id="L259">        } catch (NumberFormatException e) {</span>
+<span class="nc" id="L260">            throw new ParseFormatException(&quot;integer value expected &quot;);</span>
+        }
+    }
+
+    @Override
+    public String decode(int[] model) {
+<span class="nc" id="L266">        StringBuilder stb = new StringBuilder();</span>
+<span class="nc bnc" id="L267" title="All 2 branches missed.">        for (int element : model) {</span>
+<span class="nc" id="L268">            stb.append(element);</span>
+<span class="nc" id="L269">            stb.append(&quot; &quot;);</span>
+        }
+<span class="nc" id="L271">        stb.append(&quot;0&quot;);</span>
+<span class="nc" id="L272">        return stb.toString();</span>
+    }
+
+    @Override
+    public void decode(int[] model, PrintWriter out) {
+<span class="nc bnc" id="L277" title="All 2 branches missed.">        for (int element : model) {</span>
+<span class="nc" id="L278">            out.print(element);</span>
+<span class="nc" id="L279">            out.print(&quot; &quot;);</span>
+        }
+<span class="nc" id="L281">        out.print(&quot;0&quot;);</span>
+<span class="nc" id="L282">    }</span>
+
+    protected ISolver getSolver() {
+<span class="nc" id="L285">        return this.solver;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MaxSatDecorator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SAT4J core</a> &gt; <a href="index.source.html" class="el_package">org.sat4j.opt</a> &gt; <span class="el_source">MaxSatDecorator.java</span></div><h1>MaxSatDecorator.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * SAT4J: a SATisfiability library for Java Copyright (C) 2004, 2012 Artois University and CNRS
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU Lesser General Public License Version 2.1 or later (the
+ * &quot;LGPL&quot;), in which case the provisions of the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of the LGPL, and not to allow others to use your version of
+ * this file under the terms of the EPL, indicate your decision by deleting
+ * the provisions above and replace them with the notice and other provisions
+ * required by the LGPL. If you do not delete the provisions above, a recipient
+ * may use your version of this file under the terms of the EPL or the LGPL.
+ *
+ * Based on the original MiniSat specification from:
+ *
+ * An extensible SAT solver. Niklas Een and Niklas Sorensson. Proceedings of the
+ * Sixth International Conference on Theory and Applications of Satisfiability
+ * Testing, LNCS 2919, pp 502-518, 2003.
+ *
+ * See www.minisat.se for the original solver in C++.
+ *
+ * Contributors:
+ *   CRIL - initial API and implementation
+ *******************************************************************************/
+package org.sat4j.opt;
+
+import org.sat4j.core.ConstrGroup;
+import org.sat4j.core.VecInt;
+import org.sat4j.specs.ContradictionException;
+import org.sat4j.specs.IConstr;
+import org.sat4j.specs.ISolver;
+import org.sat4j.specs.IVecInt;
+import org.sat4j.specs.TimeoutException;
+
+/**
+ * Computes a solution that satisfies the maximum of clauses.
+ * 
+ * @author daniel
+ * 
+ */
+public final class MaxSatDecorator extends AbstractSelectorVariablesDecorator {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+    private final boolean equivalence;
+
+    public MaxSatDecorator(ISolver solver) {
+<span class="fc" id="L56">        this(solver, false);</span>
+<span class="fc" id="L57">    }</span>
+
+    public MaxSatDecorator(ISolver solver, boolean equivalence) {
+<span class="fc" id="L60">        super(solver);</span>
+<span class="fc" id="L61">        this.equivalence = equivalence;</span>
+<span class="fc" id="L62">    }</span>
+
+    @Override
+    public void setExpectedNumberOfClauses(int nb) {
+<span class="fc" id="L66">        super.setExpectedNumberOfClauses(nb);</span>
+<span class="fc" id="L67">        this.lits.ensure(nb);</span>
+<span class="fc" id="L68">    }</span>
+
+    @Override
+    public IConstr addClause(IVecInt literals) throws ContradictionException {
+<span class="fc" id="L72">        int newvar = nextFreeVarId(true);</span>
+<span class="fc" id="L73">        this.lits.push(newvar);</span>
+<span class="fc" id="L74">        literals.push(newvar);</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        if (this.equivalence) {</span>
+<span class="nc" id="L76">            ConstrGroup constrs = new ConstrGroup();</span>
+<span class="nc" id="L77">            constrs.add(super.addClause(literals));</span>
+<span class="nc" id="L78">            IVecInt clause = new VecInt(2);</span>
+<span class="nc" id="L79">            clause.push(-newvar);</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">            for (int i = 0; i &lt; literals.size() - 1; i++) {</span>
+<span class="nc" id="L81">                clause.push(-literals.get(i));</span>
+<span class="nc" id="L82">                constrs.add(super.addClause(clause));</span>
+            }
+<span class="nc" id="L84">            clause.pop();</span>
+<span class="nc" id="L85">            return constrs;</span>
+        }
+<span class="fc" id="L87">        return super.addClause(literals);</span>
+    }
+
+    @Override
+    public void reset() {
+<span class="fc" id="L92">        this.lits.clear();</span>
+<span class="fc" id="L93">        super.reset();</span>
+<span class="fc" id="L94">        this.prevConstr = null;</span>
+<span class="fc" id="L95">    }</span>
+
+    public boolean hasNoObjectiveFunction() {
+<span class="fc" id="L98">        return false;</span>
+    }
+
+    public boolean nonOptimalMeansSatisfiable() {
+<span class="nc" id="L102">        return false;</span>
+    }
+
+    public Number calculateObjective() {
+<span class="nc" id="L106">        calculateObjectiveValue();</span>
+<span class="nc" id="L107">        return this.counter;</span>
+    }
+
+<span class="fc" id="L110">    private final IVecInt lits = new VecInt();</span>
+
+    private int counter;
+
+    private IConstr prevConstr;
+
+    /**
+     * @since 2.1
+     */
+    public void discardCurrentSolution() throws ContradictionException {
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        if (this.prevConstr != null) {</span>
+<span class="fc" id="L121">            super.removeSubsumedConstr(this.prevConstr);</span>
+        }
+        try {
+<span class="fc" id="L124">            this.prevConstr = super.addAtMost(this.lits, this.counter - 1);</span>
+<span class="fc" id="L125">        } catch (ContradictionException ce) {</span>
+<span class="fc" id="L126">            setSolutionOptimal(true);</span>
+<span class="fc" id="L127">            throw ce;</span>
+<span class="fc" id="L128">        }</span>
+<span class="fc" id="L129">    }</span>
+
+    @Override
+    public boolean admitABetterSolution(IVecInt assumps)
+            throws TimeoutException {
+
+<span class="fc" id="L135">        boolean result = super.admitABetterSolution(assumps);</span>
+<span class="fc bfc" id="L136" title="All 4 branches covered.">        if (!result &amp;&amp; this.prevConstr != null) {</span>
+<span class="fc" id="L137">            super.removeConstr(this.prevConstr);</span>
+<span class="fc" id="L138">            this.prevConstr = null;</span>
+        }
+<span class="fc" id="L140">        return result;</span>
+    }
+
+    public void discard() throws ContradictionException {
+<span class="nc" id="L144">        discardCurrentSolution();</span>
+<span class="nc" id="L145">    }</span>
+
+    /**
+     * @since 2.1
+     */
+    public Number getObjectiveValue() {
+<span class="fc" id="L151">        return this.counter;</span>
+    }
+
+    @Override
+    void calculateObjectiveValue() {
+<span class="fc" id="L156">        this.counter = 0;</span>
+<span class="fc bfc" id="L157" title="All 2 branches covered.">        for (int q : getPrevfullmodel()) {</span>
+<span class="fc bfc" id="L158" title="All 2 branches covered.">            if (q &gt; nVars()) {</span>
+<span class="fc" id="L159">                this.counter++;</span>
+            }
+        }
+<span class="fc" id="L162">    }</span>
+
+    /**
+     * @since 2.1
+     */
+    public void forceObjectiveValueTo(Number forcedValue)
+            throws ContradictionException {
+<span class="nc" id="L169">        super.addAtMost(this.lits, forcedValue.intValue());</span>
+<span class="nc" id="L170">    }</span>
+
+    public void setTimeoutForFindingBetterSolution(int seconds) {
+        // TODO
+<span class="nc" id="L174">        throw new UnsupportedOperationException(&quot;No implemented yet&quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

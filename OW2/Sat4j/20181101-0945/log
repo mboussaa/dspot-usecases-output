@@ -1,0 +1,9 @@
+2018-11-01 11:41:22,097 WARN eu.stamp_project.dspot.assertgenerator.MethodsAssertGenerator - Some instrumented test failed!
+2018-11-01 11:41:23,237 INFO eu.stamp_project.dspot.assertgenerator.MethodsAssertGenerator - Generating assertions...
+2018-11-01 14:35:43,701 INFO eu.stamp_project.dspot.assertgenerator.AssertGenerator - 30 test fail, generating try/catch/fail blocks...
+2018-11-01 14:35:43,714 INFO eu.stamp_project.dspot.assertgenerator.AssertGenerator - 68 new tests with assertions generated
+2018-11-01 14:35:52,006 INFO eu.stamp_project.utils.compilation.DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp /home/assadm/OW2-Projects/Forks/sat4j/./org.sat4j.core/target/dspot/tmp_test_sources:/home/assadm/.m2/repository/junit/junit/4.12/junit-4.12.jar:/home/assadm/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/assadm/.m2/repository/org/mockito/mockito-all/1.9.5/mockito-all-1.9.5.jar:/home/assadm/OW2-Projects/Forks/sat4j/./org.sat4j.core/target/classes/:/home/assadm/OW2-Projects/Forks/sat4j/./org.sat4j.core/target/test-classes/:/home/assadm/OW2-Projects/Forks/sat4j/./org.sat4j.core/target/dspot/dependencies/: -d /home/assadm/OW2-Projects/Forks/sat4j/./org.sat4j.core/target/test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none /home/assadm/OW2-Projects/Forks/sat4j/org.sat4j.core/target/dspot/tmp_test_sources/org/sat4j/BugSAT43.java
+
+
+Execution time: > 4h
+Process killed after 24h idle

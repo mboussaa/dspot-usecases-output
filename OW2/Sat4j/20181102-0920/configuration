@@ -1,0 +1,1 @@
+java -jar  /home/assadm/STAMP-project/dspot/dspot/target/dspot-1.2.1-SNAPSHOT-jar-with-dependencies.jar --path-to-properties dspot.properties --test org.sat4j.BugSAT*  --generate-new-test-class --clean -s JacocoCoverageSelector -a MethodRemove --timeOut 30000 --verbose | tee -a trace.log

@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StatisticsSolver.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SAT4J core</a> &gt; <a href="index.source.html" class="el_package">org.sat4j.tools</a> &gt; <span class="el_source">StatisticsSolver.java</span></div><h1>StatisticsSolver.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * SAT4J: a SATisfiability library for Java Copyright (C) 2004, 2012 Artois University and CNRS
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU Lesser General Public License Version 2.1 or later (the
+ * &quot;LGPL&quot;), in which case the provisions of the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of the LGPL, and not to allow others to use your version of
+ * this file under the terms of the EPL, indicate your decision by deleting
+ * the provisions above and replace them with the notice and other provisions
+ * required by the LGPL. If you do not delete the provisions above, a recipient
+ * may use your version of this file under the terms of the EPL or the LGPL.
+ *
+ * Based on the original MiniSat specification from:
+ *
+ * An extensible SAT solver. Niklas Een and Niklas Sorensson. Proceedings of the
+ * Sixth International Conference on Theory and Applications of Satisfiability
+ * Testing, LNCS 2919, pp 502-518, 2003.
+ *
+ * See www.minisat.se for the original solver in C++.
+ *
+ * Contributors:
+ *   CRIL - initial API and implementation
+ *******************************************************************************/
+package org.sat4j.tools;
+
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
+import org.sat4j.core.LiteralsUtils;
+import org.sat4j.core.VecInt;
+import org.sat4j.minisat.core.Counter;
+import org.sat4j.specs.Constr;
+import org.sat4j.specs.ContradictionException;
+import org.sat4j.specs.IConstr;
+import org.sat4j.specs.ISolver;
+import org.sat4j.specs.ISolverService;
+import org.sat4j.specs.IVec;
+import org.sat4j.specs.IVecInt;
+import org.sat4j.specs.IteratorInt;
+import org.sat4j.specs.SearchListener;
+import org.sat4j.specs.TimeoutException;
+import org.sat4j.specs.UnitClauseProvider;
+
+<span class="nc" id="L53">public class StatisticsSolver implements ISolver {</span>
+
+    private static final String NOT_IMPLEMENTED_YET = &quot;Not implemented yet!&quot;;
+
+    private static final String THAT_SOLVER_ONLY_COMPUTE_STATISTICS = &quot;That solver only compute statistics&quot;;
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Number of constraints in the problem
+     */
+    private int expectedNumberOfConstraints;
+
+    /**
+     * Number of declared vars (max var id)
+     */
+    private int nbvars;
+
+    /**
+     * Size of the constraints for each occurrence of each var for each polarity
+     */
+    private IVecInt[] sizeoccurrences;
+
+<span class="nc" id="L79">    private int binarynegative = 0;</span>
+
+<span class="nc" id="L81">    private int binarypositive = 0;</span>
+
+<span class="nc" id="L83">    private int allpositive = 0;</span>
+
+<span class="nc" id="L85">    private int allnegative = 0;</span>
+
+<span class="nc" id="L87">    private int horn = 0;</span>
+
+<span class="nc" id="L89">    private int dualhorn = 0;</span>
+
+    /**
+     * Distribution of clauses size
+     */
+<span class="nc" id="L94">    private final Map&lt;Integer, Counter&gt; sizes = new HashMap&lt;Integer, Counter&gt;();</span>
+
+    public int[] model() {
+<span class="nc" id="L97">        throw new UnsupportedOperationException(</span>
+                THAT_SOLVER_ONLY_COMPUTE_STATISTICS);
+    }
+
+    public boolean model(int var) {
+<span class="nc" id="L102">        throw new UnsupportedOperationException(</span>
+                THAT_SOLVER_ONLY_COMPUTE_STATISTICS);
+    }
+
+    public int[] primeImplicant() {
+<span class="nc" id="L107">        throw new UnsupportedOperationException(</span>
+                THAT_SOLVER_ONLY_COMPUTE_STATISTICS);
+    }
+
+    public boolean primeImplicant(int p) {
+<span class="nc" id="L112">        throw new UnsupportedOperationException(</span>
+                THAT_SOLVER_ONLY_COMPUTE_STATISTICS);
+    }
+
+    public boolean isSatisfiable() throws TimeoutException {
+<span class="nc" id="L117">        throw new TimeoutException(THAT_SOLVER_ONLY_COMPUTE_STATISTICS);</span>
+    }
+
+    public boolean isSatisfiable(IVecInt assumps, boolean globalTimeout)
+            throws TimeoutException {
+<span class="nc" id="L122">        throw new TimeoutException(THAT_SOLVER_ONLY_COMPUTE_STATISTICS);</span>
+    }
+
+    public boolean isSatisfiable(boolean globalTimeout)
+            throws TimeoutException {
+<span class="nc" id="L127">        throw new TimeoutException(THAT_SOLVER_ONLY_COMPUTE_STATISTICS);</span>
+    }
+
+    public boolean isSatisfiable(IVecInt assumps) throws TimeoutException {
+<span class="nc" id="L131">        throw new TimeoutException(THAT_SOLVER_ONLY_COMPUTE_STATISTICS);</span>
+    }
+
+    public int[] findModel() throws TimeoutException {
+<span class="nc" id="L135">        throw new TimeoutException(THAT_SOLVER_ONLY_COMPUTE_STATISTICS);</span>
+    }
+
+    public int[] findModel(IVecInt assumps) throws TimeoutException {
+<span class="nc" id="L139">        throw new TimeoutException(THAT_SOLVER_ONLY_COMPUTE_STATISTICS);</span>
+    }
+
+    public int nConstraints() {
+<span class="nc" id="L143">        return expectedNumberOfConstraints;</span>
+    }
+
+    public int newVar(int howmany) {
+<span class="nc" id="L147">        this.nbvars = howmany;</span>
+<span class="nc" id="L148">        sizeoccurrences = new IVecInt[(howmany + 1) &lt;&lt; 1];</span>
+<span class="nc" id="L149">        return howmany;</span>
+    }
+
+    public int nVars() {
+<span class="nc" id="L153">        return this.nbvars;</span>
+    }
+
+    @Deprecated
+    public void printInfos(PrintWriter out, String prefix) {
+
+<span class="nc" id="L159">    }</span>
+
+    public void printInfos(PrintWriter out) {
+<span class="nc" id="L162">    }</span>
+
+    @Deprecated
+    public int newVar() {
+<span class="nc" id="L166">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public int nextFreeVarId(boolean reserve) {
+<span class="nc" id="L170">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public void registerLiteral(int p) {
+<span class="nc" id="L174">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public void setExpectedNumberOfClauses(int nb) {
+<span class="nc" id="L178">        this.expectedNumberOfConstraints = nb;</span>
+<span class="nc" id="L179">    }</span>
+
+    public IConstr addClause(IVecInt literals) throws ContradictionException {
+<span class="nc" id="L182">        int size = literals.size();</span>
+<span class="nc" id="L183">        Counter counter = sizes.get(size);</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">        if (counter == null) {</span>
+<span class="nc" id="L185">            counter = new Counter(0);</span>
+<span class="nc" id="L186">            sizes.put(size, counter);</span>
+        }
+<span class="nc" id="L188">        counter.inc();</span>
+        IVecInt list;
+        int x, p;
+<span class="nc" id="L191">        int pos = 0, neg = 0;</span>
+<span class="nc bnc" id="L192" title="All 2 branches missed.">        for (IteratorInt it = literals.iterator(); it.hasNext();) {</span>
+<span class="nc" id="L193">            x = it.next();</span>
+<span class="nc bnc" id="L194" title="All 2 branches missed.">            if (x &gt; 0) {</span>
+<span class="nc" id="L195">                pos++;</span>
+            } else {
+<span class="nc" id="L197">                neg++;</span>
+            }
+<span class="nc" id="L199">            p = LiteralsUtils.toInternal(x);</span>
+<span class="nc" id="L200">            list = sizeoccurrences[p];</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">            if (list == null) {</span>
+<span class="nc" id="L202">                list = new VecInt();</span>
+<span class="nc" id="L203">                sizeoccurrences[p] = list;</span>
+            }
+<span class="nc" id="L205">            list.push(size);</span>
+        }
+<span class="nc bnc" id="L207" title="All 2 branches missed.">        if (neg == 0) {</span>
+<span class="nc" id="L208">            allpositive++;</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">            if (size == 2) {</span>
+<span class="nc" id="L210">                binarypositive++;</span>
+            }
+<span class="nc bnc" id="L212" title="All 2 branches missed.">        } else if (pos == 0) {</span>
+<span class="nc" id="L213">            allnegative++;</span>
+<span class="nc bnc" id="L214" title="All 2 branches missed.">            if (size == 2) {</span>
+<span class="nc" id="L215">                binarynegative++;</span>
+            }
+<span class="nc bnc" id="L217" title="All 2 branches missed.">        } else if (pos == 1) {</span>
+<span class="nc" id="L218">            horn++;</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">        } else if (neg == 1) {</span>
+<span class="nc" id="L220">            dualhorn++;</span>
+        }
+<span class="nc" id="L222">        return null;</span>
+    }
+
+    public IConstr addBlockingClause(IVecInt literals)
+            throws ContradictionException {
+<span class="nc" id="L227">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public IConstr discardCurrentModel() throws ContradictionException {
+<span class="nc" id="L231">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public IVecInt createBlockingClauseForCurrentModel() {
+<span class="nc" id="L235">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public boolean removeConstr(IConstr c) {
+<span class="nc" id="L239">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public boolean removeSubsumedConstr(IConstr c) {
+<span class="nc" id="L243">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public void addAllClauses(IVec&lt;IVecInt&gt; clauses)
+            throws ContradictionException {
+<span class="nc" id="L248">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public IConstr addAtMost(IVecInt literals, int degree)
+            throws ContradictionException {
+<span class="nc" id="L253">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public IConstr addAtLeast(IVecInt literals, int degree)
+            throws ContradictionException {
+<span class="nc" id="L258">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public IConstr addExactly(IVecInt literals, int n)
+            throws ContradictionException {
+<span class="nc" id="L263">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public void setTimeout(int t) {
+<span class="nc" id="L267">    }</span>
+
+    public void setTimeoutOnConflicts(int count) {
+<span class="nc" id="L270">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public void setTimeoutMs(long t) {
+<span class="nc" id="L274">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public int getTimeout() {
+<span class="nc" id="L278">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public long getTimeoutMs() {
+<span class="nc" id="L282">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public void expireTimeout() {
+<span class="nc" id="L286">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public void reset() {
+<span class="nc" id="L290">    }</span>
+
+    @Deprecated
+    public void printStat(PrintStream out, String prefix) {
+<span class="nc" id="L294">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    @Deprecated
+    public void printStat(PrintWriter out, String prefix) {
+<span class="nc" id="L299">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public void printStat(PrintWriter out) {
+<span class="nc" id="L303">        int realNumberOfVariables = 0;</span>
+<span class="nc" id="L304">        int realNumberOfLiterals = 0;</span>
+<span class="nc" id="L305">        int pureLiterals = 0;</span>
+<span class="nc" id="L306">        int minOccV = Integer.MAX_VALUE;</span>
+<span class="nc" id="L307">        int maxOccV = Integer.MIN_VALUE;</span>
+<span class="nc" id="L308">        int sumV = 0;</span>
+        int sizeL, sizeV;
+<span class="nc" id="L310">        int minOccL = Integer.MAX_VALUE;</span>
+<span class="nc" id="L311">        int maxOccL = Integer.MIN_VALUE;</span>
+<span class="nc" id="L312">        int sumL = 0;</span>
+        IVecInt list;
+        boolean oneNull;
+<span class="nc bnc" id="L315" title="All 2 branches missed.">        if (sizeoccurrences == null) {</span>
+<span class="nc" id="L316">            return;</span>
+        }
+<span class="nc" id="L318">        int max = sizeoccurrences.length - 1;</span>
+<span class="nc bnc" id="L319" title="All 2 branches missed.">        for (int i = 2; i &lt; max; i += 2) {</span>
+<span class="nc" id="L320">            sizeV = 0;</span>
+<span class="nc" id="L321">            oneNull = false;</span>
+<span class="nc bnc" id="L322" title="All 2 branches missed.">            for (int k = 0; k &lt; 2; k++) {</span>
+<span class="nc" id="L323">                list = sizeoccurrences[i + k];</span>
+<span class="nc bnc" id="L324" title="All 2 branches missed.">                if (list == null) {</span>
+<span class="nc" id="L325">                    oneNull = true;</span>
+                } else {
+<span class="nc" id="L327">                    realNumberOfLiterals++;</span>
+<span class="nc" id="L328">                    sizeL = list.size();</span>
+<span class="nc" id="L329">                    sizeV += sizeL;</span>
+<span class="nc bnc" id="L330" title="All 2 branches missed.">                    if (minOccL &gt; sizeL) {</span>
+<span class="nc" id="L331">                        minOccL = sizeL;</span>
+                    }
+<span class="nc bnc" id="L333" title="All 2 branches missed.">                    if (sizeL &gt; maxOccL) {</span>
+<span class="nc" id="L334">                        maxOccL = sizeL;</span>
+                    }
+<span class="nc" id="L336">                    sumL += sizeL;</span>
+                }
+            }
+
+<span class="nc bnc" id="L340" title="All 2 branches missed.">            if (sizeV &gt; 0) {</span>
+<span class="nc bnc" id="L341" title="All 2 branches missed.">                if (oneNull) {</span>
+<span class="nc" id="L342">                    pureLiterals++;</span>
+                }
+<span class="nc" id="L344">                realNumberOfVariables++;</span>
+<span class="nc bnc" id="L345" title="All 2 branches missed.">                if (minOccV &gt; sizeV) {</span>
+<span class="nc" id="L346">                    minOccV = sizeV;</span>
+                }
+<span class="nc bnc" id="L348" title="All 2 branches missed.">                if (sizeV &gt; maxOccV) {</span>
+<span class="nc" id="L349">                    maxOccV = sizeV;</span>
+                }
+<span class="nc" id="L351">                sumV += sizeV;</span>
+            }
+
+        }
+<span class="nc" id="L355">        System.out.println(&quot;c Distribution of constraints size:&quot;);</span>
+<span class="nc" id="L356">        int nbclauses = 0;</span>
+<span class="nc bnc" id="L357" title="All 2 branches missed.">        for (Map.Entry&lt;Integer, Counter&gt; entry : sizes.entrySet()) {</span>
+<span class="nc" id="L358">            System.out.printf(&quot;c %d =&gt; %d%n&quot;, entry.getKey(),</span>
+<span class="nc" id="L359">                    entry.getValue().getValue());</span>
+<span class="nc" id="L360">            nbclauses += entry.getValue().getValue();</span>
+<span class="nc" id="L361">        }</span>
+
+<span class="nc" id="L363">        System.out.printf(</span>
+                &quot;c Real number of variables, literals, number of clauses, size (#literals), #pureliterals, &quot;);
+<span class="nc" id="L365">        System.out.printf(&quot;variable occurrences (min/max/avg) &quot;);</span>
+<span class="nc" id="L366">        System.out.printf(&quot;literals occurrences (min/max/avg) &quot;);</span>
+<span class="nc" id="L367">        System.out.println(</span>
+                &quot;Specific clauses: #positive  #negative #horn  #dualhorn #binary #binarynegative #binarypositive #binaryhorn #remaining&quot;);
+<span class="nc" id="L369">        Counter binaryCounter = sizes.get(2);</span>
+<span class="nc bnc" id="L370" title="All 2 branches missed.">        int nbBinary = binaryCounter == null ? 0 : binaryCounter.getValue();</span>
+<span class="nc" id="L371">        System.out.printf(Locale.US, &quot;%d %d %d %d %d %d %d %.2f %d %d %.2f &quot;,</span>
+<span class="nc" id="L372">                realNumberOfVariables, realNumberOfLiterals, nbclauses, sumL,</span>
+<span class="nc" id="L373">                pureLiterals, minOccV, maxOccV,</span>
+<span class="nc" id="L374">                sumV / (realNumberOfVariables * 1.0), minOccL, maxOccL,</span>
+<span class="nc" id="L375">                sumL / (realNumberOfLiterals * 1.0));</span>
+<span class="nc" id="L376">        System.out.printf(&quot;%d %d %d %d %d %d %d %d %d%n&quot;, allpositive,</span>
+<span class="nc" id="L377">                allnegative, horn, dualhorn, nbBinary, binarynegative,</span>
+<span class="nc" id="L378">                binarypositive, (nbBinary - binarynegative - binarypositive),</span>
+<span class="nc" id="L379">                nbclauses - allpositive - allnegative - horn - dualhorn);</span>
+<span class="nc" id="L380">    }</span>
+
+    public Map&lt;String, Number&gt; getStat() {
+<span class="nc" id="L383">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public String toString(String prefix) {
+<span class="nc" id="L387">        return prefix + &quot;Statistics about the benchmarks&quot;;</span>
+    }
+
+    public void clearLearntClauses() {
+<span class="nc" id="L391">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public void setDBSimplificationAllowed(boolean status) {
+<span class="nc" id="L395">    }</span>
+
+    public boolean isDBSimplificationAllowed() {
+<span class="nc" id="L398">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public &lt;S extends ISolverService&gt; void setSearchListener(
+            SearchListener&lt;S&gt; sl) {
+<span class="nc" id="L403">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public &lt;S extends ISolverService&gt; SearchListener&lt;S&gt; getSearchListener() {
+<span class="nc" id="L407">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public boolean isVerbose() {
+<span class="nc" id="L411">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public void setVerbose(boolean value) {
+<span class="nc" id="L415">    }</span>
+
+    public void setLogPrefix(String prefix) {
+<span class="nc" id="L418">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public String getLogPrefix() {
+<span class="nc" id="L422">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public IVecInt unsatExplanation() {
+<span class="nc" id="L426">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public int[] modelWithInternalVariables() {
+<span class="nc" id="L430">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public int realNumberOfVariables() {
+<span class="nc" id="L434">        return nbvars;</span>
+    }
+
+    public boolean isSolverKeptHot() {
+<span class="nc" id="L438">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public void setKeepSolverHot(boolean keepHot) {
+<span class="nc" id="L442">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public ISolver getSolvingEngine() {
+<span class="nc" id="L446">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public void setUnitClauseProvider(UnitClauseProvider ucp) {
+<span class="nc" id="L450">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public IConstr addConstr(Constr constr) {
+<span class="nc" id="L454">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+
+    public IConstr addParity(IVecInt literals, boolean even) {
+<span class="nc" id="L458">        throw new UnsupportedOperationException(NOT_IMPLEMENTED_YET);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
