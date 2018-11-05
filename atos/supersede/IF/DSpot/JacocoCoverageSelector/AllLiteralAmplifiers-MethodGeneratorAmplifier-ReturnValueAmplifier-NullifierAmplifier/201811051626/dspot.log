@@ -1,0 +1,15 @@
+Started DSpot: Mon Nov  5 16:26:32 CET 2018
+DSpot CLI configuration:  -i 3 -t eu.supersede.integration.api.adaptation.proxies.test.ModelRepositoryProxyTest -a AllLiteralAmplifiers:MethodGeneratorAmplifier:ReturnValueAmplifier:NullifierAmplifier -s JacocoCoverageSelector --timeOut 120000 --max-test-amplified 200 --budgetizer NoBudgetizer --verbose
+DSpot properties file:  ./dspot.properties
+2018-11-05 16:26:32,953 INFO eu.stamp_project.testrunner.EntryPoint - Path to runner Classes: /home/stamp/Git/dspot/dspot/target/dspot-1.2.2-SNAPSHOT-jar-with-dependencies.jar
+2018-11-05 16:26:32,959 INFO eu.stamp_project.testrunner.EntryPoint - /home/stamp/Git/dspot/dspot/target/dspot-1.2.2-SNAPSHOT-jar-with-dependencies.jar
+2018-11-05 16:26:32,959 INFO eu.stamp_project.testrunner.EntryPoint - /home/stamp/Git/dspot/dspot/target/dspot-1.2.2-SNAPSHOT-jar-with-dependencies.jar
+2018-11-05 16:26:32,959 INFO eu.stamp_project.testrunner.EntryPoint - /home/stamp/Git/dspot/dspot/target/dspot-1.2.2-SNAPSHOT-jar-with-dependencies.jar
+2018-11-05 16:26:32,959 WARN eu.stamp_project.program.InputConfiguration - No builder has been specified.
+2018-11-05 16:26:32,960 WARN eu.stamp_project.program.InputConfiguration - Using Maven as a default builder.
+2018-11-05 16:26:32,960 WARN eu.stamp_project.program.InputConfiguration - You can use the command-line option --automatic-builder
+2018-11-05 16:26:32,960 WARN eu.stamp_project.program.InputConfiguration - or the properties automaticBuilderName to configure it.
+2018-11-05 16:26:32,961 INFO eu.stamp_project.automaticbuilder.AutomaticBuilderFactory - Selected Maven automatic builder.
+2018-11-05 16:26:33,013 WARN eu.stamp_project.automaticbuilder.maven.DSpotPOMCreator - You gave an empty filter. To use PIT, it is recommend to specify a filter, at least, the top package of your program, otherwise, PIT may take a long time or could not be run.
+2018-11-05 16:26:33,013 WARN eu.stamp_project.automaticbuilder.maven.DSpotPOMCreator - Trying to compute the top package of the project...
+Ended DSpot: Mon Nov  5 16:26:33 CET 2018
