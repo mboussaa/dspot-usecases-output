@@ -1,0 +1,65 @@
+{
+  "classTimes": [
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT107",
+      "timeInMs": 11200
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT109",
+      "timeInMs": 8271
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT118",
+      "timeInMs": 10202
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT139",
+      "timeInMs": 17084
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT17",
+      "timeInMs": 41504
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT18",
+      "timeInMs": 103100
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT25",
+      "timeInMs": 13138
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT26",
+      "timeInMs": 359
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT34",
+      "timeInMs": 413
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT37",
+      "timeInMs": 5023
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT43",
+      "timeInMs": 11102
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT50",
+      "timeInMs": 54009
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT79",
+      "timeInMs": 249
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT81",
+      "timeInMs": 105101
+    },
+    {
+      "fullQualifiedName": "org.sat4j.BugSAT95",
+      "timeInMs": 5650
+    }
+  ],
+  "projectName": "org.sat4j.core"
+}

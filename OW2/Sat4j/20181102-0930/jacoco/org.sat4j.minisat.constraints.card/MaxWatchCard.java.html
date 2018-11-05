@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MaxWatchCard.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SAT4J core</a> &gt; <a href="index.source.html" class="el_package">org.sat4j.minisat.constraints.card</a> &gt; <span class="el_source">MaxWatchCard.java</span></div><h1>MaxWatchCard.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * SAT4J: a SATisfiability library for Java Copyright (C) 2004, 2012 Artois University and CNRS
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU Lesser General Public License Version 2.1 or later (the
+ * &quot;LGPL&quot;), in which case the provisions of the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of the LGPL, and not to allow others to use your version of
+ * this file under the terms of the EPL, indicate your decision by deleting
+ * the provisions above and replace them with the notice and other provisions
+ * required by the LGPL. If you do not delete the provisions above, a recipient
+ * may use your version of this file under the terms of the EPL or the LGPL.
+ *
+ * Based on the original MiniSat specification from:
+ *
+ * An extensible SAT solver. Niklas Een and Niklas Sorensson. Proceedings of the
+ * Sixth International Conference on Theory and Applications of Satisfiability
+ * Testing, LNCS 2919, pp 502-518, 2003.
+ *
+ * See www.minisat.se for the original solver in C++.
+ *
+ * Contributors:
+ *   CRIL - initial API and implementation
+ *******************************************************************************/
+package org.sat4j.minisat.constraints.card;
+
+import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.sat4j.core.LiteralsUtils;
+import org.sat4j.minisat.constraints.cnf.Lits;
+import org.sat4j.minisat.constraints.cnf.UnitClauses;
+import org.sat4j.minisat.core.ILits;
+import org.sat4j.minisat.core.Undoable;
+import org.sat4j.specs.Constr;
+import org.sat4j.specs.ContradictionException;
+import org.sat4j.specs.IVecInt;
+import org.sat4j.specs.MandatoryLiteralListener;
+import org.sat4j.specs.Propagatable;
+import org.sat4j.specs.UnitPropagationListener;
+import org.sat4j.specs.VarMapper;
+
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">public final class MaxWatchCard</span>
+        implements Propagatable, Constr, Undoable, Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Degree (right hand side) of the constraint.
+     */
+    private int degree;
+
+    /**
+     * Literals (left hand side) of the constraint.
+     */
+    private final int[] lits;
+
+    /**
+     * Flag to denote greater than or lesser than constraint.
+     */
+    private boolean moreThan;
+
+    /**
+     * Sum of the currently watched literals.
+     */
+    private int watchCumul;
+
+    /**
+     * Vocabulary of the constraints.
+     */
+    private final ILits voc;
+
+    /**
+     * Build a new constraint.
+     * 
+     * @param voc
+     *            the vocabulary of the constraint.
+     * @param ps
+     *            a set of literals
+     * @param moreThan
+     *            true if the constraint is of the form &quot;greater than&quot;, else
+     *            false.
+     * @param degree
+     *            the degree/threshold of the constraint
+     */
+<span class="fc" id="L93">    public MaxWatchCard(ILits voc, IVecInt ps, boolean moreThan, int degree) {</span>
+
+        // update fields
+<span class="fc" id="L96">        this.voc = voc;</span>
+<span class="fc" id="L97">        this.degree = degree;</span>
+<span class="fc" id="L98">        this.moreThan = moreThan;</span>
+
+        // Simply ps
+<span class="fc" id="L101">        int[] index = new int[voc.nVars() * 2 + 2];</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        for (int i = 0; i &lt; index.length; i++) {</span>
+<span class="fc" id="L103">            index[i] = 0;</span>
+        }
+        // Look for opposite literals
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        for (int i = 0; i &lt; ps.size(); i++) {</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">            if (index[ps.get(i) ^ 1] == 0) {</span>
+<span class="fc" id="L108">                index[ps.get(i)]++;</span>
+            } else {
+<span class="fc" id="L110">                index[ps.get(i) ^ 1]--;</span>
+            }
+        }
+        // Update degree according to removed literals
+<span class="fc" id="L114">        int ind = 0;</span>
+<span class="fc bfc" id="L115" title="All 2 branches covered.">        while (ind &lt; ps.size()) {</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">            if (index[ps.get(ind)] &gt; 0) {</span>
+<span class="fc" id="L117">                index[ps.get(ind)]--;</span>
+<span class="fc" id="L118">                ind++;</span>
+            } else {
+<span class="fc bfc" id="L120" title="All 2 branches covered.">                if ((ps.get(ind) &amp; 1) != 0) {</span>
+<span class="fc" id="L121">                    this.degree--;</span>
+                }
+<span class="fc" id="L123">                ps.set(ind, ps.last());</span>
+<span class="fc" id="L124">                ps.pop();</span>
+            }
+        }
+
+        // Copy literals to the current constraint
+<span class="fc" id="L129">        this.lits = new int[ps.size()];</span>
+<span class="fc" id="L130">        ps.moveTo(this.lits);</span>
+
+        // Normalize the constraint
+<span class="fc" id="L133">        normalize();</span>
+
+        // Watch all non falsified literals
+<span class="fc" id="L136">        this.watchCumul = 0;</span>
+
+<span class="fc bfc" id="L138" title="All 2 branches covered.">        for (int i = 0; i &lt; this.lits.length; i++) {</span>
+            // Note: those falsified literals will never be unset
+<span class="pc bpc" id="L140" title="1 of 2 branches missed.">            if (!voc.isFalsified(this.lits[i])) {</span>
+<span class="fc" id="L141">                this.watchCumul++;</span>
+<span class="fc" id="L142">                voc.watch(this.lits[i] ^ 1, this);</span>
+            }
+        }
+<span class="fc" id="L145">    }</span>
+
+    /**
+     * Calcule la cause de l'affection d'un litt?ral
+     * 
+     * @param p
+     *            un litt?ral falsifi? (ou Lit.UNDEFINED)
+     * @param outReason
+     *            vecteur de litt?raux ? remplir
+     * @see Constr#calcReason(int p, IVecInt outReason)
+     */
+    public void calcReason(int p, IVecInt outReason) {
+<span class="fc bfc" id="L157" title="All 2 branches covered.">        for (int lit : this.lits) {</span>
+<span class="fc bfc" id="L158" title="All 2 branches covered.">            if (this.voc.isFalsified(lit)) {</span>
+<span class="fc" id="L159">                outReason.push(lit ^ 1);</span>
+            }
+        }
+<span class="fc" id="L162">    }</span>
+
+    /**
+     * Obtenir la valeur de l'activit? de la contrainte
+     * 
+     * @return la valeur de l'activit? de la contrainte
+     * @see Constr#getActivity()
+     */
+    public double getActivity() {
+        // TODO getActivity
+<span class="nc" id="L172">        return 0;</span>
+    }
+
+    /**
+     * Incr?mente la valeur de l'activit? de la contrainte
+     * 
+     * @param claInc
+     *            incr?ment de l'activit? de la contrainte
+     * @see Constr#incActivity(double claInc)
+     */
+    public void incActivity(double claInc) {
+        // TODO incActivity
+<span class="nc" id="L184">    }</span>
+
+    public void setActivity(double d) {
+<span class="nc" id="L187">    }</span>
+
+    /**
+     * D?termine si la contrainte est apprise
+     * 
+     * @return true si la contrainte est apprise, false sinon
+     * @see Constr#learnt()
+     */
+    public boolean learnt() {
+        // TODO learnt
+<span class="fc" id="L197">        return false;</span>
+    }
+
+    /**
+     * La contrainte est la cause d'une propagation unitaire
+     * 
+     * @return true si c'est le cas, false sinon
+     * @see Constr#locked()
+     */
+    public boolean locked() {
+        // TODO locked
+<span class="nc" id="L208">        return true;</span>
+    }
+
+    /**
+     * Permet la cr?ation de contrainte de cardinalit? ? observation minimale
+     * 
+     * @param s
+     *            outil pour la propagation des litt?raux
+     * @param voc
+     *            vocabulaire utilis? par la contrainte
+     * @param ps
+     *            liste des litt?raux de la nouvelle contrainte
+     * @param moreThan
+     *            d?termine si c'est une sup?rieure ou ?gal ? l'origine
+     * @param degree
+     *            fournit le degr? de la contrainte
+     * @return une nouvelle clause si tout va bien, null sinon
+     * @throws ContradictionException
+     */
+    public static Constr maxWatchCardNew(UnitPropagationListener s, ILits voc,
+            IVecInt ps, boolean moreThan, int degree)
+            throws ContradictionException {
+
+<span class="fc" id="L231">        MaxWatchCard outclause = null;</span>
+
+        // La contrainte ne doit pas ?tre vide
+<span class="pc bpc" id="L234" title="1 of 2 branches missed.">        if (ps.size() &lt; degree) {</span>
+<span class="nc" id="L235">            throw new ContradictionException(</span>
+                    &quot;Creating trivially inconsistent constraint&quot;); //$NON-NLS-1$
+<span class="pc bpc" id="L237" title="1 of 2 branches missed.">        } else if (ps.size() == degree) {</span>
+<span class="nc bnc" id="L238" title="All 2 branches missed.">            for (int i = 0; i &lt; ps.size(); i++) {</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">                if (!s.enqueue(ps.get(i))) {</span>
+<span class="nc" id="L240">                    throw new ContradictionException(</span>
+                            &quot;Contradiction with implied literal&quot;); //$NON-NLS-1$
+                }
+            }
+<span class="nc" id="L244">            return new UnitClauses(ps);</span>
+        }
+
+        // On cree la contrainte
+<span class="fc" id="L248">        outclause = new MaxWatchCard(voc, ps, moreThan, degree);</span>
+
+        // Si le degr? est insufisant
+<span class="fc bfc" id="L251" title="All 2 branches covered.">        if (outclause.degree &lt;= 0) {</span>
+<span class="fc" id="L252">            return null;</span>
+        }
+
+        // Si il n'y a aucune chance de satisfaire la contrainte
+<span class="pc bpc" id="L256" title="1 of 2 branches missed.">        if (outclause.watchCumul &lt; outclause.degree) {</span>
+<span class="nc" id="L257">            throw new ContradictionException();</span>
+        }
+
+        // Si les litt?raux observ?s sont impliqu?s
+<span class="pc bpc" id="L261" title="1 of 2 branches missed.">        if (outclause.watchCumul == outclause.degree) {</span>
+<span class="nc bnc" id="L262" title="All 2 branches missed.">            for (int i = 0; i &lt; outclause.lits.length; i++) {</span>
+<span class="nc bnc" id="L263" title="All 2 branches missed.">                if (!s.enqueue(outclause.lits[i])) {</span>
+<span class="nc" id="L264">                    throw new ContradictionException(</span>
+                            &quot;Contradiction with implied literal&quot;); //$NON-NLS-1$
+                }
+            }
+<span class="nc" id="L268">            return null;</span>
+        }
+
+<span class="fc" id="L271">        return outclause;</span>
+    }
+
+    /**
+     * On normalise la contrainte au sens de Barth
+     */
+    public void normalize() {
+        // Gestion du signe
+<span class="pc bpc" id="L279" title="1 of 2 branches missed.">        if (!this.moreThan) {</span>
+            // On multiplie le degr? par -1
+<span class="nc" id="L281">            this.degree = 0 - this.degree;</span>
+            // On r?vise chaque litt?ral
+<span class="nc bnc" id="L283" title="All 2 branches missed.">            for (int indLit = 0; indLit &lt; this.lits.length; indLit++) {</span>
+<span class="nc" id="L284">                this.lits[indLit] = this.lits[indLit] ^ 1;</span>
+<span class="nc" id="L285">                this.degree++;</span>
+            }
+<span class="nc" id="L287">            this.moreThan = true;</span>
+        }
+<span class="fc" id="L289">    }</span>
+
+    /**
+     * Propagation de la valeur de v?rit? d'un litt?ral falsifi?
+     * 
+     * @param s
+     *            objet utilis? pour la propagation
+     * @param p
+     *            le litt?ral propag? (il doit etre falsifie)
+     * @return false ssi une inconsistance est d?t?ct?e
+     */
+    public boolean propagate(UnitPropagationListener s, int p) {
+
+        // On observe toujours tous les litt?raux
+<span class="fc" id="L303">        this.voc.watch(p, this);</span>
+<span class="pc bpc" id="L304" title="2 of 4 branches missed.">        assert !this.voc.isFalsified(p);</span>
+
+        // Si le litt?ral p est impliqu?
+<span class="fc bfc" id="L307" title="All 2 branches covered.">        if (this.watchCumul == this.degree) {</span>
+<span class="fc" id="L308">            return false;</span>
+        }
+
+        // On met en place la mise ? jour du compteur
+<span class="fc" id="L312">        this.voc.undos(p).push(this);</span>
+<span class="fc" id="L313">        this.watchCumul--;</span>
+
+        // Si les litt?raux restant sont impliqu?s
+<span class="fc bfc" id="L316" title="All 2 branches covered.">        if (this.watchCumul == this.degree) {</span>
+<span class="fc bfc" id="L317" title="All 2 branches covered.">            for (int q : this.lits) {</span>
+<span class="pc bpc" id="L318" title="1 of 4 branches missed.">                if (this.voc.isUnassigned(q) &amp;&amp; !s.enqueue(q, this)) {</span>
+<span class="nc" id="L319">                    return false;</span>
+                }
+            }
+        }
+<span class="fc" id="L323">        return true;</span>
+    }
+
+    /**
+     * @since 2.1
+     */
+    public void remove(UnitPropagationListener upl) {
+<span class="fc bfc" id="L330" title="All 2 branches covered.">        for (int q : this.lits) {</span>
+<span class="fc" id="L331">            this.voc.watches(q ^ 1).remove(this);</span>
+        }
+<span class="fc" id="L333">    }</span>
+
+    /**
+     * Permet le r??chantillonage de l'activit? de la contrainte
+     * 
+     * @param d
+     *            facteur d'ajustement
+     */
+    public void rescaleBy(double d) {
+<span class="nc" id="L342">    }</span>
+
+    /**
+     * Simplifie la contrainte(l'all?ge)
+     * 
+     * @return true si la contrainte est satisfaite, false sinon
+     */
+    public boolean simplify() {
+
+<span class="nc" id="L351">        int i = 0;</span>
+
+        // On esp?re le maximum de la somme
+<span class="nc" id="L354">        int curr = this.watchCumul;</span>
+
+        // Pour chaque litt?ral
+<span class="nc bnc" id="L357" title="All 2 branches missed.">        while (i &lt; this.lits.length) {</span>
+            // On d?cr?mente si l'espoir n'est pas fond?
+<span class="nc bnc" id="L359" title="All 2 branches missed.">            if (this.voc.isUnassigned(this.lits[i++])) {</span>
+<span class="nc" id="L360">                curr--;</span>
+<span class="nc bnc" id="L361" title="All 2 branches missed.">                if (curr &lt; this.degree) {</span>
+<span class="nc" id="L362">                    return false;</span>
+                }
+            }
+        }
+
+<span class="nc" id="L367">        return false;</span>
+    }
+
+    /**
+     * Cha?ne repr?sentant la contrainte
+     * 
+     * @return Cha?ne repr?sentant la contrainte
+     */
+    @Override
+    public String toString() {
+<span class="nc" id="L377">        StringBuilder stb = new StringBuilder();</span>
+
+<span class="nc bnc" id="L379" title="All 2 branches missed.">        if (this.lits.length &gt; 0) {</span>
+<span class="nc bnc" id="L380" title="All 2 branches missed.">            if (this.voc.isUnassigned(this.lits[0])) {</span>
+<span class="nc" id="L381">                stb.append(Lits.toString(this.lits[0]));</span>
+<span class="nc" id="L382">                stb.append(&quot; &quot;); //$NON-NLS-1$</span>
+            }
+<span class="nc bnc" id="L384" title="All 2 branches missed.">            for (int i = 1; i &lt; this.lits.length; i++) {</span>
+<span class="nc bnc" id="L385" title="All 2 branches missed.">                if (this.voc.isUnassigned(this.lits[i])) {</span>
+<span class="nc" id="L386">                    stb.append(&quot; + &quot;); //$NON-NLS-1$</span>
+<span class="nc" id="L387">                    stb.append(Lits.toString(this.lits[i]));</span>
+<span class="nc" id="L388">                    stb.append(&quot; &quot;); //$NON-NLS-1$</span>
+                }
+            }
+<span class="nc" id="L391">            stb.append(&quot;&gt;= &quot;); //$NON-NLS-1$</span>
+<span class="nc" id="L392">            stb.append(this.degree);</span>
+        }
+<span class="nc" id="L394">        return stb.toString();</span>
+    }
+
+    /**
+     * M?thode appel?e lors du backtrack
+     * 
+     * @param p
+     *            le litt?ral d?saffect?
+     */
+    public void undo(int p) {
+<span class="fc" id="L404">        this.watchCumul++;</span>
+<span class="fc" id="L405">    }</span>
+
+    public void setLearnt() {
+<span class="nc" id="L408">        throw new UnsupportedOperationException();</span>
+    }
+
+    public void register() {
+<span class="nc" id="L412">        throw new UnsupportedOperationException();</span>
+    }
+
+    public int size() {
+<span class="nc" id="L416">        return this.lits.length;</span>
+    }
+
+    public int get(int i) {
+<span class="nc" id="L420">        return this.lits[i];</span>
+    }
+
+    public void assertConstraint(UnitPropagationListener s) {
+<span class="nc" id="L424">        boolean ret = true;</span>
+<span class="nc bnc" id="L425" title="All 2 branches missed.">        for (Integer lit : this.lits) {</span>
+<span class="nc bnc" id="L426" title="All 2 branches missed.">            if (this.voc.isUnassigned(lit)) {</span>
+<span class="nc" id="L427">                ret &amp;= s.enqueue(lit, this);</span>
+            }
+        }
+<span class="nc bnc" id="L430" title="All 4 branches missed.">        assert ret == true;</span>
+<span class="nc" id="L431">    }</span>
+
+    public void assertConstraintIfNeeded(UnitPropagationListener s) {
+<span class="nc" id="L434">        throw new UnsupportedOperationException();</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.minisat.constraints.pb.PBConstr#getCoefficient(int)
+     */
+    public BigInteger getCoef(int literal) {
+<span class="nc" id="L443">        return BigInteger.ONE;</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.minisat.constraints.pb.PBConstr#getDegree()
+     */
+    public BigInteger getDegree() {
+<span class="nc" id="L452">        return BigInteger.valueOf(this.degree);</span>
+    }
+
+    public ILits getVocabulary() {
+<span class="nc" id="L456">        return this.voc;</span>
+    }
+
+    /**
+     * @since 2.1
+     */
+    public void forwardActivity(double claInc) {
+        // TODO Auto-generated method stub
+
+<span class="nc" id="L465">    }</span>
+
+    public boolean canBePropagatedMultipleTimes() {
+<span class="nc" id="L468">        return false;</span>
+    }
+
+    public Constr toConstraint() {
+<span class="fc" id="L472">        return this;</span>
+    }
+
+    public void calcReasonOnTheFly(int p, IVecInt trail, IVecInt outReason) {
+<span class="nc" id="L476">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public boolean propagatePI(MandatoryLiteralListener l, int p) {
+<span class="nc" id="L480">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+
+    }
+
+    public boolean canBeSatisfiedByCountingLiterals() {
+<span class="nc" id="L485">        return true;</span>
+    }
+
+    public int requiredNumberOfSatisfiedLiterals() {
+<span class="nc" id="L489">        return degree;</span>
+    }
+
+    public boolean isSatisfied() {
+<span class="nc" id="L493">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public int getAssertionLevel(IVecInt trail, int decisionLevel) {
+<span class="nc" id="L497">        int nUnsat = 0;</span>
+<span class="nc" id="L498">        Set&lt;Integer&gt; litsSet = new HashSet&lt;Integer&gt;();</span>
+<span class="nc bnc" id="L499" title="All 2 branches missed.">        for (Integer i : this.lits)</span>
+<span class="nc" id="L500">            litsSet.add(i);</span>
+<span class="nc bnc" id="L501" title="All 2 branches missed.">        for (int i = 0; i &lt; trail.size(); ++i) {</span>
+<span class="nc bnc" id="L502" title="All 2 branches missed.">            if (litsSet.contains(trail.get(i) ^ 1)) {</span>
+<span class="nc" id="L503">                ++nUnsat;</span>
+<span class="nc bnc" id="L504" title="All 2 branches missed.">                if (nUnsat == this.lits.length - this.degree)</span>
+<span class="nc" id="L505">                    return i;</span>
+            }
+        }
+<span class="nc" id="L508">        return -1;</span>
+    }
+
+    public String toString(VarMapper mapper) {
+<span class="nc" id="L512">        StringBuilder stb = new StringBuilder();</span>
+
+<span class="nc bnc" id="L514" title="All 2 branches missed.">        if (this.lits.length &gt; 0) {</span>
+<span class="nc bnc" id="L515" title="All 2 branches missed.">            if (this.voc.isUnassigned(this.lits[0])) {</span>
+<span class="nc" id="L516">                stb.append(mapper.map(LiteralsUtils.toDimacs(this.lits[0])));</span>
+<span class="nc" id="L517">                stb.append(&quot; &quot;); //$NON-NLS-1$</span>
+            }
+<span class="nc bnc" id="L519" title="All 2 branches missed.">            for (int i = 1; i &lt; this.lits.length; i++) {</span>
+<span class="nc bnc" id="L520" title="All 2 branches missed.">                if (this.voc.isUnassigned(this.lits[i])) {</span>
+<span class="nc" id="L521">                    stb.append(&quot; + &quot;); //$NON-NLS-1$</span>
+<span class="nc" id="L522">                    stb.append(</span>
+<span class="nc" id="L523">                            mapper.map(LiteralsUtils.toDimacs(this.lits[i])));</span>
+<span class="nc" id="L524">                    stb.append(&quot; &quot;); //$NON-NLS-1$</span>
+                }
+            }
+<span class="nc" id="L527">            stb.append(&quot;&gt;= &quot;); //$NON-NLS-1$</span>
+<span class="nc" id="L528">            stb.append(this.degree);</span>
+        }
+<span class="nc" id="L530">        return stb.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

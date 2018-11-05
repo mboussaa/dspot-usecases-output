@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MultiTracing.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SAT4J core</a> &gt; <a href="index.source.html" class="el_package">org.sat4j.tools</a> &gt; <span class="el_source">MultiTracing.java</span></div><h1>MultiTracing.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * SAT4J: a SATisfiability library for Java Copyright (C) 2004, 2012 Artois University and CNRS
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU Lesser General Public License Version 2.1 or later (the
+ * &quot;LGPL&quot;), in which case the provisions of the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of the LGPL, and not to allow others to use your version of
+ * this file under the terms of the EPL, indicate your decision by deleting
+ * the provisions above and replace them with the notice and other provisions
+ * required by the LGPL. If you do not delete the provisions above, a recipient
+ * may use your version of this file under the terms of the EPL or the LGPL.
+ *
+ * Based on the original MiniSat specification from:
+ *
+ * An extensible SAT solver. Niklas Een and Niklas Sorensson. Proceedings of the
+ * Sixth International Conference on Theory and Applications of Satisfiability
+ * Testing, LNCS 2919, pp 502-518, 2003.
+ *
+ * See www.minisat.se for the original solver in C++.
+ *
+ * Contributors:
+ *   CRIL - initial API and implementation
+ *******************************************************************************/
+package org.sat4j.tools;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
+import org.sat4j.specs.IConstr;
+import org.sat4j.specs.ISolverService;
+import org.sat4j.specs.Lbool;
+import org.sat4j.specs.RandomAccessModel;
+import org.sat4j.specs.SearchListener;
+
+/**
+ * Allow to feed the solver with several SearchListener.
+ * 
+ * @author leberre
+ * 
+ */
+public class MultiTracing&lt;T extends ISolverService&gt; implements
+        SearchListener&lt;T&gt; {
+
+    /**
+	 * 
+	 */
+    private static final long serialVersionUID = 1L;
+
+<span class="nc" id="L57">    private final Collection&lt;SearchListener&lt;T&gt;&gt; listeners = new ArrayList&lt;SearchListener&lt;T&gt;&gt;();</span>
+
+<span class="nc" id="L59">    public MultiTracing(SearchListener&lt;T&gt;... listeners) {</span>
+<span class="nc" id="L60">        this.listeners.addAll(Arrays.asList(listeners));</span>
+<span class="nc" id="L61">    }</span>
+
+<span class="nc" id="L63">    public MultiTracing(List&lt;SearchListener&lt;T&gt;&gt; listenersList) {</span>
+<span class="nc" id="L64">        this.listeners.addAll(listenersList);</span>
+<span class="nc" id="L65">    }</span>
+
+    public void assuming(int p) {
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L69">            sl.assuming(p);</span>
+<span class="nc" id="L70">        }</span>
+
+<span class="nc" id="L72">    }</span>
+
+    public void propagating(int p) {
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L76">            sl.propagating(p);</span>
+<span class="nc" id="L77">        }</span>
+<span class="nc" id="L78">    }</span>
+
+    public void enqueueing(int p, IConstr reason) {
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L82">            sl.enqueueing(p, reason);</span>
+<span class="nc" id="L83">        }</span>
+<span class="nc" id="L84">    }</span>
+
+    public void backtracking(int p) {
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L88">            sl.backtracking(p);</span>
+<span class="nc" id="L89">        }</span>
+<span class="nc" id="L90">    }</span>
+
+    public void adding(int p) {
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L94">            sl.adding(p);</span>
+<span class="nc" id="L95">        }</span>
+
+<span class="nc" id="L97">    }</span>
+
+    public void learn(IConstr c) {
+<span class="nc bnc" id="L100" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L101">            sl.learn(c);</span>
+<span class="nc" id="L102">        }</span>
+
+<span class="nc" id="L104">    }</span>
+
+    public void learnUnit(int p) {
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L108">            sl.learnUnit(p);</span>
+<span class="nc" id="L109">        }</span>
+<span class="nc" id="L110">    }</span>
+
+    public void delete(IConstr c) {
+<span class="nc bnc" id="L113" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L114">            sl.delete(c);</span>
+<span class="nc" id="L115">        }</span>
+
+<span class="nc" id="L117">    }</span>
+
+    public void conflictFound(IConstr confl, int dlevel, int trailLevel) {
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L121">            sl.conflictFound(confl, dlevel, trailLevel);</span>
+<span class="nc" id="L122">        }</span>
+
+<span class="nc" id="L124">    }</span>
+
+    public void conflictFound(int p) {
+<span class="nc bnc" id="L127" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L128">            sl.conflictFound(p);</span>
+<span class="nc" id="L129">        }</span>
+
+<span class="nc" id="L131">    }</span>
+
+    public void solutionFound(int[] model, RandomAccessModel lazyModel) {
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L135">            sl.solutionFound(model, lazyModel);</span>
+<span class="nc" id="L136">        }</span>
+
+<span class="nc" id="L138">    }</span>
+
+    public void beginLoop() {
+<span class="nc bnc" id="L141" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L142">            sl.beginLoop();</span>
+<span class="nc" id="L143">        }</span>
+<span class="nc" id="L144">    }</span>
+
+    public void start() {
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L148">            sl.start();</span>
+<span class="nc" id="L149">        }</span>
+
+<span class="nc" id="L151">    }</span>
+
+    public void end(Lbool result) {
+<span class="nc bnc" id="L154" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L155">            sl.end(result);</span>
+<span class="nc" id="L156">        }</span>
+<span class="nc" id="L157">    }</span>
+
+    public void restarting() {
+<span class="nc bnc" id="L160" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L161">            sl.restarting();</span>
+<span class="nc" id="L162">        }</span>
+
+<span class="nc" id="L164">    }</span>
+
+    public void backjump(int backjumpLevel) {
+<span class="nc bnc" id="L167" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L168">            sl.backjump(backjumpLevel);</span>
+<span class="nc" id="L169">        }</span>
+
+<span class="nc" id="L171">    }</span>
+
+    public void init(T solverService) {
+<span class="nc bnc" id="L174" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L175">            sl.init(solverService);</span>
+<span class="nc" id="L176">        }</span>
+<span class="nc" id="L177">    }</span>
+
+    public void cleaning() {
+<span class="nc bnc" id="L180" title="All 2 branches missed.">        for (SearchListener&lt;T&gt; sl : this.listeners) {</span>
+<span class="nc" id="L181">            sl.cleaning();</span>
+<span class="nc" id="L182">        }</span>
+<span class="nc" id="L183">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

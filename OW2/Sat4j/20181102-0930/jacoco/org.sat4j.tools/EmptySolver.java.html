@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EmptySolver.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SAT4J core</a> &gt; <a href="index.source.html" class="el_package">org.sat4j.tools</a> &gt; <span class="el_source">EmptySolver.java</span></div><h1>EmptySolver.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * SAT4J: a SATisfiability library for Java Copyright (C) 2004, 2012 Artois University and CNRS
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU Lesser General Public License Version 2.1 or later (the
+ * &quot;LGPL&quot;), in which case the provisions of the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of the LGPL, and not to allow others to use your version of
+ * this file under the terms of the EPL, indicate your decision by deleting
+ * the provisions above and replace them with the notice and other provisions
+ * required by the LGPL. If you do not delete the provisions above, a recipient
+ * may use your version of this file under the terms of the EPL or the LGPL.
+ *
+ * Based on the original MiniSat specification from:
+ *
+ * An extensible SAT solver. Niklas Een and Niklas Sorensson. Proceedings of the
+ * Sixth International Conference on Theory and Applications of Satisfiability
+ * Testing, LNCS 2919, pp 502-518, 2003.
+ *
+ * See www.minisat.se for the original solver in C++.
+ *
+ * Contributors:
+ *   CRIL - initial API and implementation
+ *******************************************************************************/
+package org.sat4j.tools;
+
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.util.Map;
+
+import org.sat4j.specs.Constr;
+import org.sat4j.specs.ContradictionException;
+import org.sat4j.specs.IConstr;
+import org.sat4j.specs.ISolver;
+import org.sat4j.specs.ISolverService;
+import org.sat4j.specs.IVec;
+import org.sat4j.specs.IVecInt;
+import org.sat4j.specs.SearchListener;
+import org.sat4j.specs.TimeoutException;
+import org.sat4j.specs.UnitClauseProvider;
+import org.sat4j.specs.VarMapper;
+
+/**
+ * Empty solver meant to be specialized to be used instead of real solvers
+ * inside e.g. parsers.
+ * 
+ * 
+ * @author leberre
+ * @since 2.3.6
+ */
+<span class="nc" id="L56">public abstract class EmptySolver implements ISolver {</span>
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+<span class="nc" id="L63">    private final IConstr FAKECONSTR = new IConstr() {</span>
+
+        public String toString(VarMapper mapper) {
+<span class="nc" id="L66">            throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+        }
+
+        public int size() {
+<span class="nc" id="L70">            throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+        }
+
+        public boolean learnt() {
+<span class="nc" id="L74">            throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+        }
+
+        public double getActivity() {
+<span class="nc" id="L78">            throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+        }
+
+        public int get(int i) {
+<span class="nc" id="L82">            throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+        }
+
+        public boolean canBePropagatedMultipleTimes() {
+<span class="nc" id="L86">            throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+        }
+    };
+
+    private int nbVars;
+
+    private int nbClauses;
+
+    public int[] model() {
+<span class="nc" id="L95">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public int[] primeImplicant() {
+<span class="nc" id="L99">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public boolean primeImplicant(int p) {
+<span class="nc" id="L103">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public boolean isSatisfiable() throws TimeoutException {
+<span class="nc" id="L107">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public boolean isSatisfiable(IVecInt assumps, boolean globalTimeout)
+            throws TimeoutException {
+<span class="nc" id="L112">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public boolean isSatisfiable(boolean globalTimeout) throws TimeoutException {
+<span class="nc" id="L116">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public boolean isSatisfiable(IVecInt assumps) throws TimeoutException {
+<span class="nc" id="L120">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public int[] findModel() throws TimeoutException {
+<span class="nc" id="L124">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public int[] findModel(IVecInt assumps) throws TimeoutException {
+<span class="nc" id="L128">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public int nConstraints() {
+<span class="nc" id="L132">        return nbClauses;</span>
+    }
+
+    public int newVar(int howmany) {
+<span class="nc" id="L136">        this.nbVars = howmany;</span>
+<span class="nc" id="L137">        return howmany;</span>
+    }
+
+    public int nVars() {
+<span class="nc" id="L141">        return nbVars;</span>
+    }
+
+    public void printInfos(PrintWriter out, String prefix) {
+<span class="nc" id="L145">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public void printInfos(PrintWriter out) {
+<span class="nc" id="L149">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public boolean model(int var) {
+<span class="nc" id="L153">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public int newVar() {
+<span class="nc" id="L157">        nbVars++;</span>
+<span class="nc" id="L158">        return nbVars;</span>
+    }
+
+    public int nextFreeVarId(boolean reserve) {
+<span class="nc" id="L162">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public void registerLiteral(int p) {
+<span class="nc" id="L166">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public void setExpectedNumberOfClauses(int nb) {
+<span class="nc" id="L170">        this.nbClauses = nb;</span>
+<span class="nc" id="L171">    }</span>
+
+    public IConstr addClause(IVecInt literals) throws ContradictionException {
+<span class="nc" id="L174">        return FAKECONSTR;</span>
+    }
+
+    public IConstr addBlockingClause(IVecInt literals)
+            throws ContradictionException {
+<span class="nc" id="L179">        return FAKECONSTR;</span>
+    }
+
+    public IConstr discardCurrentModel() throws ContradictionException {
+<span class="nc" id="L183">        return FAKECONSTR;</span>
+    }
+
+    public IVecInt createBlockingClauseForCurrentModel() {
+        // TODO: implement this method !
+<span class="nc" id="L188">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public boolean removeConstr(IConstr c) {
+<span class="nc" id="L192">        return false;</span>
+    }
+
+    public boolean removeSubsumedConstr(IConstr c) {
+<span class="nc" id="L196">        return false;</span>
+    }
+
+    public void addAllClauses(IVec&lt;IVecInt&gt; clauses)
+            throws ContradictionException {
+        // TODO: implement this method !
+<span class="nc" id="L202">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public IConstr addAtMost(IVecInt literals, int degree)
+            throws ContradictionException {
+<span class="nc" id="L207">        return FAKECONSTR;</span>
+    }
+
+    public IConstr addAtLeast(IVecInt literals, int degree)
+            throws ContradictionException {
+<span class="nc" id="L212">        return FAKECONSTR;</span>
+    }
+
+    public IConstr addExactly(IVecInt literals, int n)
+            throws ContradictionException {
+<span class="nc" id="L217">        return FAKECONSTR;</span>
+    }
+
+    public IConstr addConstr(Constr constr) {
+<span class="nc" id="L221">        return FAKECONSTR;</span>
+    }
+
+    public void setTimeout(int t) {
+
+<span class="nc" id="L226">    }</span>
+
+    public void setTimeoutOnConflicts(int count) {
+
+<span class="nc" id="L230">    }</span>
+
+    public void setTimeoutMs(long t) {
+
+<span class="nc" id="L234">    }</span>
+
+    public int getTimeout() {
+        // TODO: implement this method !
+<span class="nc" id="L238">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public long getTimeoutMs() {
+        // TODO: implement this method !
+<span class="nc" id="L243">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public void expireTimeout() {
+        // TODO: implement this method !
+<span class="nc" id="L248">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public void reset() {
+
+<span class="nc" id="L253">    }</span>
+
+    public void printStat(PrintStream out, String prefix) {
+        // TODO: implement this method !
+<span class="nc" id="L257">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public void printStat(PrintWriter out, String prefix) {
+        // TODO: implement this method !
+<span class="nc" id="L262">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public void printStat(PrintWriter out) {
+        // TODO: implement this method !
+<span class="nc" id="L267">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public Map&lt;String, Number&gt; getStat() {
+        // TODO: implement this method !
+<span class="nc" id="L272">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public String toString(String prefix) {
+<span class="nc" id="L276">        return &quot;Empty Solver&quot;;</span>
+    }
+
+    public void clearLearntClauses() {
+
+<span class="nc" id="L281">    }</span>
+
+    public void setDBSimplificationAllowed(boolean status) {
+
+<span class="nc" id="L285">    }</span>
+
+    public boolean isDBSimplificationAllowed() {
+<span class="nc" id="L288">        return false;</span>
+    }
+
+    public &lt;S extends ISolverService&gt; void setSearchListener(
+            SearchListener&lt;S&gt; sl) {
+<span class="nc" id="L293">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public void setUnitClauseProvider(UnitClauseProvider ucp) {
+<span class="nc" id="L297">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public &lt;S extends ISolverService&gt; SearchListener&lt;S&gt; getSearchListener() {
+<span class="nc" id="L301">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public boolean isVerbose() {
+<span class="nc" id="L305">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public void setVerbose(boolean value) {
+
+<span class="nc" id="L310">    }</span>
+
+    public void setLogPrefix(String prefix) {
+<span class="nc" id="L313">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public String getLogPrefix() {
+<span class="nc" id="L317">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public IVecInt unsatExplanation() {
+<span class="nc" id="L321">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public int[] modelWithInternalVariables() {
+<span class="nc" id="L325">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public int realNumberOfVariables() {
+<span class="nc" id="L329">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public boolean isSolverKeptHot() {
+<span class="nc" id="L333">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public void setKeepSolverHot(boolean keepHot) {
+<span class="nc" id="L337">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public ISolver getSolvingEngine() {
+<span class="nc" id="L341">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

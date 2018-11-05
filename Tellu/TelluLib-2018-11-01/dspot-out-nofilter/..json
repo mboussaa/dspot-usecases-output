@@ -1,0 +1,65 @@
+{
+  "classTimes": [
+    {
+      "fullQualifiedName": "no.tellu.lib.data.BooleanOpTest",
+      "timeInMs": 5817
+    },
+    {
+      "fullQualifiedName": "no.tellu.lib.data.DataHandleTest",
+      "timeInMs": 9623
+    },
+    {
+      "fullQualifiedName": "no.tellu.lib.data.DataNodeTest",
+      "timeInMs": 8391
+    },
+    {
+      "fullQualifiedName": "no.tellu.lib.data.DataPathTest",
+      "timeInMs": 7082
+    },
+    {
+      "fullQualifiedName": "no.tellu.lib.data.MergeHandleTest",
+      "timeInMs": 5561
+    },
+    {
+      "fullQualifiedName": "no.tellu.lib.data.MetaParserTest",
+      "timeInMs": 5095
+    },
+    {
+      "fullQualifiedName": "no.tellu.lib.data.MetaTest",
+      "timeInMs": 8729
+    },
+    {
+      "fullQualifiedName": "no.tellu.lib.data.MultiLevelTest",
+      "timeInMs": 671
+    },
+    {
+      "fullQualifiedName": "no.tellu.lib.data.model.ModelTest",
+      "timeInMs": 740
+    },
+    {
+      "fullQualifiedName": "no.tellu.lib.data.serialize.JsonTest",
+      "timeInMs": 6286
+    },
+    {
+      "fullQualifiedName": "no.tellu.lib.data.serialize.XmlTest",
+      "timeInMs": 5626
+    },
+    {
+      "fullQualifiedName": "no.tellu.lib.data.template.TemplateTest",
+      "timeInMs": 6085
+    },
+    {
+      "fullQualifiedName": "no.tellu.lib.util.DateTimeTest",
+      "timeInMs": 1130
+    },
+    {
+      "fullQualifiedName": "no.tellu.lib.util.DateTimeTestMs",
+      "timeInMs": 5321
+    },
+    {
+      "fullQualifiedName": "no.tellu.lib.util.FailureRateTrackerTest",
+      "timeInMs": 5409
+    }
+  ],
+  "projectName": "."
+}

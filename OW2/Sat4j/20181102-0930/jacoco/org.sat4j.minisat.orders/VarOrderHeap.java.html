@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VarOrderHeap.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SAT4J core</a> &gt; <a href="index.source.html" class="el_package">org.sat4j.minisat.orders</a> &gt; <span class="el_source">VarOrderHeap.java</span></div><h1>VarOrderHeap.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * SAT4J: a SATisfiability library for Java Copyright (C) 2004, 2012 Artois University and CNRS
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU Lesser General Public License Version 2.1 or later (the
+ * &quot;LGPL&quot;), in which case the provisions of the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of the LGPL, and not to allow others to use your version of
+ * this file under the terms of the EPL, indicate your decision by deleting
+ * the provisions above and replace them with the notice and other provisions
+ * required by the LGPL. If you do not delete the provisions above, a recipient
+ * may use your version of this file under the terms of the EPL or the LGPL.
+ *
+ * Based on the original MiniSat specification from:
+ *
+ * An extensible SAT solver. Niklas Een and Niklas Sorensson. Proceedings of the
+ * Sixth International Conference on Theory and Applications of Satisfiability
+ * Testing, LNCS 2919, pp 502-518, 2003.
+ *
+ * See www.minisat.se for the original solver in C++.
+ *
+ * Contributors:
+ *   CRIL - initial API and implementation
+ *******************************************************************************/
+package org.sat4j.minisat.orders;
+
+import static org.sat4j.core.LiteralsUtils.var;
+
+import java.io.PrintWriter;
+import java.io.Serializable;
+
+import org.sat4j.minisat.core.Heap;
+import org.sat4j.minisat.core.ILits;
+import org.sat4j.minisat.core.IOrder;
+import org.sat4j.minisat.core.IPhaseSelectionStrategy;
+
+/*
+ * Created on 16 oct. 2003
+ */
+
+/**
+ * @author leberre Heuristique du prouveur. Changement par rapport au MiniSAT
+ *         original : la gestion activity est faite ici et non plus dans Solver.
+ */
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">public class VarOrderHeap implements IOrder, Serializable {</span>
+
+    private static final long serialVersionUID = 1L;
+
+    private static final double VAR_RESCALE_FACTOR = 1e-100;
+
+    private static final double VAR_RESCALE_BOUND = 1 / VAR_RESCALE_FACTOR;
+
+    /**
+     * mesure heuristique de l'activite d'une variable.
+     */
+<span class="fc" id="L61">    protected double[] activity = new double[1];</span>
+
+<span class="fc" id="L63">    private double varDecay = 1.0;</span>
+
+    /**
+     * increment pour l'activite des variables.
+     */
+<span class="fc" id="L68">    private double varInc = 1.0;</span>
+
+    protected ILits lits;
+
+<span class="fc" id="L72">    private long nullchoice = 0;</span>
+
+    protected Heap heap;
+
+    protected IPhaseSelectionStrategy phaseStrategy;
+
+    public VarOrderHeap() {
+<span class="fc" id="L79">        this(new PhaseInLastLearnedClauseSelectionStrategy());</span>
+<span class="fc" id="L80">    }</span>
+
+<span class="fc" id="L82">    public VarOrderHeap(IPhaseSelectionStrategy strategy) {</span>
+<span class="fc" id="L83">        this.phaseStrategy = strategy;</span>
+<span class="fc" id="L84">    }</span>
+
+    /**
+     * Change the selection strategy.
+     * 
+     * @param strategy
+     */
+    public void setPhaseSelectionStrategy(IPhaseSelectionStrategy strategy) {
+<span class="fc" id="L92">        this.phaseStrategy = strategy;</span>
+<span class="fc" id="L93">    }</span>
+
+    public IPhaseSelectionStrategy getPhaseSelectionStrategy() {
+<span class="fc" id="L96">        return this.phaseStrategy;</span>
+    }
+
+    public void setLits(ILits lits) {
+<span class="fc" id="L100">        this.lits = lits;</span>
+<span class="fc" id="L101">    }</span>
+
+    /**
+     * Selectionne une nouvelle variable, non affectee, ayant l'activite la plus
+     * elevee.
+     * 
+     * @return Lit.UNDEFINED si aucune variable n'est trouvee
+     */
+    public int select() {
+<span class="fc bfc" id="L110" title="All 2 branches covered.">        while (!this.heap.empty()) {</span>
+<span class="fc" id="L111">            int var = this.heap.getmin();</span>
+<span class="fc" id="L112">            int next = this.phaseStrategy.select(var);</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">            if (this.lits.isUnassigned(next)) {</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">                if (this.activity[var] &lt; 0.0001) {</span>
+<span class="fc" id="L115">                    this.nullchoice++;</span>
+                }
+<span class="fc" id="L117">                return next;</span>
+            }
+<span class="fc" id="L119">        }</span>
+<span class="fc" id="L120">        return ILits.UNDEFINED;</span>
+    }
+
+    /**
+     * Change la valeur de varDecay.
+     * 
+     * @param d
+     *            la nouvelle valeur de varDecay
+     */
+    public void setVarDecay(double d) {
+<span class="fc" id="L130">        this.varDecay = d;</span>
+<span class="fc" id="L131">    }</span>
+
+    /**
+     * Methode appelee quand la variable x est desaffectee.
+     * 
+     * @param x
+     */
+    public void undo(int x) {
+<span class="fc bfc" id="L139" title="All 2 branches covered.">        if (!this.heap.inHeap(x)) {</span>
+<span class="fc" id="L140">            this.heap.insert(x);</span>
+        }
+<span class="fc" id="L142">    }</span>
+
+    /**
+     * Appelee lorsque l'activite de la variable x a change.
+     * 
+     * @param p
+     *            a literal
+     */
+    public void updateVar(int p) {
+<span class="fc" id="L151">        int var = var(p);</span>
+<span class="fc" id="L152">        updateActivity(var);</span>
+<span class="fc" id="L153">        this.phaseStrategy.updateVar(p);</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">        if (this.heap.inHeap(var)) {</span>
+<span class="fc" id="L155">            this.heap.increase(var);</span>
+        }
+<span class="fc" id="L157">    }</span>
+
+    protected void updateActivity(final int var) {
+<span class="fc bfc" id="L160" title="All 2 branches covered.">        if ((this.activity[var] += this.varInc) &gt; VAR_RESCALE_BOUND) {</span>
+<span class="fc" id="L161">            varRescaleActivity();</span>
+        }
+<span class="fc" id="L163">    }</span>
+
+    /**
+     * 
+     */
+    public void varDecayActivity() {
+<span class="fc" id="L169">        this.varInc *= this.varDecay;</span>
+<span class="fc" id="L170">    }</span>
+
+    /**
+     * 
+     */
+    private void varRescaleActivity() {
+<span class="fc bfc" id="L176" title="All 2 branches covered.">        for (int i = 1; i &lt; this.activity.length; i++) {</span>
+<span class="fc" id="L177">            this.activity[i] *= VAR_RESCALE_FACTOR;</span>
+        }
+<span class="fc" id="L179">        this.varInc *= VAR_RESCALE_FACTOR;</span>
+<span class="fc" id="L180">    }</span>
+
+    public double varActivity(int p) {
+<span class="nc" id="L183">        return this.activity[var(p)];</span>
+    }
+
+    /**
+     * 
+     */
+    public int numberOfInterestingVariables() {
+<span class="nc" id="L190">        int cpt = 0;</span>
+<span class="nc bnc" id="L191" title="All 2 branches missed.">        for (int i = 1; i &lt; this.activity.length; i++) {</span>
+<span class="nc bnc" id="L192" title="All 2 branches missed.">            if (this.activity[i] &gt; 1.0) {</span>
+<span class="nc" id="L193">                cpt++;</span>
+            }
+        }
+<span class="nc" id="L196">        return cpt;</span>
+    }
+
+    protected Heap createHeap(double[] activity) {
+<span class="fc" id="L200">        return new Heap(new ActivityBasedVariableComparator(activity));</span>
+    }
+
+    /**
+     * that method has the responsibility to initialize all arrays in the
+     * heuristics. PLEASE CALL super.init() IF YOU OVERRIDE THAT METHOD.
+     */
+    public void init() {
+<span class="fc" id="L208">        int nlength = this.lits.nVars() + 1;</span>
+<span class="pc bpc" id="L209" title="1 of 4 branches missed.">        if (this.activity == null || this.activity.length &lt; nlength) {</span>
+<span class="fc" id="L210">            this.activity = new double[nlength];</span>
+        }
+<span class="fc" id="L212">        this.phaseStrategy.init(nlength);</span>
+<span class="fc" id="L213">        this.activity[0] = -1;</span>
+<span class="fc" id="L214">        this.heap = createHeap(this.activity);</span>
+<span class="fc" id="L215">        this.heap.setBounds(nlength);</span>
+<span class="fc bfc" id="L216" title="All 2 branches covered.">        for (int i = 1; i &lt; nlength; i++) {</span>
+<span class="pc bpc" id="L217" title="2 of 4 branches missed.">            assert i &gt; 0;</span>
+<span class="pc bpc" id="L218" title="2 of 4 branches missed.">            assert i &lt;= this.lits.nVars() : &quot;&quot; + this.lits.nVars() + &quot;/&quot; + i; //$NON-NLS-1$ //$NON-NLS-2$</span>
+<span class="fc" id="L219">            this.activity[i] = 0.0;</span>
+<span class="fc bfc" id="L220" title="All 2 branches covered.">            if (this.lits.belongsToPool(i)) {</span>
+<span class="fc" id="L221">                this.heap.insert(i);</span>
+            }
+        }
+<span class="fc" id="L224">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L228">        return &quot;VSIDS like heuristics from MiniSAT using a heap &quot; //$NON-NLS-1$</span>
+                + this.phaseStrategy;
+    }
+
+    public ILits getVocabulary() {
+<span class="nc" id="L233">        return this.lits;</span>
+    }
+
+    public void printStat(PrintWriter out, String prefix) {
+<span class="fc" id="L237">        out.println(prefix + &quot;non guided choices\t: &quot; + this.nullchoice); //$NON-NLS-1$</span>
+<span class="fc" id="L238">    }</span>
+
+    public void assignLiteral(int p) {
+<span class="fc" id="L241">        this.phaseStrategy.assignLiteral(p);</span>
+<span class="fc" id="L242">    }</span>
+
+    public void updateVarAtDecisionLevel(int q) {
+<span class="fc" id="L245">        this.phaseStrategy.updateVarAtDecisionLevel(q);</span>
+
+<span class="fc" id="L247">    }</span>
+
+    public double[] getVariableHeuristics() {
+<span class="nc" id="L250">        return this.activity;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

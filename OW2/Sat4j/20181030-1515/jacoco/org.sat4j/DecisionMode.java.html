@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DecisionMode.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SAT4J core</a> &gt; <a href="index.source.html" class="el_package">org.sat4j</a> &gt; <span class="el_source">DecisionMode.java</span></div><h1>DecisionMode.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * SAT4J: a SATisfiability library for Java Copyright (C) 2004, 2012 Artois University and CNRS
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU Lesser General Public License Version 2.1 or later (the
+ * &quot;LGPL&quot;), in which case the provisions of the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of the LGPL, and not to allow others to use your version of
+ * this file under the terms of the EPL, indicate your decision by deleting
+ * the provisions above and replace them with the notice and other provisions
+ * required by the LGPL. If you do not delete the provisions above, a recipient
+ * may use your version of this file under the terms of the EPL or the LGPL.
+ *
+ * Based on the original MiniSat specification from:
+ *
+ * An extensible SAT solver. Niklas Een and Niklas Sorensson. Proceedings of the
+ * Sixth International Conference on Theory and Applications of Satisfiability
+ * Testing, LNCS 2919, pp 502-518, 2003.
+ *
+ * See www.minisat.se for the original solver in C++.
+ *
+ * Contributors:
+ *   CRIL - initial API and implementation
+ *******************************************************************************/
+package org.sat4j;
+
+import java.io.PrintWriter;
+
+import org.sat4j.core.VecInt;
+import org.sat4j.reader.Reader;
+import org.sat4j.specs.ILogAble;
+import org.sat4j.specs.IProblem;
+import org.sat4j.specs.ISolver;
+import org.sat4j.specs.IVecInt;
+import org.sat4j.specs.TimeoutException;
+import org.sat4j.tools.Backbone;
+
+/**
+ * Behavior of the solver when one single solution is needed.
+ * 
+ * @author leberre
+ * 
+ */
+<span class="nc" id="L49">final class DecisionMode implements ILauncherMode {</span>
+<span class="nc" id="L50">    private volatile ExitCode exitCode = ExitCode.UNKNOWN;</span>
+    private int nbSolutionFound;
+    private PrintWriter out;
+    private long beginTime;
+
+    public void displayResult(ISolver solver, IProblem problem, ILogAble logger,
+            PrintWriter out, Reader reader, long beginTime,
+            boolean displaySolutionLine) {
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        if (solver != null) {</span>
+<span class="nc" id="L59">            out.flush();</span>
+<span class="nc" id="L60">            double wallclocktime = (System.currentTimeMillis() - beginTime)</span>
+                    / 1000.0;
+<span class="nc" id="L62">            solver.printStat(out);</span>
+<span class="nc" id="L63">            out.println(ANSWER_PREFIX + exitCode);</span>
+<span class="nc bnc" id="L64" title="All 4 branches missed.">            if (exitCode != ExitCode.UNKNOWN</span>
+                    &amp;&amp; exitCode != ExitCode.UNSATISFIABLE) {
+<span class="nc" id="L66">                int[] model = problem.model();</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">                if (System.getProperty(&quot;prime&quot;) != null) {</span>
+<span class="nc" id="L68">                    int initiallength = model.length;</span>
+<span class="nc" id="L69">                    logger.log(&quot;returning a prime implicant ...&quot;);</span>
+<span class="nc" id="L70">                    long beginpi = System.currentTimeMillis();</span>
+<span class="nc" id="L71">                    model = solver.primeImplicant();</span>
+<span class="nc" id="L72">                    long endpi = System.currentTimeMillis();</span>
+<span class="nc" id="L73">                    logger.log(&quot;removed &quot; + (initiallength - model.length)</span>
+                            + &quot; literals&quot;);
+<span class="nc" id="L75">                    logger.log(&quot;pi computation time: &quot; + (endpi - beginpi)</span>
+                            + &quot; ms&quot;);
+                }
+<span class="nc bnc" id="L78" title="All 2 branches missed.">                if (System.getProperty(&quot;backbone&quot;) != null) {</span>
+<span class="nc" id="L79">                    logger.log(&quot;computing the backbone of the formula ...&quot;);</span>
+<span class="nc" id="L80">                    long beginpi = System.currentTimeMillis();</span>
+<span class="nc" id="L81">                    model = solver.primeImplicant();</span>
+                    try {
+<span class="nc" id="L83">                        IVecInt backbone = Backbone.instance().compute(solver,</span>
+                                model);
+<span class="nc" id="L85">                        long endpi = System.currentTimeMillis();</span>
+<span class="nc" id="L86">                        out.print(solver.getLogPrefix());</span>
+<span class="nc" id="L87">                        reader.decode(backbone.toArray(), out);</span>
+<span class="nc" id="L88">                        out.println();</span>
+<span class="nc" id="L89">                        logger.log(&quot;backbone computation time: &quot;</span>
+                                + (endpi - beginpi) + &quot; ms&quot;);
+<span class="nc" id="L91">                    } catch (TimeoutException e) {</span>
+<span class="nc" id="L92">                        logger.log(&quot;timeout, cannot compute the backbone.&quot;);</span>
+<span class="nc" id="L93">                    }</span>
+
+                }
+<span class="nc bnc" id="L96" title="All 2 branches missed.">                if (nbSolutionFound &gt;= 1) {</span>
+<span class="nc" id="L97">                    logger.log(&quot;Found &quot; + nbSolutionFound + &quot; solution(s)&quot;);</span>
+                } else {
+<span class="nc" id="L99">                    out.print(SOLUTION_PREFIX);</span>
+<span class="nc" id="L100">                    reader.decode(model, out);</span>
+<span class="nc" id="L101">                    out.println();</span>
+                }
+            }
+<span class="nc" id="L104">            logger.log(&quot;Total wall clock time (in seconds) : &quot; + wallclocktime); //$NON-NLS-1$</span>
+        }
+<span class="nc" id="L106">    }</span>
+
+    public void solve(IProblem problem, Reader reader, ILogAble logger,
+            PrintWriter out, long beginTime) {
+<span class="nc" id="L110">        this.exitCode = ExitCode.UNKNOWN;</span>
+<span class="nc" id="L111">        this.out = out;</span>
+<span class="nc" id="L112">        this.nbSolutionFound = 0;</span>
+<span class="nc" id="L113">        this.beginTime = beginTime;</span>
+        try {
+<span class="nc bnc" id="L115" title="All 2 branches missed.">            if (problem.isSatisfiable()) {</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">                if (this.exitCode == ExitCode.UNKNOWN) {</span>
+<span class="nc" id="L117">                    this.exitCode = ExitCode.SATISFIABLE;</span>
+                }
+            } else {
+<span class="nc bnc" id="L120" title="All 2 branches missed.">                if (this.exitCode == ExitCode.UNKNOWN) {</span>
+<span class="nc" id="L121">                    this.exitCode = ExitCode.UNSATISFIABLE;</span>
+                }
+            }
+<span class="nc" id="L124">        } catch (TimeoutException e) {</span>
+<span class="nc" id="L125">            logger.log(&quot;timeout&quot;);</span>
+<span class="nc" id="L126">        }</span>
+
+<span class="nc" id="L128">    }</span>
+
+    public void setIncomplete(boolean isIncomplete) {
+<span class="nc" id="L131">    }</span>
+
+    public ExitCode getCurrentExitCode() {
+<span class="nc" id="L134">        return this.exitCode;</span>
+    }
+
+    public void onSolutionFound(int[] solution) {
+<span class="nc" id="L138">        this.nbSolutionFound++;</span>
+<span class="nc" id="L139">        this.exitCode = ExitCode.SATISFIABLE;</span>
+<span class="nc" id="L140">        this.out.printf(&quot;c Found solution #%d  (%.2f)s%n&quot;, nbSolutionFound,</span>
+<span class="nc" id="L141">                (System.currentTimeMillis() - beginTime) / 1000.0);</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        if (System.getProperty(&quot;printallmodels&quot;) != null) {</span>
+<span class="nc" id="L143">            this.out.println(SOLUTION_PREFIX + new VecInt(solution));</span>
+        }
+<span class="nc" id="L145">    }</span>
+
+    public void onSolutionFound(IVecInt solution) {
+<span class="nc" id="L148">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public void onUnsatTermination() {
+<span class="nc bnc" id="L152" title="All 2 branches missed.">        if (this.exitCode == ExitCode.SATISFIABLE) {</span>
+<span class="nc" id="L153">            this.exitCode = ExitCode.OPTIMUM_FOUND;</span>
+        }
+<span class="nc" id="L155">    }</span>
+
+    public void setExitCode(ExitCode exitCode) {
+<span class="nc" id="L158">        this.exitCode = exitCode;</span>
+<span class="nc" id="L159">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

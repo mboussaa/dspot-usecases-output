@@ -1,0 +1,9 @@
+{
+  "classTimes": [
+    {
+      "fullQualifiedName": "org.sat4j.minisat.core.TestMaxSatDecorator",
+      "timeInMs": 7341
+    }
+  ],
+  "projectName": "org.sat4j.core"
+}
