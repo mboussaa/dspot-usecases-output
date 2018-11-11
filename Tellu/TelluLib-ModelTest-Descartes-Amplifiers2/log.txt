@@ -1,0 +1,807 @@
+[INFO] 2018-11-11 14:08:01 EntryPoint - Path to runner Classes: E:\Dev\tellu_github\tellulib\dspot.jar
+[INFO] 2018-11-11 14:08:01 EntryPoint - E:\Dev\tellu_github\tellulib\dspot.jar
+[INFO] 2018-11-11 14:08:01 EntryPoint - E:\Dev\tellu_github\tellulib\dspot.jar
+[INFO] 2018-11-11 14:08:01 EntryPoint - E:\Dev\tellu_github\tellulib\dspot.jar
+[WARN] 2018-11-11 14:08:01 InputConfiguration - No builder has been specified.
+[WARN] 2018-11-11 14:08:01 InputConfiguration - Using Maven as a default builder.
+[WARN] 2018-11-11 14:08:01 InputConfiguration - You can use the command-line option --automatic-builder
+[WARN] 2018-11-11 14:08:01 InputConfiguration - or the properties automaticBuilderName to configure it.
+[INFO] 2018-11-11 14:08:01 AutomaticBuilderFactory - Selected Maven automatic builder.
+[INFO] 2018-11-11 14:08:01 MavenAutomaticBuilder - Using E:\Dev\tellu_github\tellulib\.\.\pom.xml to run maven.
+[INFO] 2018-11-11 14:08:01 MavenAutomaticBuilder - Using C:\Dev\maven for maven home
+[INFO] 2018-11-11 14:08:01 MavenAutomaticBuilder - run maven: C:\Dev\maven/bin/mvn clean test -DskipTests dependency:build-classpath -Dmdep.outputFile=target/dspot/classpath
+[WARN] Maven will be executed in interactive mode, but no input stream has been configured for this MavenInvoker instance.
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Tellu Utilities Library 3.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ tellulib ---
+[INFO] Deleting E:\Dev\tellu_github\tellulib\target
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ tellulib ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\Dev\tellu_github\tellulib\src\main\resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ tellulib ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 70 source files to E:\Dev\tellu_github\tellulib\target\classes
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ tellulib ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 4 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ tellulib ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 15 source files to E:\Dev\tellu_github\tellulib\target\test-classes
+[INFO]
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ tellulib ---
+[INFO] Tests are skipped.
+[INFO]
+[INFO] --- maven-dependency-plugin:2.8:build-classpath (default-cli) @ tellulib ---
+[INFO] Wrote classpath file 'E:\Dev\tellu_github\tellulib\target\dspot\classpath'.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 4.799 s
+[INFO] Finished at: 2018-11-11T14:08:07+01:00
+[INFO] Final Memory: 22M/195M
+[INFO] ------------------------------------------------------------------------
+[INFO] 2018-11-11 14:08:10 MavenAutomaticBuilder - Using E:\Dev\tellu_github\tellulib\.\.\.dspot_pom.xml to run maven.
+[INFO] 2018-11-11 14:08:10 MavenAutomaticBuilder - Using C:\Dev\maven for maven home
+[INFO] 2018-11-11 14:08:10 MavenAutomaticBuilder - run maven: C:\Dev\maven/bin/mvn org.pitest:pitest-maven:mutationCoverage
+[WARN] Maven will be executed in interactive mode, but no input stream has been configured for this MavenInvoker instance.
+[INFO] 2018-11-11 14:08:59 PitMutantScoreSelector - The original test suite kill 376 / 789
+[INFO] 2018-11-11 14:09:00 Amplification - Amplification of no.tellu.lib.data.model.ModelTest (12 test(s))
+[INFO] 2018-11-11 14:09:00 Amplification - Assertion amplification of no.tellu.lib.data.model.ModelTest (12 test(s))
+[INFO] 2018-11-11 14:09:01 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[WARN] 2018-11-11 14:09:14 EntryPoint - Timeout when running java  -classpath E:\Dev\tellu_github\tellulib\.\.\target\test-classes;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/;E:\Dev\tellu_github\tellulib\dspot.jar eu.stamp_project.testrunner.runner.test.TestRunner no.tellu.lib.data.model.ModelTest testCopyModel;testDataTransaction;testInitFromFile;testInitFromMeta;testInitFromModel;testMergeNodes;testPath;testProcessor;testReset;testRuleCondition;testRuleTrigger;testSubscribers
+[WARN] 2018-11-11 14:09:14 TestRunner - Timeout during execution of no.tellu.lib.data.model.ModelTest: testCopyModel,testDataTransaction,testInitFromFile,testInitFromMeta,testInitFromModel,testMergeNodes,testPath,testProcessor,testReset,testRuleCondition,testRuleTrigger,testSubscribers
+[INFO] 2018-11-11 14:09:14 Amplification - 0 amplified test methods has been selected to be kept. (global: 0)
+[INFO] 2018-11-11 14:09:14 Amplification - Applying Input-amplification and Assertion-amplification test by test.
+[INFO] 2018-11-11 14:09:14 Amplification - Amplification of testCopyModel, (1/12)
+[INFO] 2018-11-11 14:09:14 Amplification - iteration 0 / 3
+[INFO] 2018-11-11 14:09:14 Amplification - 1 tests selected to be amplified over 1 available tests
+[INFO] 2018-11-11 14:09:14 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]/
+[INFO] 2018-11-11 14:09:14 NoBudgetizer - 36 new tests generated
+[INFO] 2018-11-11 14:09:20 AssertGenerator - Run tests. (36)
+[INFO] 2018-11-11 14:09:20 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Error(s) during compilation:
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_0
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_0
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_1
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_4
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_7
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_7
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_8
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_11
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_14
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_14
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_15
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_18
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_21
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_21
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_22
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_25
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_28
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_28
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_29
+[ERROR] 2018-11-11 14:09:20 TestCompiler - Pb(55) Duplicate local variable boolean_32
+[ERROR] 2018-11-11 14:09:20 JDTTreeBuilder - Could not find declaration for variable $missing$ at (E:/Dev/tellu_github/tellulib/target/dspot/tmp_test_sources/no/tellu/lib/data/model/ModelTest.java:1359)
+[INFO] 2018-11-11 14:09:21 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[WARN] 2018-11-11 14:09:21 AssertGenerator - Error when executing tests before Assertion Amplification:
+eu.stamp_project.dspot.AmplificationException: Every test methods are uncompilable
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndDiscardUncompilableMethods(TestCompiler.java:123)
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndRun(TestCompiler.java:92)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.innerAssertionAmplification(AssertGenerator.java:100)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.assertionAmplification(AssertGenerator.java:71)
+        at eu.stamp_project.dspot.Amplification.assertionsAmplification(Amplification.java:176)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:153)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:104)
+        at eu.stamp_project.dspot.DSpot._amplify(DSpot.java:244)
+        at eu.stamp_project.dspot.DSpot.lambda$amplifyTestClassesTestMethods$6(DSpot.java:223)
+        at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+        at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+        at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+        at eu.stamp_project.dspot.DSpot.amplifyTestClassesTestMethods(DSpot.java:224)
+        at eu.stamp_project.Main.run(Main.java:70)
+        at eu.stamp_project.Main.main(Main.java:41)
+[INFO] 2018-11-11 14:09:21 AssertGenerator - Could not generate any test with assertions
+[INFO] 2018-11-11 14:09:21 Amplification - iteration 1 / 3
+[INFO] 2018-11-11 14:09:21 Amplification - 36 tests selected to be amplified over 36 available tests
+[INFO] 2018-11-11 14:09:21 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]|
+ 52% |================================== ]\[INFO] 2018-11-11 14:09:21 NoBudgetizer - 0 new tests generated
+[INFO] 2018-11-11 14:09:21 Amplification - iteration 2 / 3
+[WARN] 2018-11-11 14:09:21 Amplification - No test could be selected to be amplified.
+[INFO] 2018-11-11 14:09:21 Amplification - 0 amplified test methods has been selected to be kept. (global: 0)
+[INFO] 2018-11-11 14:09:21 Amplification - Amplification of testDataTransaction, (2/12)
+[INFO] 2018-11-11 14:09:21 Amplification - iteration 0 / 3
+[INFO] 2018-11-11 14:09:21 Amplification - 1 tests selected to be amplified over 1 available tests
+[INFO] 2018-11-11 14:09:21 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]/
+[INFO] 2018-11-11 14:09:21 NoBudgetizer - 15 new tests generated
+[INFO] 2018-11-11 14:09:21 AssertGenerator - Run tests. (15)
+[INFO] 2018-11-11 14:09:21 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[ERROR] 2018-11-11 14:09:21 TestCompiler - Error(s) during compilation:
+[ERROR] 2018-11-11 14:09:21 TestCompiler - Pb(55) Duplicate local variable boolean_253
+[ERROR] 2018-11-11 14:09:21 TestCompiler - Pb(55) Duplicate local variable boolean_257
+[ERROR] 2018-11-11 14:09:21 TestCompiler - Pb(55) Duplicate local variable boolean_261
+[ERROR] 2018-11-11 14:09:21 TestCompiler - Pb(55) Duplicate local variable boolean_265
+[ERROR] 2018-11-11 14:09:21 TestCompiler - Pb(55) Duplicate local variable boolean_269
+[ERROR] 2018-11-11 14:09:21 TestCompiler - Pb(55) Duplicate local variable boolean_273
+[ERROR] 2018-11-11 14:09:21 TestCompiler - Pb(55) Duplicate local variable boolean_277
+[ERROR] 2018-11-11 14:09:21 TestCompiler - Pb(55) Duplicate local variable boolean_281
+[ERROR] 2018-11-11 14:09:21 TestCompiler - Pb(55) Duplicate local variable boolean_285
+[ERROR] 2018-11-11 14:09:21 TestCompiler - Pb(55) Duplicate local variable boolean_289
+[ERROR] 2018-11-11 14:09:21 TestCompiler - Pb(55) Duplicate local variable boolean_293
+[ERROR] 2018-11-11 14:09:21 TestCompiler - Pb(55) Duplicate local variable boolean_297
+[ERROR] 2018-11-11 14:09:21 TestCompiler - Pb(55) Duplicate local variable boolean_301
+[ERROR] 2018-11-11 14:09:21 TestCompiler - Pb(55) Duplicate local variable boolean_305
+[ERROR] 2018-11-11 14:09:21 TestCompiler - Pb(55) Duplicate local variable boolean_309
+[INFO] 2018-11-11 14:09:21 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[WARN] 2018-11-11 14:09:21 AssertGenerator - Error when executing tests before Assertion Amplification:
+eu.stamp_project.dspot.AmplificationException: Every test methods are uncompilable
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndDiscardUncompilableMethods(TestCompiler.java:123)
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndRun(TestCompiler.java:92)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.innerAssertionAmplification(AssertGenerator.java:100)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.assertionAmplification(AssertGenerator.java:71)
+        at eu.stamp_project.dspot.Amplification.assertionsAmplification(Amplification.java:176)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:153)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:104)
+        at eu.stamp_project.dspot.DSpot._amplify(DSpot.java:244)
+        at eu.stamp_project.dspot.DSpot.lambda$amplifyTestClassesTestMethods$6(DSpot.java:223)
+        at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+        at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+        at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+        at eu.stamp_project.dspot.DSpot.amplifyTestClassesTestMethods(DSpot.java:224)
+        at eu.stamp_project.Main.run(Main.java:70)
+        at eu.stamp_project.Main.main(Main.java:41)
+[INFO] 2018-11-11 14:09:21 AssertGenerator - Could not generate any test with assertions
+[INFO] 2018-11-11 14:09:21 Amplification - iteration 1 / 3
+[INFO] 2018-11-11 14:09:21 Amplification - 15 tests selected to be amplified over 15 available tests
+[INFO] 2018-11-11 14:09:21 NoBudgetizer - Amplification of inputs...
+ 26% |================================================== ]|
+[INFO] 2018-11-11 14:09:21 NoBudgetizer - 0 new tests generated
+[INFO] 2018-11-11 14:09:21 Amplification - iteration 2 / 3
+[WARN] 2018-11-11 14:09:21 Amplification - No test could be selected to be amplified.
+[INFO] 2018-11-11 14:09:21 Amplification - 0 amplified test methods has been selected to be kept. (global: 0)
+[INFO] 2018-11-11 14:09:21 Amplification - Amplification of testInitFromFile, (3/12)
+[INFO] 2018-11-11 14:09:21 Amplification - iteration 0 / 3
+[INFO] 2018-11-11 14:09:21 Amplification - 1 tests selected to be amplified over 1 available tests
+[INFO] 2018-11-11 14:09:21 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]/
+[INFO] 2018-11-11 14:09:21 NoBudgetizer - 16 new tests generated
+[INFO] 2018-11-11 14:09:21 AssertGenerator - Run tests. (16)
+[INFO] 2018-11-11 14:09:22 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+Loading E:\Dev\tellu_github\tellulib\target\dspot\TestListener.ser
+[INFO] 2018-11-11 14:09:22 AssertGenerator - 16 test pass, generating assertion...
+[INFO] 2018-11-11 14:09:22 MethodsAssertGenerator - Add observations points in passing tests.
+[INFO] 2018-11-11 14:09:22 MethodsAssertGenerator - Instrumentation...
+100% |================================================== ]|
+[INFO] 2018-11-11 14:09:22 MethodsAssertGenerator - Run instrumented tests. (48)
+[INFO] 2018-11-11 14:09:23 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[WARN] 2018-11-11 14:10:12 EntryPoint - Timeout when running java  -classpath E:\Dev\tellu_github\tellulib\.\.\target\test-classes;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/;E:\Dev\tellu_github\tellulib\dspot.jar eu.stamp_project.testrunner.runner.test.TestRunner no.tellu.lib.data.model.ModelTest testInitFromFile_add103_withlog0;testInitFromFile_add104_withlog0;testInitFromFile_add105_withlog0;testInitFromFile_add106_withlog0;testInitFromFile_add107_withlog0;testInitFromFile_add108_withlog0;testInitFromFile_add109_withlog0;testInitFromFile_add110_withlog0;testInitFromFile_add111_withlog0;testInitFromFile_add112_withlog0;testInitFromFile_add113_withlog0;testInitFromFile_add114_withlog0;testInitFromFile_add115_withlog0;testInitFromFile_add116_withlog0;testInitFromFile_add117_withlog0;testInitFromFile_add118_withlog0;testInitFromFile_add103_withlog1;testInitFromFile_add104_withlog1;testInitFromFile_add105_withlog1;testInitFromFile_add106_withlog1;testInitFromFile_add107_withlog1;testInitFromFile_add108_withlog1;testInitFromFile_add109_withlog1;testInitFromFile_add110_withlog1;testInitFromFile_add111_withlog1;testInitFromFile_add112_withlog1;testInitFromFile_add113_withlog1;testInitFromFile_add114_withlog1;testInitFromFile_add115_withlog1;testInitFromFile_add116_withlog1;testInitFromFile_add117_withlog1;testInitFromFile_add118_withlog1;testInitFromFile_add103_withlog2;testInitFromFile_add104_withlog2;testInitFromFile_add105_withlog2;testInitFromFile_add106_withlog2;testInitFromFile_add107_withlog2;testInitFromFile_add108_withlog2;testInitFromFile_add109_withlog2;testInitFromFile_add110_withlog2;testInitFromFile_add111_withlog2;testInitFromFile_add112_withlog2;testInitFromFile_add113_withlog2;testInitFromFile_add114_withlog2;testInitFromFile_add115_withlog2;testInitFromFile_add116_withlog2;testInitFromFile_add117_withlog2;testInitFromFile_add118_withlog2
+[WARN] 2018-11-11 14:10:12 TestRunner - Timeout during execution of no.tellu.lib.data.model.ModelTest: testInitFromFile_add103_withlog0,testInitFromFile_add104_withlog0,testInitFromFile_add105_withlog0,testInitFromFile_add106_withlog0,testInitFromFile_add107_withlog0,testInitFromFile_add108_withlog0,testInitFromFile_add109_withlog0,testInitFromFile_add110_withlog0,testInitFromFile_add111_withlog0,testInitFromFile_add112_withlog0,testInitFromFile_add113_withlog0,testInitFromFile_add114_withlog0,testInitFromFile_add115_withlog0,testInitFromFile_add116_withlog0,testInitFromFile_add117_withlog0,testInitFromFile_add118_withlog0,testInitFromFile_add103_withlog1,testInitFromFile_add104_withlog1,testInitFromFile_add105_withlog1,testInitFromFile_add106_withlog1,testInitFromFile_add107_withlog1,testInitFromFile_add108_withlog1,testInitFromFile_add109_withlog1,testInitFromFile_add110_withlog1,testInitFromFile_add111_withlog1,testInitFromFile_add112_withlog1,testInitFromFile_add113_withlog1,testInitFromFile_add114_withlog1,testInitFromFile_add115_withlog1,testInitFromFile_add116_withlog1,testInitFromFile_add117_withlog1,testInitFromFile_add118_withlog1,testInitFromFile_add103_withlog2,testInitFromFile_add104_withlog2,testInitFromFile_add105_withlog2,testInitFromFile_add106_withlog2,testInitFromFile_add107_withlog2,testInitFromFile_add108_withlog2,testInitFromFile_add109_withlog2,testInitFromFile_add110_withlog2,testInitFromFile_add111_withlog2,testInitFromFile_add112_withlog2,testInitFromFile_add113_withlog2,testInitFromFile_add114_withlog2,testInitFromFile_add115_withlog2,testInitFromFile_add116_withlog2,testInitFromFile_add117_withlog2,testInitFromFile_add118_withlog2
+eu.stamp_project.dspot.AmplificationException: java.util.concurrent.TimeoutException
+        at eu.stamp_project.utils.compilation.TestRunner.runGivenTestMethods(TestRunner.java:75)
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndRun(TestCompiler.java:98)
+        at eu.stamp_project.dspot.assertgenerator.MethodsAssertGenerator.addAssertions(MethodsAssertGenerator.java:109)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.innerAssertionAmplification(AssertGenerator.java:122)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.assertionAmplification(AssertGenerator.java:71)
+        at eu.stamp_project.dspot.Amplification.assertionsAmplification(Amplification.java:176)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:153)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:104)
+        at eu.stamp_project.dspot.DSpot._amplify(DSpot.java:244)
+        at eu.stamp_project.dspot.DSpot.lambda$amplifyTestClassesTestMethods$6(DSpot.java:223)
+        at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+        at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+        at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+        at eu.stamp_project.dspot.DSpot.amplifyTestClassesTestMethods(DSpot.java:224)
+        at eu.stamp_project.Main.run(Main.java:70)
+        at eu.stamp_project.Main.main(Main.java:41)
+Caused by: java.util.concurrent.TimeoutException
+        at java.util.concurrent.FutureTask.get(FutureTask.java:205)
+        at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:373)
+        at eu.stamp_project.testrunner.EntryPoint.runTests(EntryPoint.java:179)
+        at eu.stamp_project.testrunner.EntryPoint.runTests(EntryPoint.java:166)
+        at eu.stamp_project.utils.compilation.TestRunner.runGivenTestMethods(TestRunner.java:61)
+        ... 19 more
+[INFO] 2018-11-11 14:10:12 AssertGenerator - Could not generate any test with assertions
+[INFO] 2018-11-11 14:10:12 Amplification - iteration 1 / 3
+[INFO] 2018-11-11 14:10:12 Amplification - 16 tests selected to be amplified over 16 available tests
+[INFO] 2018-11-11 14:10:12 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]|
+ 31% |================================================== ]/[INFO] 2018-11-11 14:10:12 NoBudgetizer - 0 new tests generated
+[INFO] 2018-11-11 14:10:12 Amplification - iteration 2 / 3
+[WARN] 2018-11-11 14:10:12 Amplification - No test could be selected to be amplified.
+[INFO] 2018-11-11 14:10:12 Amplification - 0 amplified test methods has been selected to be kept. (global: 0)
+[INFO] 2018-11-11 14:10:12 Amplification - Amplification of testInitFromMeta, (4/12)
+[INFO] 2018-11-11 14:10:12 Amplification - iteration 0 / 3
+[INFO] 2018-11-11 14:10:12 Amplification - 1 tests selected to be amplified over 1 available tests
+[INFO] 2018-11-11 14:10:12 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]/
+[INFO] 2018-11-11 14:10:12 NoBudgetizer - 12 new tests generated
+[INFO] 2018-11-11 14:10:12 AssertGenerator - Run tests. (12)
+[INFO] 2018-11-11 14:10:12 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+Loading E:\Dev\tellu_github\tellulib\target\dspot\TestListener.ser
+[INFO] 2018-11-11 14:10:12 AssertGenerator - 12 test pass, generating assertion...
+[INFO] 2018-11-11 14:10:12 MethodsAssertGenerator - Add observations points in passing tests.
+[INFO] 2018-11-11 14:10:12 MethodsAssertGenerator - Instrumentation...
+100% |================================================== ]|
+[INFO] 2018-11-11 14:10:13 MethodsAssertGenerator - Run instrumented tests. (36)
+[INFO] 2018-11-11 14:10:13 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[WARN] 2018-11-11 14:10:50 EntryPoint - Timeout when running java  -classpath E:\Dev\tellu_github\tellulib\.\.\target\test-classes;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/;E:\Dev\tellu_github\tellulib\dspot.jar eu.stamp_project.testrunner.runner.test.TestRunner no.tellu.lib.data.model.ModelTest testInitFromMeta_add151_withlog0;testInitFromMeta_add152_withlog0;testInitFromMeta_add153_withlog0;testInitFromMeta_add154_withlog0;testInitFromMeta_add155_withlog0;testInitFromMeta_add156_withlog0;testInitFromMeta_add157_withlog0;testInitFromMeta_add158_withlog0;testInitFromMeta_add159_withlog0;testInitFromMeta_add160_withlog0;testInitFromMeta_add161_withlog0;testInitFromMeta_add162_withlog0;testInitFromMeta_add151_withlog1;testInitFromMeta_add152_withlog1;testInitFromMeta_add153_withlog1;testInitFromMeta_add154_withlog1;testInitFromMeta_add155_withlog1;testInitFromMeta_add156_withlog1;testInitFromMeta_add157_withlog1;testInitFromMeta_add158_withlog1;testInitFromMeta_add159_withlog1;testInitFromMeta_add160_withlog1;testInitFromMeta_add161_withlog1;testInitFromMeta_add162_withlog1;testInitFromMeta_add151_withlog2;testInitFromMeta_add152_withlog2;testInitFromMeta_add153_withlog2;testInitFromMeta_add154_withlog2;testInitFromMeta_add155_withlog2;testInitFromMeta_add156_withlog2;testInitFromMeta_add157_withlog2;testInitFromMeta_add158_withlog2;testInitFromMeta_add159_withlog2;testInitFromMeta_add160_withlog2;testInitFromMeta_add161_withlog2;testInitFromMeta_add162_withlog2
+[WARN] 2018-11-11 14:10:50 TestRunner - Timeout during execution of no.tellu.lib.data.model.ModelTest: testInitFromMeta_add151_withlog0,testInitFromMeta_add152_withlog0,testInitFromMeta_add153_withlog0,testInitFromMeta_add154_withlog0,testInitFromMeta_add155_withlog0,testInitFromMeta_add156_withlog0,testInitFromMeta_add157_withlog0,testInitFromMeta_add158_withlog0,testInitFromMeta_add159_withlog0,testInitFromMeta_add160_withlog0,testInitFromMeta_add161_withlog0,testInitFromMeta_add162_withlog0,testInitFromMeta_add151_withlog1,testInitFromMeta_add152_withlog1,testInitFromMeta_add153_withlog1,testInitFromMeta_add154_withlog1,testInitFromMeta_add155_withlog1,testInitFromMeta_add156_withlog1,testInitFromMeta_add157_withlog1,testInitFromMeta_add158_withlog1,testInitFromMeta_add159_withlog1,testInitFromMeta_add160_withlog1,testInitFromMeta_add161_withlog1,testInitFromMeta_add162_withlog1,testInitFromMeta_add151_withlog2,testInitFromMeta_add152_withlog2,testInitFromMeta_add153_withlog2,testInitFromMeta_add154_withlog2,testInitFromMeta_add155_withlog2,testInitFromMeta_add156_withlog2,testInitFromMeta_add157_withlog2,testInitFromMeta_add158_withlog2,testInitFromMeta_add159_withlog2,testInitFromMeta_add160_withlog2,testInitFromMeta_add161_withlog2,testInitFromMeta_add162_withlog2
+eu.stamp_project.dspot.AmplificationException: java.util.concurrent.TimeoutException
+        at eu.stamp_project.utils.compilation.TestRunner.runGivenTestMethods(TestRunner.java:75)
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndRun(TestCompiler.java:98)
+        at eu.stamp_project.dspot.assertgenerator.MethodsAssertGenerator.addAssertions(MethodsAssertGenerator.java:109)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.innerAssertionAmplification(AssertGenerator.java:122)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.assertionAmplification(AssertGenerator.java:71)
+        at eu.stamp_project.dspot.Amplification.assertionsAmplification(Amplification.java:176)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:153)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:104)
+        at eu.stamp_project.dspot.DSpot._amplify(DSpot.java:244)
+        at eu.stamp_project.dspot.DSpot.lambda$amplifyTestClassesTestMethods$6(DSpot.java:223)
+        at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+        at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+        at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+        at eu.stamp_project.dspot.DSpot.amplifyTestClassesTestMethods(DSpot.java:224)
+        at eu.stamp_project.Main.run(Main.java:70)
+        at eu.stamp_project.Main.main(Main.java:41)
+Caused by: java.util.concurrent.TimeoutException
+        at java.util.concurrent.FutureTask.get(FutureTask.java:205)
+        at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:373)
+        at eu.stamp_project.testrunner.EntryPoint.runTests(EntryPoint.java:179)
+        at eu.stamp_project.testrunner.EntryPoint.runTests(EntryPoint.java:166)
+        at eu.stamp_project.utils.compilation.TestRunner.runGivenTestMethods(TestRunner.java:61)
+        ... 19 more
+[INFO] 2018-11-11 14:10:50 AssertGenerator - Could not generate any test with assertions
+[INFO] 2018-11-11 14:10:50 Amplification - iteration 1 / 3
+[INFO] 2018-11-11 14:10:50 Amplification - 12 tests selected to be amplified over 12 available tests
+[INFO] 2018-11-11 14:10:50 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]|
+  8% |================================================== ]/[INFO] 2018-11-11 14:10:50 NoBudgetizer - 0 new tests generated
+[INFO] 2018-11-11 14:10:50 Amplification - iteration 2 / 3
+[WARN] 2018-11-11 14:10:50 Amplification - No test could be selected to be amplified.
+[INFO] 2018-11-11 14:10:50 Amplification - 0 amplified test methods has been selected to be kept. (global: 0)
+[INFO] 2018-11-11 14:10:50 Amplification - Amplification of testInitFromModel, (5/12)
+[INFO] 2018-11-11 14:10:50 Amplification - iteration 0 / 3
+[INFO] 2018-11-11 14:10:50 Amplification - 1 tests selected to be amplified over 1 available tests
+[INFO] 2018-11-11 14:10:50 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]/
+[INFO] 2018-11-11 14:10:50 NoBudgetizer - 18 new tests generated
+[INFO] 2018-11-11 14:10:50 AssertGenerator - Run tests. (18)
+[INFO] 2018-11-11 14:10:50 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+Loading E:\Dev\tellu_github\tellulib\target\dspot\TestListener.ser
+[INFO] 2018-11-11 14:10:51 AssertGenerator - 17 test pass, generating assertion...
+[INFO] 2018-11-11 14:10:51 MethodsAssertGenerator - Add observations points in passing tests.
+[INFO] 2018-11-11 14:10:51 MethodsAssertGenerator - Instrumentation...
+100% |================================================== ]/
+[INFO] 2018-11-11 14:10:51 MethodsAssertGenerator - Run instrumented tests. (51)
+[INFO] 2018-11-11 14:10:51 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[WARN] 2018-11-11 14:11:43 EntryPoint - Timeout when running java  -classpath E:\Dev\tellu_github\tellulib\.\.\target\test-classes;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/;E:\Dev\tellu_github\tellulib\dspot.jar eu.stamp_project.testrunner.runner.test.TestRunner no.tellu.lib.data.model.ModelTest testInitFromModel_add187_withlog0;testInitFromModel_add188_withlog0;testInitFromModel_add189_withlog0;testInitFromModel_add190_withlog0;testInitFromModel_add191_withlog0;testInitFromModel_add192_withlog0;testInitFromModel_add193_withlog0;testInitFromModel_add195_withlog0;testInitFromModel_add196_withlog0;testInitFromModel_add197_withlog0;testInitFromModel_add198_withlog0;testInitFromModel_add199_withlog0;testInitFromModel_add200_withlog0;testInitFromModel_add201_withlog0;testInitFromModel_add202_withlog0;testInitFromModel_add203_withlog0;testInitFromModel_add204_withlog0;testInitFromModel_add187_withlog1;testInitFromModel_add188_withlog1;testInitFromModel_add189_withlog1;testInitFromModel_add190_withlog1;testInitFromModel_add191_withlog1;testInitFromModel_add192_withlog1;testInitFromModel_add193_withlog1;testInitFromModel_add195_withlog1;testInitFromModel_add196_withlog1;testInitFromModel_add197_withlog1;testInitFromModel_add198_withlog1;testInitFromModel_add199_withlog1;testInitFromModel_add200_withlog1;testInitFromModel_add201_withlog1;testInitFromModel_add202_withlog1;testInitFromModel_add203_withlog1;testInitFromModel_add204_withlog1;testInitFromModel_add187_withlog2;testInitFromModel_add188_withlog2;testInitFromModel_add189_withlog2;testInitFromModel_add190_withlog2;testInitFromModel_add191_withlog2;testInitFromModel_add192_withlog2;testInitFromModel_add193_withlog2;testInitFromModel_add195_withlog2;testInitFromModel_add196_withlog2;testInitFromModel_add197_withlog2;testInitFromModel_add198_withlog2;testInitFromModel_add199_withlog2;testInitFromModel_add200_withlog2;testInitFromModel_add201_withlog2;testInitFromModel_add202_withlog2;testInitFromModel_add203_withlog2;testInitFromModel_add204_withlog2
+[WARN] 2018-11-11 14:11:43 TestRunner - Timeout during execution of no.tellu.lib.data.model.ModelTest: testInitFromModel_add187_withlog0,testInitFromModel_add188_withlog0,testInitFromModel_add189_withlog0,testInitFromModel_add190_withlog0,testInitFromModel_add191_withlog0,testInitFromModel_add192_withlog0,testInitFromModel_add193_withlog0,testInitFromModel_add195_withlog0,testInitFromModel_add196_withlog0,testInitFromModel_add197_withlog0,testInitFromModel_add198_withlog0,testInitFromModel_add199_withlog0,testInitFromModel_add200_withlog0,testInitFromModel_add201_withlog0,testInitFromModel_add202_withlog0,testInitFromModel_add203_withlog0,testInitFromModel_add204_withlog0,testInitFromModel_add187_withlog1,testInitFromModel_add188_withlog1,testInitFromModel_add189_withlog1,testInitFromModel_add190_withlog1,testInitFromModel_add191_withlog1,testInitFromModel_add192_withlog1,testInitFromModel_add193_withlog1,testInitFromModel_add195_withlog1,testInitFromModel_add196_withlog1,testInitFromModel_add197_withlog1,testInitFromModel_add198_withlog1,testInitFromModel_add199_withlog1,testInitFromModel_add200_withlog1,testInitFromModel_add201_withlog1,testInitFromModel_add202_withlog1,testInitFromModel_add203_withlog1,testInitFromModel_add204_withlog1,testInitFromModel_add187_withlog2,testInitFromModel_add188_withlog2,testInitFromModel_add189_withlog2,testInitFromModel_add190_withlog2,testInitFromModel_add191_withlog2,testInitFromModel_add192_withlog2,testInitFromModel_add193_withlog2,testInitFromModel_add195_withlog2,testInitFromModel_add196_withlog2,testInitFromModel_add197_withlog2,testInitFromModel_add198_withlog2,testInitFromModel_add199_withlog2,testInitFromModel_add200_withlog2,testInitFromModel_add201_withlog2,testInitFromModel_add202_withlog2,testInitFromModel_add203_withlog2,testInitFromModel_add204_withlog2
+eu.stamp_project.dspot.AmplificationException: java.util.concurrent.TimeoutException
+        at eu.stamp_project.utils.compilation.TestRunner.runGivenTestMethods(TestRunner.java:75)
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndRun(TestCompiler.java:98)
+        at eu.stamp_project.dspot.assertgenerator.MethodsAssertGenerator.addAssertions(MethodsAssertGenerator.java:109)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.innerAssertionAmplification(AssertGenerator.java:122)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.assertionAmplification(AssertGenerator.java:71)
+        at eu.stamp_project.dspot.Amplification.assertionsAmplification(Amplification.java:176)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:153)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:104)
+        at eu.stamp_project.dspot.DSpot._amplify(DSpot.java:244)
+        at eu.stamp_project.dspot.DSpot.lambda$amplifyTestClassesTestMethods$6(DSpot.java:223)
+        at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+        at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+        at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+        at eu.stamp_project.dspot.DSpot.amplifyTestClassesTestMethods(DSpot.java:224)
+        at eu.stamp_project.Main.run(Main.java:70)
+        at eu.stamp_project.Main.main(Main.java:41)
+Caused by: java.util.concurrent.TimeoutException
+        at java.util.concurrent.FutureTask.get(FutureTask.java:205)
+        at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:373)
+        at eu.stamp_project.testrunner.EntryPoint.runTests(EntryPoint.java:179)
+        at eu.stamp_project.testrunner.EntryPoint.runTests(EntryPoint.java:166)
+        at eu.stamp_project.utils.compilation.TestRunner.runGivenTestMethods(TestRunner.java:61)
+        ... 19 more
+[INFO] 2018-11-11 14:11:43 AssertGenerator - 1 test fail, generating try/catch/fail blocks...
+[INFO] 2018-11-11 14:11:43 AssertGenerator - 1 new tests with assertions generated
+[INFO] 2018-11-11 14:11:43 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+Loading E:\Dev\tellu_github\tellulib\target\dspot\TestListener.ser
+[INFO] 2018-11-11 14:11:44 Amplification - Assertion amplification: 1 test method(s) has been successfully amplified.
+[INFO] 2018-11-11 14:11:44 MavenAutomaticBuilder - Using E:\Dev\tellu_github\tellulib\.\.\.dspot_pom.xml to run maven.
+[INFO] 2018-11-11 14:11:44 MavenAutomaticBuilder - Using C:\Dev\maven for maven home
+[INFO] 2018-11-11 14:11:44 MavenAutomaticBuilder - run maven: C:\Dev\maven/bin/mvn org.pitest:pitest-maven:mutationCoverage -DtargetTests=no.tellu.lib.data.model.ModelTest
+[WARN] Maven will be executed in interactive mode, but no input stream has been configured for this MavenInvoker instance.
+[INFO] 2018-11-11 14:12:01 PitMutantScoreSelector - 789 mutants has been generated (789)
+[INFO] 2018-11-11 14:12:01 Amplification - 0 amplified test methods has been selected to be kept.
+[INFO] 2018-11-11 14:12:01 Amplification - iteration 1 / 3
+[INFO] 2018-11-11 14:12:01 Amplification - 1 tests selected to be amplified over 1 available tests
+[INFO] 2018-11-11 14:12:01 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]/
+[INFO] 2018-11-11 14:12:01 NoBudgetizer - 20 new tests generated
+[INFO] 2018-11-11 14:12:01 AssertGenerator - Run tests. (20)
+[INFO] 2018-11-11 14:12:01 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[WARN] 2018-11-11 14:12:22 EntryPoint - Timeout when running java  -classpath E:\Dev\tellu_github\tellulib\.\.\target\test-classes;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/;E:\Dev\tellu_github\tellulib\dspot.jar eu.stamp_project.testrunner.runner.test.TestRunner no.tellu.lib.data.model.ModelTest testInitFromModel_add194_failAssert0_add241;testInitFromModel_add194_failAssert0_add242;testInitFromModel_add194_failAssert0_add243;testInitFromModel_add194_failAssert0_add244;testInitFromModel_add194_failAssert0_add245;testInitFromModel_add194_failAssert0_add246;testInitFromModel_add194_failAssert0_add247;testInitFromModel_add194_failAssert0_add248;testInitFromModel_add194_failAssert0_add249;testInitFromModel_add194_failAssert0_add250;testInitFromModel_add194_failAssert0_add251;testInitFromModel_add194_failAssert0_add252;testInitFromModel_add194_failAssert0_add253;testInitFromModel_add194_failAssert0_add254;testInitFromModel_add194_failAssert0_add255;testInitFromModel_add194_failAssert0_add256;testInitFromModel_add194_failAssert0_add257;testInitFromModel_add194_failAssert0_add258;testInitFromModel_add194_failAssert0_add259;testInitFromModel_add194_failAssert0_add260
+[WARN] 2018-11-11 14:12:22 TestRunner - Timeout during execution of no.tellu.lib.data.model.ModelTest: testInitFromModel_add194_failAssert0_add241,testInitFromModel_add194_failAssert0_add242,testInitFromModel_add194_failAssert0_add243,testInitFromModel_add194_failAssert0_add244,testInitFromModel_add194_failAssert0_add245,testInitFromModel_add194_failAssert0_add246,testInitFromModel_add194_failAssert0_add247,testInitFromModel_add194_failAssert0_add248,testInitFromModel_add194_failAssert0_add249,testInitFromModel_add194_failAssert0_add250,testInitFromModel_add194_failAssert0_add251,testInitFromModel_add194_failAssert0_add252,testInitFromModel_add194_failAssert0_add253,testInitFromModel_add194_failAssert0_add254,testInitFromModel_add194_failAssert0_add255,testInitFromModel_add194_failAssert0_add256,testInitFromModel_add194_failAssert0_add257,testInitFromModel_add194_failAssert0_add258,testInitFromModel_add194_failAssert0_add259,testInitFromModel_add194_failAssert0_add260
+[WARN] 2018-11-11 14:12:22 AssertGenerator - Error when executing tests before Assertion Amplification:
+eu.stamp_project.dspot.AmplificationException: java.util.concurrent.TimeoutException
+        at eu.stamp_project.utils.compilation.TestRunner.runGivenTestMethods(TestRunner.java:75)
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndRun(TestCompiler.java:98)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.innerAssertionAmplification(AssertGenerator.java:100)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.assertionAmplification(AssertGenerator.java:71)
+        at eu.stamp_project.dspot.Amplification.assertionsAmplification(Amplification.java:176)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:153)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:104)
+        at eu.stamp_project.dspot.DSpot._amplify(DSpot.java:244)
+        at eu.stamp_project.dspot.DSpot.lambda$amplifyTestClassesTestMethods$6(DSpot.java:223)
+        at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+        at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+        at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+        at eu.stamp_project.dspot.DSpot.amplifyTestClassesTestMethods(DSpot.java:224)
+        at eu.stamp_project.Main.run(Main.java:70)
+        at eu.stamp_project.Main.main(Main.java:41)
+Caused by: java.util.concurrent.TimeoutException
+        at java.util.concurrent.FutureTask.get(FutureTask.java:205)
+        at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:373)
+        at eu.stamp_project.testrunner.EntryPoint.runTests(EntryPoint.java:179)
+        at eu.stamp_project.testrunner.EntryPoint.runTests(EntryPoint.java:166)
+        at eu.stamp_project.utils.compilation.TestRunner.runGivenTestMethods(TestRunner.java:61)
+        ... 18 more
+[INFO] 2018-11-11 14:12:22 AssertGenerator - Could not generate any test with assertions
+[INFO] 2018-11-11 14:12:22 Amplification - iteration 2 / 3
+[INFO] 2018-11-11 14:12:22 Amplification - 20 tests selected to be amplified over 20 available tests
+[INFO] 2018-11-11 14:12:22 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]|
+[INFO] 2018-11-11 14:12:23 NoBudgetizer - 0 new tests generated
+[INFO] 2018-11-11 14:12:23 Amplification - 0 amplified test methods has been selected to be kept. (global: 0)
+[INFO] 2018-11-11 14:12:23 Amplification - Amplification of testMergeNodes, (6/12)
+[INFO] 2018-11-11 14:12:23 Amplification - iteration 0 / 3
+[INFO] 2018-11-11 14:12:23 Amplification - 1 tests selected to be amplified over 1 available tests
+[INFO] 2018-11-11 14:12:23 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]/
+[INFO] 2018-11-11 14:12:23 NoBudgetizer - 14 new tests generated
+[INFO] 2018-11-11 14:12:23 AssertGenerator - Run tests. (14)
+[INFO] 2018-11-11 14:12:23 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Error(s) during compilation:
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_496
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_498
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_500
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_502
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_504
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_506
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_508
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_510
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_512
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_514
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_516
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_518
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_520
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_522
+[INFO] 2018-11-11 14:12:23 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[WARN] 2018-11-11 14:12:23 AssertGenerator - Error when executing tests before Assertion Amplification:
+eu.stamp_project.dspot.AmplificationException: Every test methods are uncompilable
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndDiscardUncompilableMethods(TestCompiler.java:123)
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndRun(TestCompiler.java:92)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.innerAssertionAmplification(AssertGenerator.java:100)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.assertionAmplification(AssertGenerator.java:71)
+        at eu.stamp_project.dspot.Amplification.assertionsAmplification(Amplification.java:176)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:153)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:104)
+        at eu.stamp_project.dspot.DSpot._amplify(DSpot.java:244)
+        at eu.stamp_project.dspot.DSpot.lambda$amplifyTestClassesTestMethods$6(DSpot.java:223)
+        at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+        at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+        at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+        at eu.stamp_project.dspot.DSpot.amplifyTestClassesTestMethods(DSpot.java:224)
+        at eu.stamp_project.Main.run(Main.java:70)
+        at eu.stamp_project.Main.main(Main.java:41)
+[INFO] 2018-11-11 14:12:23 AssertGenerator - Could not generate any test with assertions
+[INFO] 2018-11-11 14:12:23 Amplification - iteration 1 / 3
+[INFO] 2018-11-11 14:12:23 Amplification - 14 tests selected to be amplified over 14 available tests
+[INFO] 2018-11-11 14:12:23 NoBudgetizer - Amplification of inputs...
+ 78% |===================================================================== ]\
+ 28% |===================================================================== ]|[INFO] 2018-11-11 14:12:23 NoBudgetizer - 0 new tests generated
+[INFO] 2018-11-11 14:12:23 Amplification - iteration 2 / 3
+[WARN] 2018-11-11 14:12:23 Amplification - No test could be selected to be amplified.
+[INFO] 2018-11-11 14:12:23 Amplification - 0 amplified test methods has been selected to be kept. (global: 0)
+[INFO] 2018-11-11 14:12:23 Amplification - Amplification of testPath, (7/12)
+[INFO] 2018-11-11 14:12:23 Amplification - iteration 0 / 3
+[INFO] 2018-11-11 14:12:23 Amplification - 1 tests selected to be amplified over 1 available tests
+[INFO] 2018-11-11 14:12:23 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]/
+[INFO] 2018-11-11 14:12:23 NoBudgetizer - 9 new tests generated
+[INFO] 2018-11-11 14:12:23 AssertGenerator - Run tests. (9)
+[INFO] 2018-11-11 14:12:23 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Error(s) during compilation:
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_524
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_524
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_525
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_527
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_527
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_528
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_530
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_530
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_531
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_533
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_533
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_534
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_536
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_536
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_537
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_539
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_539
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_540
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_542
+[ERROR] 2018-11-11 14:12:23 TestCompiler - Pb(55) Duplicate local variable boolean_542
+[INFO] 2018-11-11 14:12:23 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[WARN] 2018-11-11 14:12:23 AssertGenerator - Error when executing tests before Assertion Amplification:
+eu.stamp_project.dspot.AmplificationException: Every test methods are uncompilable
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndDiscardUncompilableMethods(TestCompiler.java:123)
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndRun(TestCompiler.java:92)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.innerAssertionAmplification(AssertGenerator.java:100)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.assertionAmplification(AssertGenerator.java:71)
+        at eu.stamp_project.dspot.Amplification.assertionsAmplification(Amplification.java:176)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:153)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:104)
+        at eu.stamp_project.dspot.DSpot._amplify(DSpot.java:244)
+        at eu.stamp_project.dspot.DSpot.lambda$amplifyTestClassesTestMethods$6(DSpot.java:223)
+        at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+        at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+        at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+        at eu.stamp_project.dspot.DSpot.amplifyTestClassesTestMethods(DSpot.java:224)
+        at eu.stamp_project.Main.run(Main.java:70)
+        at eu.stamp_project.Main.main(Main.java:41)
+[INFO] 2018-11-11 14:12:23 AssertGenerator - Could not generate any test with assertions
+[INFO] 2018-11-11 14:12:23 Amplification - iteration 1 / 3
+[INFO] 2018-11-11 14:12:23 Amplification - 9 tests selected to be amplified over 9 available tests
+[INFO] 2018-11-11 14:12:23 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]/
+[INFO] 2018-11-11 14:12:23 NoBudgetizer - 0 new tests generated
+[INFO] 2018-11-11 14:12:23 Amplification - iteration 2 / 3
+[WARN] 2018-11-11 14:12:23 Amplification - No test could be selected to be amplified.
+[INFO] 2018-11-11 14:12:23 Amplification - 0 amplified test methods has been selected to be kept. (global: 0)
+[INFO] 2018-11-11 14:12:23 Amplification - Amplification of testProcessor, (8/12)
+[INFO] 2018-11-11 14:12:23 Amplification - iteration 0 / 3
+[INFO] 2018-11-11 14:12:23 Amplification - 1 tests selected to be amplified over 1 available tests
+[INFO] 2018-11-11 14:12:23 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]/
+[INFO] 2018-11-11 14:12:23 NoBudgetizer - 24 new tests generated
+[INFO] 2018-11-11 14:12:24 AssertGenerator - Run tests. (24)
+[INFO] 2018-11-11 14:12:24 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Error(s) during compilation:
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_551
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_551
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_552
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_551
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_552
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_553
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_555
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_555
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_556
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_555
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_556
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_557
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_559
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_559
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_560
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_559
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_560
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_561
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_563
+[ERROR] 2018-11-11 14:12:24 TestCompiler - Pb(55) Duplicate local variable boolean_563
+[INFO] 2018-11-11 14:12:24 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[WARN] 2018-11-11 14:12:25 AssertGenerator - Error when executing tests before Assertion Amplification:
+eu.stamp_project.dspot.AmplificationException: Every test methods are uncompilable
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndDiscardUncompilableMethods(TestCompiler.java:123)
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndRun(TestCompiler.java:92)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.innerAssertionAmplification(AssertGenerator.java:100)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.assertionAmplification(AssertGenerator.java:71)
+        at eu.stamp_project.dspot.Amplification.assertionsAmplification(Amplification.java:176)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:153)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:104)
+        at eu.stamp_project.dspot.DSpot._amplify(DSpot.java:244)
+        at eu.stamp_project.dspot.DSpot.lambda$amplifyTestClassesTestMethods$6(DSpot.java:223)
+        at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+        at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+        at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+        at eu.stamp_project.dspot.DSpot.amplifyTestClassesTestMethods(DSpot.java:224)
+        at eu.stamp_project.Main.run(Main.java:70)
+        at eu.stamp_project.Main.main(Main.java:41)
+[INFO] 2018-11-11 14:12:25 AssertGenerator - Could not generate any test with assertions
+[INFO] 2018-11-11 14:12:25 Amplification - iteration 1 / 3
+[INFO] 2018-11-11 14:12:25 Amplification - 24 tests selected to be amplified over 24 available tests
+[INFO] 2018-11-11 14:12:25 NoBudgetizer - Amplification of inputs...
+ 29% |================================================== ]\
+ 79% |================================================== ]\[INFO] 2018-11-11 14:12:25 NoBudgetizer - 0 new tests generated
+[INFO] 2018-11-11 14:12:25 Amplification - iteration 2 / 3
+[WARN] 2018-11-11 14:12:25 Amplification - No test could be selected to be amplified.
+[INFO] 2018-11-11 14:12:25 Amplification - 0 amplified test methods has been selected to be kept. (global: 0)
+[INFO] 2018-11-11 14:12:25 Amplification - Amplification of testReset, (9/12)
+[INFO] 2018-11-11 14:12:25 Amplification - iteration 0 / 3
+[INFO] 2018-11-11 14:12:25 Amplification - 1 tests selected to be amplified over 1 available tests
+[INFO] 2018-11-11 14:12:25 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]/
+[INFO] 2018-11-11 14:12:25 NoBudgetizer - 31 new tests generated
+[INFO] 2018-11-11 14:12:29 AssertGenerator - Run tests. (31)
+[INFO] 2018-11-11 14:12:29 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Error(s) during compilation:
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_648
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_652
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_656
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_660
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_664
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_668
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_672
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_676
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_680
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_684
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_688
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_692
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_696
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_700
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_704
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_708
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_712
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_716
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_720
+[ERROR] 2018-11-11 14:12:29 TestCompiler - Pb(55) Duplicate local variable boolean_724
+[INFO] 2018-11-11 14:12:29 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[WARN] 2018-11-11 14:12:29 AssertGenerator - Error when executing tests before Assertion Amplification:
+eu.stamp_project.dspot.AmplificationException: Every test methods are uncompilable
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndDiscardUncompilableMethods(TestCompiler.java:123)
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndRun(TestCompiler.java:92)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.innerAssertionAmplification(AssertGenerator.java:100)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.assertionAmplification(AssertGenerator.java:71)
+        at eu.stamp_project.dspot.Amplification.assertionsAmplification(Amplification.java:176)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:153)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:104)
+        at eu.stamp_project.dspot.DSpot._amplify(DSpot.java:244)
+        at eu.stamp_project.dspot.DSpot.lambda$amplifyTestClassesTestMethods$6(DSpot.java:223)
+        at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+        at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+        at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+        at eu.stamp_project.dspot.DSpot.amplifyTestClassesTestMethods(DSpot.java:224)
+        at eu.stamp_project.Main.run(Main.java:70)
+        at eu.stamp_project.Main.main(Main.java:41)
+[INFO] 2018-11-11 14:12:29 AssertGenerator - Could not generate any test with assertions
+[INFO] 2018-11-11 14:12:29 Amplification - iteration 1 / 3
+[INFO] 2018-11-11 14:12:29 Amplification - 31 tests selected to be amplified over 31 available tests
+[INFO] 2018-11-11 14:12:29 NoBudgetizer - Amplification of inputs...
+ 32% |================================================== ]-
+ 51% |================================================ ]|[INFO] 2018-11-11 14:12:29 NoBudgetizer - 0 new tests generated
+[INFO] 2018-11-11 14:12:29 Amplification - iteration 2 / 3
+[WARN] 2018-11-11 14:12:29 Amplification - No test could be selected to be amplified.
+[INFO] 2018-11-11 14:12:29 Amplification - 0 amplified test methods has been selected to be kept. (global: 0)
+[INFO] 2018-11-11 14:12:29 Amplification - Amplification of testRuleCondition, (10/12)
+[INFO] 2018-11-11 14:12:29 Amplification - iteration 0 / 3
+[INFO] 2018-11-11 14:12:29 Amplification - 1 tests selected to be amplified over 1 available tests
+[INFO] 2018-11-11 14:12:29 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]/
+[INFO] 2018-11-11 14:12:29 NoBudgetizer - 32 new tests generated
+[INFO] 2018-11-11 14:12:30 AssertGenerator - Run tests. (32)
+[INFO] 2018-11-11 14:12:30 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Error(s) during compilation:
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_771
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_771
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_772
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_771
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_772
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_773
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_775
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_775
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_776
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_775
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_776
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_777
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_779
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_779
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_780
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_779
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_780
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_781
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_783
+[ERROR] 2018-11-11 14:12:30 TestCompiler - Pb(55) Duplicate local variable boolean_783
+[INFO] 2018-11-11 14:12:31 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[WARN] 2018-11-11 14:12:31 AssertGenerator - Error when executing tests before Assertion Amplification:
+eu.stamp_project.dspot.AmplificationException: Every test methods are uncompilable
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndDiscardUncompilableMethods(TestCompiler.java:123)
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndRun(TestCompiler.java:92)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.innerAssertionAmplification(AssertGenerator.java:100)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.assertionAmplification(AssertGenerator.java:71)
+        at eu.stamp_project.dspot.Amplification.assertionsAmplification(Amplification.java:176)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:153)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:104)
+        at eu.stamp_project.dspot.DSpot._amplify(DSpot.java:244)
+        at eu.stamp_project.dspot.DSpot.lambda$amplifyTestClassesTestMethods$6(DSpot.java:223)
+        at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+        at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+        at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+        at eu.stamp_project.dspot.DSpot.amplifyTestClassesTestMethods(DSpot.java:224)
+        at eu.stamp_project.Main.run(Main.java:70)
+        at eu.stamp_project.Main.main(Main.java:41)
+[INFO] 2018-11-11 14:12:31 AssertGenerator - Could not generate any test with assertions
+[INFO] 2018-11-11 14:12:31 Amplification - iteration 1 / 3
+[INFO] 2018-11-11 14:12:31 Amplification - 32 tests selected to be amplified over 32 available tests
+[INFO] 2018-11-11 14:12:31 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]|
+ 75% |================================================ ]|[INFO] 2018-11-11 14:12:31 NoBudgetizer - 0 new tests generated
+[INFO] 2018-11-11 14:12:31 Amplification - iteration 2 / 3
+[WARN] 2018-11-11 14:12:31 Amplification - No test could be selected to be amplified.
+[INFO] 2018-11-11 14:12:31 Amplification - 0 amplified test methods has been selected to be kept. (global: 0)
+[INFO] 2018-11-11 14:12:31 Amplification - Amplification of testRuleTrigger, (11/12)
+[INFO] 2018-11-11 14:12:31 Amplification - iteration 0 / 3
+[INFO] 2018-11-11 14:12:31 Amplification - 1 tests selected to be amplified over 1 available tests
+[INFO] 2018-11-11 14:12:31 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]/
+[INFO] 2018-11-11 14:12:31 NoBudgetizer - 22 new tests generated
+[INFO] 2018-11-11 14:12:31 AssertGenerator - Run tests. (22)
+[INFO] 2018-11-11 14:12:31 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Error(s) during compilation:
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_900
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_903
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_906
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_909
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_912
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_915
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_918
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_921
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_924
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_927
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_930
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_933
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_936
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_939
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_942
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_945
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_948
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_951
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_954
+[ERROR] 2018-11-11 14:12:32 TestCompiler - Pb(55) Duplicate local variable boolean_957
+[INFO] 2018-11-11 14:12:32 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[WARN] 2018-11-11 14:12:32 AssertGenerator - Error when executing tests before Assertion Amplification:
+eu.stamp_project.dspot.AmplificationException: Every test methods are uncompilable
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndDiscardUncompilableMethods(TestCompiler.java:123)
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndRun(TestCompiler.java:92)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.innerAssertionAmplification(AssertGenerator.java:100)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.assertionAmplification(AssertGenerator.java:71)
+        at eu.stamp_project.dspot.Amplification.assertionsAmplification(Amplification.java:176)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:153)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:104)
+        at eu.stamp_project.dspot.DSpot._amplify(DSpot.java:244)
+        at eu.stamp_project.dspot.DSpot.lambda$amplifyTestClassesTestMethods$6(DSpot.java:223)
+        at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+        at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+        at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+        at eu.stamp_project.dspot.DSpot.amplifyTestClassesTestMethods(DSpot.java:224)
+        at eu.stamp_project.Main.run(Main.java:70)
+        at eu.stamp_project.Main.main(Main.java:41)
+[INFO] 2018-11-11 14:12:32 AssertGenerator - Could not generate any test with assertions
+[INFO] 2018-11-11 14:12:32 Amplification - iteration 1 / 3
+[INFO] 2018-11-11 14:12:32 Amplification - 22 tests selected to be amplified over 22 available tests
+[INFO] 2018-11-11 14:12:32 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]-
+[INFO] 2018-11-11 14:12:32 NoBudgetizer - 0 new tests generated
+[INFO] 2018-11-11 14:12:32 Amplification - iteration 2 / 3
+[WARN] 2018-11-11 14:12:32 Amplification - No test could be selected to be amplified.
+[INFO] 2018-11-11 14:12:32 Amplification - 0 amplified test methods has been selected to be kept. (global: 0)
+[INFO] 2018-11-11 14:12:32 Amplification - Amplification of testSubscribers, (12/12)
+[INFO] 2018-11-11 14:12:32 Amplification - iteration 0 / 3
+[INFO] 2018-11-11 14:12:32 Amplification - 1 tests selected to be amplified over 1 available tests
+[INFO] 2018-11-11 14:12:32 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]/
+[INFO] 2018-11-11 14:12:32 NoBudgetizer - 42 new tests generated
+[INFO] 2018-11-11 14:12:33 AssertGenerator - Run tests. (42)
+[INFO] 2018-11-11 14:12:33 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[WARN] 2018-11-11 14:13:17 EntryPoint - Timeout when running java  -classpath E:\Dev\tellu_github\tellulib\.\.\target\test-classes;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/;E:\Dev\tellu_github\tellulib\dspot.jar eu.stamp_project.testrunner.runner.test.TestRunner no.tellu.lib.data.model.ModelTest testSubscribers_add545;testSubscribers_add546;testSubscribers_add547;testSubscribers_add548;testSubscribers_add549;testSubscribers_add550;testSubscribers_add551;testSubscribers_add552;testSubscribers_add553;testSubscribers_add554;testSubscribers_add555;testSubscribers_add556;testSubscribers_add557;testSubscribers_add558;testSubscribers_add559;testSubscribers_add560;testSubscribers_add561;testSubscribers_add562;testSubscribers_add563;testSubscribers_add564;testSubscribers_add565;testSubscribers_add566;testSubscribers_add567;testSubscribers_add568;testSubscribers_add569;testSubscribers_add570;testSubscribers_add571;testSubscribers_add572;testSubscribers_add573;testSubscribers_add574;testSubscribers_add575;testSubscribers_add576;testSubscribers_add577;testSubscribers_add578;testSubscribers_add579;testSubscribers_add580;testSubscribers_add581;testSubscribers_add582;testSubscribers_add583;testSubscribers_add584;testSubscribers_add585;testSubscribers_add586
+[WARN] 2018-11-11 14:13:17 TestRunner - Timeout during execution of no.tellu.lib.data.model.ModelTest: testSubscribers_add545,testSubscribers_add546,testSubscribers_add547,testSubscribers_add548,testSubscribers_add549,testSubscribers_add550,testSubscribers_add551,testSubscribers_add552,testSubscribers_add553,testSubscribers_add554,testSubscribers_add555,testSubscribers_add556,testSubscribers_add557,testSubscribers_add558,testSubscribers_add559,testSubscribers_add560,testSubscribers_add561,testSubscribers_add562,testSubscribers_add563,testSubscribers_add564,testSubscribers_add565,testSubscribers_add566,testSubscribers_add567,testSubscribers_add568,testSubscribers_add569,testSubscribers_add570,testSubscribers_add571,testSubscribers_add572,testSubscribers_add573,testSubscribers_add574,testSubscribers_add575,testSubscribers_add576,testSubscribers_add577,testSubscribers_add578,testSubscribers_add579,testSubscribers_add580,testSubscribers_add581,testSubscribers_add582,testSubscribers_add583,testSubscribers_add584,testSubscribers_add585,testSubscribers_add586
+[WARN] 2018-11-11 14:13:17 AssertGenerator - Error when executing tests before Assertion Amplification:
+eu.stamp_project.dspot.AmplificationException: java.util.concurrent.TimeoutException
+        at eu.stamp_project.utils.compilation.TestRunner.runGivenTestMethods(TestRunner.java:75)
+        at eu.stamp_project.utils.compilation.TestCompiler.compileAndRun(TestCompiler.java:98)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.innerAssertionAmplification(AssertGenerator.java:100)
+        at eu.stamp_project.dspot.assertgenerator.AssertGenerator.assertionAmplification(AssertGenerator.java:71)
+        at eu.stamp_project.dspot.Amplification.assertionsAmplification(Amplification.java:176)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:153)
+        at eu.stamp_project.dspot.Amplification.amplification(Amplification.java:104)
+        at eu.stamp_project.dspot.DSpot._amplify(DSpot.java:244)
+        at eu.stamp_project.dspot.DSpot.lambda$amplifyTestClassesTestMethods$6(DSpot.java:223)
+        at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+        at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+        at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+        at eu.stamp_project.dspot.DSpot.amplifyTestClassesTestMethods(DSpot.java:224)
+        at eu.stamp_project.Main.run(Main.java:70)
+        at eu.stamp_project.Main.main(Main.java:41)
+Caused by: java.util.concurrent.TimeoutException
+        at java.util.concurrent.FutureTask.get(FutureTask.java:205)
+        at eu.stamp_project.testrunner.EntryPoint.runGivenCommandLine(EntryPoint.java:373)
+        at eu.stamp_project.testrunner.EntryPoint.runTests(EntryPoint.java:179)
+        at eu.stamp_project.testrunner.EntryPoint.runTests(EntryPoint.java:166)
+        at eu.stamp_project.utils.compilation.TestRunner.runGivenTestMethods(TestRunner.java:61)
+        ... 18 more
+[INFO] 2018-11-11 14:13:17 AssertGenerator - Could not generate any test with assertions
+[INFO] 2018-11-11 14:13:17 Amplification - iteration 1 / 3
+[INFO] 2018-11-11 14:13:17 Amplification - 42 tests selected to be amplified over 42 available tests
+[INFO] 2018-11-11 14:13:17 NoBudgetizer - Amplification of inputs...
+100% |================================================== ]-
+ 76% |================================================== ]|[INFO] 2018-11-11 14:13:17 NoBudgetizer - 0 new tests generated
+[INFO] 2018-11-11 14:13:17 Amplification - iteration 2 / 3
+[WARN] 2018-11-11 14:13:17 Amplification - No test could be selected to be amplified.
+[INFO] 2018-11-11 14:13:17 Amplification - 0 amplified test methods has been selected to be kept. (global: 0)
+[INFO] 2018-11-11 14:13:17 DSpot - elapsedTime 256130
+[WARN] 2018-11-11 14:13:17 DSpot - DSpot could not obtain any amplified test method.
+[WARN] 2018-11-11 14:13:17 DSpot - You can customize the following options: --amplifiers, --test-criterion, --iteration, --budgetizer etc, and retry with a new configuration.
+
+======= REPORT =======
+PitMutantScoreSelector:
+The original test suite kills 376 mutants
+The amplification results with 0 new tests
+it kills 0 more mutants
+
+[INFO] 2018-11-11 14:13:17 Main - Amplification succeed.
+[INFO] 2018-11-11 14:13:17 Main - Elapsed time 257717 ms
+[INFO] 2018-11-11 14:13:17 Amplification - DSpot amplified your test suite without errors. (no errors report will be outputted)
+MethodRemove : The term 'MethodRemove' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spel
+ling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:138
++ ... ta.model.ModelTest --timeOut 1000 --amplifiers MethodAdd;MethodRemove
++                                                              ~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (MethodRemove:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
