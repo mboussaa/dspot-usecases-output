@@ -1,0 +1,73 @@
+[INFO] 2018-11-11 15:22:16 EntryPoint - Path to runner Classes: E:\Dev\tellu_github\tellulib\dspot.jar
+[INFO] 2018-11-11 15:22:16 EntryPoint - E:\Dev\tellu_github\tellulib\dspot.jar
+[INFO] 2018-11-11 15:22:16 EntryPoint - E:\Dev\tellu_github\tellulib\dspot.jar
+[INFO] 2018-11-11 15:22:16 EntryPoint - E:\Dev\tellu_github\tellulib\dspot.jar
+[WARN] 2018-11-11 15:22:16 InputConfiguration - No builder has been specified.
+[WARN] 2018-11-11 15:22:16 InputConfiguration - Using Maven as a default builder.
+[WARN] 2018-11-11 15:22:16 InputConfiguration - You can use the command-line option --automatic-builder
+[WARN] 2018-11-11 15:22:16 InputConfiguration - or the properties automaticBuilderName to configure it.
+[INFO] 2018-11-11 15:22:16 AutomaticBuilderFactory - Selected Maven automatic builder.
+[INFO] 2018-11-11 15:22:16 MavenAutomaticBuilder - Using E:\Dev\tellu_github\tellulib\.\.\pom.xml to run maven.
+[INFO] 2018-11-11 15:22:16 MavenAutomaticBuilder - Using C:\Dev\maven for maven home
+[INFO] 2018-11-11 15:22:16 MavenAutomaticBuilder - run maven: C:\Dev\maven/bin/mvn clean test -DskipTests dependency:build-classpath -Dmdep.outputFile=target/dspot/classpath
+[WARN] Maven will be executed in interactive mode, but no input stream has been configured for this MavenInvoker instance.
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Tellu Utilities Library 3.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ tellulib ---
+[INFO] Deleting E:\Dev\tellu_github\tellulib\target
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ tellulib ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\Dev\tellu_github\tellulib\src\main\resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ tellulib ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 70 source files to E:\Dev\tellu_github\tellulib\target\classes
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ tellulib ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 4 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ tellulib ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 15 source files to E:\Dev\tellu_github\tellulib\target\test-classes
+[INFO]
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ tellulib ---
+[INFO] Tests are skipped.
+[INFO]
+[INFO] --- maven-dependency-plugin:2.8:build-classpath (default-cli) @ tellulib ---
+[INFO] Wrote classpath file 'E:\Dev\tellu_github\tellulib\target\dspot\classpath'.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 12.319 s
+[INFO] Finished at: 2018-11-11T15:22:32+01:00
+[INFO] Final Memory: 20M/110M
+[INFO] ------------------------------------------------------------------------
+[INFO] 2018-11-11 15:22:35 Amplification - Amplification of no.tellu.lib.data.model.ModelTest (12 test(s))
+[INFO] 2018-11-11 15:22:35 Amplification - Assertion amplification of no.tellu.lib.data.model.ModelTest (12 test(s))
+[INFO] 2018-11-11 15:22:36 DSpotCompiler - Compiling with -proceedOnError -encoding UTF-8 -cp E:\Dev\tellu_github\tellulib\.\.\target\dspot\tmp_test_sources;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;E:\Dev\tellu_github\tellulib\.\.\target/test-classes/\;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/; -d E:\Dev\tellu_github\tellulib\.\.\target\test-classes -1.8 -preserveAllLocals -noExit -enableJavadoc -proc:none E:\Dev\tellu_github\tellulib\target\dspot\tmp_test_sources\no\tellu\lib\data\model\ModelTest.java
+[WARN] 2018-11-11 15:24:37 EntryPoint - Timeout when running java  -classpath E:\Dev\tellu_github\tellulib\.\.\target\test-classes;E:\Dev\tellu_github\tellulib\.\.\target/classes/\;C:\Users\Larsgiang\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpclient\4.5.5\httpclient-4.5.5.jar;C:\Users\Larsgiang\.m2\repository\org\apache\httpcomponents\httpcore\4.4.9\httpcore-4.4.9.jar;C:\Users\Larsgiang\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Larsgiang\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Larsgiang\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;E:\Dev\tellu_github\tellulib\.\.\target/dspot/dependencies/;E:\Dev\tellu_github\tellulib\dspot.jar eu.stamp_project.testrunner.runner.test.TestRunner no.tellu.lib.data.model.ModelTest testCopyModel;testDataTransaction;testInitFromFile;testInitFromMeta;testInitFromModel;testMergeNodes;testPath;testProcessor;testReset;testRuleCondition;testRuleTrigger;testSubscribers
+[WARN] 2018-11-11 15:24:37 TestRunner - Timeout during execution of no.tellu.lib.data.model.ModelTest: testCopyModel,testDataTransaction,testInitFromFile,testInitFromMeta,testInitFromModel,testMergeNodes,testPath,testProcessor,testReset,testRuleCondition,testRuleTrigger,testSubscribers
+[WARN] 2018-11-11 15:24:37 Amplification - Something bad happened during selection before amplification.
+[INFO] 2018-11-11 15:24:37 DSpot - elapsedTime 121860
+[WARN] 2018-11-11 15:24:38 DSpot - DSpot could not obtain any amplified test method.
+[WARN] 2018-11-11 15:24:38 DSpot - You can customize the following options: --amplifiers, --test-criterion, --iteration, --budgetizer etc, and retry with a new configuration.
+Exception in thread "main" java.lang.NullPointerException
+        at eu.stamp_project.dspot.selector.JacocoCoverageSelector.report(JacocoCoverageSelector.java:171)
+        at eu.stamp_project.dspot.DSpot._amplify(DSpot.java:260)
+        at eu.stamp_project.dspot.DSpot.lambda$amplifyTestClassesTestMethods$6(DSpot.java:223)
+        at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+        at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+        at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
+        at eu.stamp_project.dspot.DSpot.amplifyTestClassesTestMethods(DSpot.java:224)
+        at eu.stamp_project.Main.run(Main.java:70)
+        at eu.stamp_project.Main.main(Main.java:41)
