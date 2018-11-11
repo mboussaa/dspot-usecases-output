@@ -1,0 +1,11 @@
+{
+  "name": "eu.supersede.integration.api.adaptation.proxies.test.ModelRepositoryProxyTest",
+  "nbOriginalTestCases": 17,
+  "initialInstructionCovered": 1687,
+  "initialInstructionTotal": 33519,
+  "percentageinitialInstructionCovered": 5.032966377278559,
+  "amplifiedInstructionCovered": 1735,
+  "amplifiedInstructionTotal": 33519,
+  "percentageamplifiedInstructionCovered": 5.176168740117546,
+  "testCases": []
+}
