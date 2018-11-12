@@ -1,0 +1,13 @@
+{
+  "classTimes": [
+    {
+      "fullQualifiedName": "eu.supersede.integration.api.adaptation.dashboard.proxies.test.AdaptationDashboardProxyTest",
+      "timeInMs": 299315
+    },
+    {
+      "fullQualifiedName": "eu.supersede.integration.api.adaptation.dashboard.proxies.test.AdaptationDashboardResetTest",
+      "timeInMs": 141707
+    }
+  ],
+  "projectName": "."
+}
