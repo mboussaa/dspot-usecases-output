@@ -1,0 +1,11 @@
+{
+  "name": "eu.supersede.integration.api.adaptation.proxies.test.AdapterProxyTest",
+  "nbOriginalTestCases": 13,
+  "initialInstructionCovered": 2076,
+  "initialInstructionTotal": 33519,
+  "percentageinitialInstructionCovered": 6.19350219278618,
+  "amplifiedInstructionCovered": 2122,
+  "amplifiedInstructionTotal": 33519,
+  "percentageamplifiedInstructionCovered": 6.330737790506877,
+  "testCases": []
+}
