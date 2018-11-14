@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":33,"id":367,"methods":[{"el":16,"sc":5,"sl":14},{"el":26,"sc":5,"sl":18},{"el":32,"sc":5,"sl":29}],"name":"AdaptationMode","sl":9}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_164":{"methods":[{"sl":29}],"name":"testAdaptationMode_add1_add28_add130","pass":true,"statements":[{"sl":31}]},"test_185":{"methods":[{"sl":29}],"name":"testAdaptationMode_add1_add28","pass":true,"statements":[{"sl":31}]},"test_201":{"methods":[{"sl":14}],"name":"testAdaptationMode_literalMutationString4_failAssert1","pass":true,"statements":[{"sl":15}]},"test_299":{"methods":[{"sl":29}],"name":"testAdaptationMode_add1","pass":true,"statements":[{"sl":31}]},"test_326":{"methods":[{"sl":18}],"name":"testGetAdaptationConfigurationMode","pass":true,"statements":[{"sl":20},{"sl":23},{"sl":25}]},"test_337":{"methods":[{"sl":18},{"sl":29}],"name":"testGetAdaptationConfigurationMode_sd325","pass":true,"statements":[{"sl":20},{"sl":23},{"sl":25},{"sl":31}]},"test_551":{"methods":[{"sl":18},{"sl":29}],"name":"testGetAdaptationConfigurationMode_sd325_sd341","pass":true,"statements":[{"sl":20},{"sl":23},{"sl":25},{"sl":31}]},"test_599":{"methods":[{"sl":18},{"sl":29}],"name":"testGetAdaptationConfigurationMode_add323_add336","pass":true,"statements":[{"sl":20},{"sl":23},{"sl":25},{"sl":31}]},"test_637":{"methods":[{"sl":29}],"name":"testSetAdaptationConfigurationMode","pass":true,"statements":[{"sl":31}]},"test_821":{"methods":[{"sl":18},{"sl":29}],"name":"testGetAdaptationConfigurationMode_add323","pass":true,"statements":[{"sl":20},{"sl":23},{"sl":25},{"sl":31}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [201], [201], [], [], [821, 551, 337, 326, 599], [], [821, 551, 337, 326, 599], [], [], [821, 551, 337, 326, 599], [], [821, 551, 337, 326, 599], [], [], [], [185, 299, 821, 164, 551, 337, 599, 637], [], [185, 299, 821, 164, 551, 337, 599, 637], [], []]
