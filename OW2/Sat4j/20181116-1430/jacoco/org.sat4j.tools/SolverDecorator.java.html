@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SolverDecorator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SAT4J core</a> &gt; <a href="index.source.html" class="el_package">org.sat4j.tools</a> &gt; <span class="el_source">SolverDecorator.java</span></div><h1>SolverDecorator.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * SAT4J: a SATisfiability library for Java Copyright (C) 2004, 2012 Artois University and CNRS
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU Lesser General Public License Version 2.1 or later (the
+ * &quot;LGPL&quot;), in which case the provisions of the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of the LGPL, and not to allow others to use your version of
+ * this file under the terms of the EPL, indicate your decision by deleting
+ * the provisions above and replace them with the notice and other provisions
+ * required by the LGPL. If you do not delete the provisions above, a recipient
+ * may use your version of this file under the terms of the EPL or the LGPL.
+ *
+ * Based on the original MiniSat specification from:
+ *
+ * An extensible SAT solver. Niklas Een and Niklas Sorensson. Proceedings of the
+ * Sixth International Conference on Theory and Applications of Satisfiability
+ * Testing, LNCS 2919, pp 502-518, 2003.
+ *
+ * See www.minisat.se for the original solver in C++.
+ *
+ * Contributors:
+ *   CRIL - initial API and implementation
+ *******************************************************************************/
+package org.sat4j.tools;
+
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.util.Map;
+
+import org.sat4j.specs.Constr;
+import org.sat4j.specs.ContradictionException;
+import org.sat4j.specs.IConstr;
+import org.sat4j.specs.ISolver;
+import org.sat4j.specs.ISolverService;
+import org.sat4j.specs.IVec;
+import org.sat4j.specs.IVecInt;
+import org.sat4j.specs.SearchListener;
+import org.sat4j.specs.TimeoutException;
+import org.sat4j.specs.UnitClauseProvider;
+
+/**
+ * The aim of that class is to allow adding dynamic responsibilities to SAT
+ * solvers using the Decorator design pattern. The class is abstract because it
+ * does not makes sense to use it &quot;as is&quot;.
+ * 
+ * @author leberre
+ */
+public abstract class SolverDecorator&lt;T extends ISolver&gt; implements ISolver {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+    public boolean isDBSimplificationAllowed() {
+<span class="nc" id="L62">        return this.solver.isDBSimplificationAllowed();</span>
+    }
+
+    public void setDBSimplificationAllowed(boolean status) {
+<span class="nc" id="L66">        this.solver.setDBSimplificationAllowed(status);</span>
+<span class="nc" id="L67">    }</span>
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.specs.ISolver#setTimeoutOnConflicts(int)
+     */
+    public void setTimeoutOnConflicts(int count) {
+<span class="fc" id="L75">        this.solver.setTimeoutOnConflicts(count);</span>
+<span class="fc" id="L76">    }</span>
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.specs.IProblem#printInfos(java.io.PrintWriter,
+     * java.lang.String)
+     */
+    public void printInfos(PrintWriter out, String prefix) {
+<span class="nc" id="L85">        this.solver.printInfos(out, prefix);</span>
+<span class="nc" id="L86">    }</span>
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.specs.IProblem#printInfos(java.io.PrintWriter,
+     * java.lang.String)
+     */
+    public void printInfos(PrintWriter out) {
+<span class="nc" id="L95">        this.solver.printInfos(out);</span>
+<span class="nc" id="L96">    }</span>
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.specs.IProblem#isSatisfiable(boolean)
+     */
+    public boolean isSatisfiable(boolean global) throws TimeoutException {
+<span class="fc" id="L104">        return this.solver.isSatisfiable(global);</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.specs.IProblem#isSatisfiable(org.sat4j.specs.IVecInt,
+     * boolean)
+     */
+    public boolean isSatisfiable(IVecInt assumps, boolean global)
+            throws TimeoutException {
+<span class="fc" id="L115">        return this.solver.isSatisfiable(assumps, global);</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.specs.ISolver#clearLearntClauses()
+     */
+    public void clearLearntClauses() {
+<span class="nc" id="L124">        this.solver.clearLearntClauses();</span>
+<span class="nc" id="L125">    }</span>
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.specs.IProblem#findModel()
+     */
+    public int[] findModel() throws TimeoutException {
+<span class="fc" id="L133">        return this.solver.findModel();</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.specs.IProblem#findModel(org.sat4j.specs.IVecInt)
+     */
+    public int[] findModel(IVecInt assumps) throws TimeoutException {
+<span class="fc" id="L142">        return this.solver.findModel(assumps);</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.specs.IProblem#model(int)
+     */
+    public boolean model(int var) {
+<span class="fc" id="L151">        return this.solver.model(var);</span>
+    }
+
+    public void setExpectedNumberOfClauses(int nb) {
+<span class="fc" id="L155">        this.solver.setExpectedNumberOfClauses(nb);</span>
+<span class="fc" id="L156">    }</span>
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.specs.ISolver#getTimeout()
+     */
+    public int getTimeout() {
+<span class="nc" id="L164">        return this.solver.getTimeout();</span>
+    }
+
+    /**
+     * @since 2.1
+     */
+    public long getTimeoutMs() {
+<span class="nc" id="L171">        return this.solver.getTimeoutMs();</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.specs.ISolver#toString(java.lang.String)
+     */
+    public String toString(String prefix) {
+<span class="nc" id="L180">        return this.solver.toString(prefix);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L185">        return this.solver.toString();</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.specs.ISolver#printStat(java.io.PrintStream,
+     * java.lang.String)
+     */
+    @Deprecated
+    public void printStat(PrintStream out, String prefix) {
+<span class="nc" id="L196">        this.solver.printStat(out, prefix);</span>
+<span class="nc" id="L197">    }</span>
+
+    public void printStat(PrintWriter out, String prefix) {
+<span class="nc" id="L200">        this.solver.printStat(out, prefix);</span>
+<span class="nc" id="L201">    }</span>
+
+    public void printStat(PrintWriter out) {
+<span class="nc" id="L204">        this.solver.printStat(out);</span>
+<span class="nc" id="L205">    }</span>
+
+    private T solver;
+
+    /**
+     * 
+     */
+<span class="fc" id="L212">    public SolverDecorator(T solver) {</span>
+<span class="fc" id="L213">        this.solver = solver;</span>
+<span class="fc" id="L214">    }</span>
+
+    @Deprecated
+    public int newVar() {
+<span class="nc" id="L218">        return this.solver.newVar();</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.ISolver#newVar(int)
+     */
+    public int newVar(int howmany) {
+<span class="fc" id="L227">        return this.solver.newVar(howmany);</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.ISolver#addClause(org.sat4j.datatype.VecInt)
+     */
+    public IConstr addClause(IVecInt literals) throws ContradictionException {
+<span class="fc" id="L236">        return this.solver.addClause(literals);</span>
+    }
+
+    public void addAllClauses(IVec&lt;IVecInt&gt; clauses)
+            throws ContradictionException {
+<span class="nc" id="L241">        this.solver.addAllClauses(clauses);</span>
+<span class="nc" id="L242">    }</span>
+
+    /**
+     * @since 2.1
+     */
+    public IConstr addBlockingClause(IVecInt literals)
+            throws ContradictionException {
+<span class="fc" id="L249">        return this.solver.addBlockingClause(literals);</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.ISolver#discardCurrentModel()
+     */
+    public IConstr discardCurrentModel() throws ContradictionException {
+<span class="fc" id="L258">        return this.solver.discardCurrentModel();</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.ISolver#createBlockingClauseForCurrentModel()
+     */
+    public IVecInt createBlockingClauseForCurrentModel() {
+<span class="fc" id="L267">        return this.solver.createBlockingClauseForCurrentModel();</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.ISolver#addAtMost(org.sat4j.datatype.VecInt, int)
+     */
+    public IConstr addAtMost(IVecInt literals, int degree)
+            throws ContradictionException {
+<span class="fc" id="L277">        return this.solver.addAtMost(literals, degree);</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.ISolver#addAtLeast(org.sat4j.datatype.VecInt, int)
+     */
+    public IConstr addAtLeast(IVecInt literals, int degree)
+            throws ContradictionException {
+<span class="fc" id="L287">        return this.solver.addAtLeast(literals, degree);</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.ISolver#model()
+     */
+    public int[] model() {
+<span class="fc" id="L296">        return this.solver.model();</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.ISolver#isSatisfiable()
+     */
+    public boolean isSatisfiable() throws TimeoutException {
+<span class="fc" id="L305">        return this.solver.isSatisfiable();</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.ISolver#isSatisfiable(org.sat4j.datatype.VecInt)
+     */
+    public boolean isSatisfiable(IVecInt assumps) throws TimeoutException {
+<span class="fc" id="L314">        return this.solver.isSatisfiable(assumps);</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.ISolver#setTimeout(int)
+     */
+    public void setTimeout(int t) {
+<span class="fc" id="L323">        this.solver.setTimeout(t);</span>
+<span class="fc" id="L324">    }</span>
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.ISolver#setTimeoutMs(int)
+     */
+    public void setTimeoutMs(long t) {
+<span class="fc" id="L332">        this.solver.setTimeoutMs(t);</span>
+<span class="fc" id="L333">    }</span>
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.ISolver#expireTimeout()
+     */
+    public void expireTimeout() {
+<span class="fc" id="L341">        this.solver.expireTimeout();</span>
+<span class="fc" id="L342">    }</span>
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.ISolver#nConstraints()
+     */
+    public int nConstraints() {
+<span class="nc" id="L350">        return this.solver.nConstraints();</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.ISolver#nVars()
+     */
+    public int nVars() {
+<span class="fc" id="L359">        return this.solver.nVars();</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.ISolver#reset()
+     */
+    public void reset() {
+<span class="fc" id="L368">        this.solver.reset();</span>
+<span class="fc" id="L369">    }</span>
+
+    public T decorated() {
+<span class="fc" id="L372">        return this.solver;</span>
+    }
+
+    /**
+     * Method to be called to clear the decorator from its decorated solver.
+     * This is especially useful to avoid memory leak in a program.
+     * 
+     * @return the decorated solver.
+     */
+    public T clearDecorated() {
+<span class="nc" id="L382">        T decorated = this.solver;</span>
+<span class="nc" id="L383">        this.solver = null;</span>
+<span class="nc" id="L384">        return decorated;</span>
+    }
+
+    protected void setDecorated(T solver) {
+<span class="nc" id="L388">        this.solver = solver;</span>
+<span class="nc" id="L389">    }</span>
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.specs.ISolver#removeConstr(org.sat4j.minisat.core.Constr)
+     */
+    public boolean removeConstr(IConstr c) {
+<span class="fc" id="L397">        return this.solver.removeConstr(c);</span>
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.sat4j.specs.ISolver#getStat()
+     */
+    public Map&lt;String, Number&gt; getStat() {
+<span class="nc" id="L406">        return this.solver.getStat();</span>
+    }
+
+    /**
+     * @since 2.1
+     */
+    public &lt;S extends ISolverService&gt; void setSearchListener(
+            SearchListener&lt;S&gt; sl) {
+<span class="nc" id="L414">        this.solver.setSearchListener(sl);</span>
+<span class="nc" id="L415">    }</span>
+
+    /**
+     * @since 2.1
+     */
+    public int nextFreeVarId(boolean reserve) {
+<span class="fc" id="L421">        return this.solver.nextFreeVarId(reserve);</span>
+    }
+
+    /**
+     * @since 2.1
+     */
+    public boolean removeSubsumedConstr(IConstr c) {
+<span class="fc" id="L428">        return this.solver.removeSubsumedConstr(c);</span>
+    }
+
+    /**
+     * @since 2.2
+     */
+    public &lt;S extends ISolverService&gt; SearchListener&lt;S&gt; getSearchListener() {
+<span class="nc" id="L435">        return this.solver.getSearchListener();</span>
+    }
+
+    /**
+     * @since 2.2
+     */
+    public boolean isVerbose() {
+<span class="fc" id="L442">        return this.solver.isVerbose();</span>
+    }
+
+    /**
+     * @since 2.2
+     */
+    public void setVerbose(boolean value) {
+<span class="nc" id="L449">        this.solver.setVerbose(value);</span>
+<span class="nc" id="L450">    }</span>
+
+    /**
+     * @since 2.2
+     */
+    public void setLogPrefix(String prefix) {
+<span class="nc" id="L456">        this.solver.setLogPrefix(prefix);</span>
+<span class="nc" id="L457">    }</span>
+
+    /**
+     * @since 2.2
+     */
+    public String getLogPrefix() {
+<span class="nc" id="L463">        return this.solver.getLogPrefix();</span>
+    }
+
+    /**
+     * @since 2.2
+     */
+    public IVecInt unsatExplanation() {
+<span class="nc" id="L470">        return this.solver.unsatExplanation();</span>
+    }
+
+    /**
+     * @since 2.3
+     */
+    public int[] primeImplicant() {
+<span class="fc" id="L477">        return this.solver.primeImplicant();</span>
+    }
+
+    /**
+     * @since 2.3.1
+     */
+    public IConstr addExactly(IVecInt literals, int n)
+            throws ContradictionException {
+<span class="nc" id="L485">        return this.solver.addExactly(literals, n);</span>
+    }
+
+    /**
+     * @since 2.3.1
+     */
+    public int[] modelWithInternalVariables() {
+<span class="fc" id="L492">        return this.solver.modelWithInternalVariables();</span>
+    }
+
+    /**
+     * @since 2.3.1
+     */
+    public int realNumberOfVariables() {
+<span class="nc" id="L499">        return this.solver.realNumberOfVariables();</span>
+    }
+
+    /**
+     * @since 2.3.1
+     */
+    public void registerLiteral(int p) {
+<span class="nc" id="L506">        this.solver.registerLiteral(p);</span>
+<span class="nc" id="L507">    }</span>
+
+    /**
+     * @since 2.3.2
+     */
+    public boolean isSolverKeptHot() {
+<span class="nc" id="L513">        return this.solver.isSolverKeptHot();</span>
+    }
+
+    /**
+     * @since 2.3.2
+     */
+    public void setKeepSolverHot(boolean value) {
+<span class="nc" id="L520">        this.solver.setKeepSolverHot(value);</span>
+<span class="nc" id="L521">    }</span>
+
+    /**
+     * @since 2.3.2
+     */
+    public boolean primeImplicant(int p) {
+<span class="nc" id="L527">        return this.solver.primeImplicant(p);</span>
+    }
+
+    /**
+     * @since 2.3.3
+     */
+    public ISolver getSolvingEngine() {
+<span class="fc" id="L534">        return this.solver.getSolvingEngine();</span>
+    }
+
+    /**
+     * @since 2.3.4
+     */
+    public void setUnitClauseProvider(UnitClauseProvider ucp) {
+<span class="nc" id="L541">        this.solver.setUnitClauseProvider(ucp);</span>
+<span class="nc" id="L542">    }</span>
+
+    /**
+     * @since 2.3.6
+     */
+    public IConstr addConstr(Constr constr) {
+<span class="nc" id="L548">        return this.solver.addConstr(constr);</span>
+    }
+
+    /**
+     * @since 2.3.6
+     */
+    public IConstr addParity(IVecInt literals, boolean even) {
+<span class="nc" id="L555">        return this.solver.addParity(literals, even);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

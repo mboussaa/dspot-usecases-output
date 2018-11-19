@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UnitClauses.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SAT4J core</a> &gt; <a href="index.source.html" class="el_package">org.sat4j.minisat.constraints.cnf</a> &gt; <span class="el_source">UnitClauses.java</span></div><h1>UnitClauses.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * SAT4J: a SATisfiability library for Java Copyright (C) 2004, 2012 Artois University and CNRS
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU Lesser General Public License Version 2.1 or later (the
+ * &quot;LGPL&quot;), in which case the provisions of the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of the LGPL, and not to allow others to use your version of
+ * this file under the terms of the EPL, indicate your decision by deleting
+ * the provisions above and replace them with the notice and other provisions
+ * required by the LGPL. If you do not delete the provisions above, a recipient
+ * may use your version of this file under the terms of the EPL or the LGPL.
+ *
+ * Based on the original MiniSat specification from:
+ *
+ * An extensible SAT solver. Niklas Een and Niklas Sorensson. Proceedings of the
+ * Sixth International Conference on Theory and Applications of Satisfiability
+ * Testing, LNCS 2919, pp 502-518, 2003.
+ *
+ * See www.minisat.se for the original solver in C++.
+ *
+ * Contributors:
+ *   CRIL - initial API and implementation
+ *******************************************************************************/
+package org.sat4j.minisat.constraints.cnf;
+
+import org.sat4j.specs.Constr;
+import org.sat4j.specs.IVecInt;
+import org.sat4j.specs.MandatoryLiteralListener;
+import org.sat4j.specs.UnitPropagationListener;
+import org.sat4j.specs.VarMapper;
+
+/**
+ * @since 2.1
+ */
+public class UnitClauses implements Constr {
+
+    protected final int[] literals;
+
+<span class="fc" id="L45">    public UnitClauses(IVecInt values) {</span>
+<span class="fc" id="L46">        this.literals = new int[values.size()];</span>
+<span class="fc" id="L47">        values.copyTo(this.literals);</span>
+<span class="fc" id="L48">    }</span>
+
+    public void assertConstraint(UnitPropagationListener s) {
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        for (int p : this.literals) {</span>
+<span class="nc" id="L52">            s.enqueue(p, this);</span>
+        }
+<span class="nc" id="L54">    }</span>
+
+    public void assertConstraintIfNeeded(UnitPropagationListener s) {
+<span class="nc" id="L57">        assertConstraint(s);</span>
+<span class="nc" id="L58">    }</span>
+
+    public void calcReason(int p, IVecInt outReason) {
+<span class="nc" id="L61">        throw new UnsupportedOperationException();</span>
+
+    }
+
+    public double getActivity() {
+<span class="nc" id="L66">        throw new UnsupportedOperationException();</span>
+    }
+
+    public void incActivity(double claInc) {
+        // silent to prevent problems with xplain trick.
+<span class="nc" id="L71">    }</span>
+
+    public void setActivity(double claInc) {
+        // do nothing
+<span class="nc" id="L75">    }</span>
+
+    public boolean locked() {
+<span class="nc" id="L78">        throw new UnsupportedOperationException();</span>
+    }
+
+    public void register() {
+<span class="nc" id="L82">        throw new UnsupportedOperationException();</span>
+    }
+
+    public void remove(UnitPropagationListener upl) {
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        for (int i = this.literals.length - 1; i &gt;= 0; i--) {</span>
+<span class="fc" id="L87">            upl.unset(this.literals[i]);</span>
+        }
+<span class="fc" id="L89">    }</span>
+
+    public void rescaleBy(double d) {
+<span class="nc" id="L92">        throw new UnsupportedOperationException();</span>
+    }
+
+    public void setLearnt() {
+<span class="nc" id="L96">        throw new UnsupportedOperationException();</span>
+    }
+
+    public boolean simplify() {
+<span class="nc" id="L100">        return false;</span>
+    }
+
+    public boolean propagate(UnitPropagationListener s, int p) {
+<span class="nc" id="L104">        throw new UnsupportedOperationException();</span>
+    }
+
+    public int get(int i) {
+<span class="nc" id="L108">        throw new UnsupportedOperationException();</span>
+    }
+
+    public boolean learnt() {
+<span class="nc" id="L112">        throw new UnsupportedOperationException();</span>
+    }
+
+    public int size() {
+<span class="nc" id="L116">        throw new UnsupportedOperationException();</span>
+    }
+
+    public void forwardActivity(double claInc) {
+        // silent to prevent problems with xplain trick.
+<span class="nc" id="L121">    }</span>
+
+    public boolean canBePropagatedMultipleTimes() {
+<span class="nc" id="L124">        return false;</span>
+    }
+
+    public void calcReasonOnTheFly(int p, IVecInt trail, IVecInt outReason) {
+<span class="nc" id="L128">        calcReason(p, outReason);</span>
+<span class="nc" id="L129">    }</span>
+
+    public void propagatePi(MandatoryLiteralListener m) {
+<span class="nc" id="L132">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public boolean canBeSatisfiedByCountingLiterals() {
+<span class="nc" id="L136">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public int requiredNumberOfSatisfiedLiterals() {
+<span class="nc" id="L140">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public boolean isSatisfied() {
+<span class="nc" id="L144">        return true;</span>
+    }
+
+    public int getAssertionLevel(IVecInt trail, int decisionLevel) {
+<span class="nc" id="L148">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+
+    public String toString(VarMapper mapper) {
+<span class="nc" id="L152">        throw new UnsupportedOperationException(&quot;Not implemented yet!&quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
