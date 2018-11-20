@@ -5,7 +5,7 @@
 - 93% sucessful test classes analysis.  
 - 2 classes failed to be analyzed: CatalogObjectServiceTest and RestAPIAcessServiceTest.
 - If we exclude CatalogObjectServiceTest from the test suite, it takes 16.3 secondes to analyse it.
-- After analysing each class, thre are no killed mutant and no test generated. This is probably due to the pitest exception which occures during the build. 
+- After analysing each class, thre are no killed mutant and no test generated. This is probably due to the pitest exception which occurs during the build. 
 
 
 ### Configuration
