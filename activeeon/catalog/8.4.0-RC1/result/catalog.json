@@ -1,0 +1,161 @@
+{
+  "classTimes": [
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.Application",
+      "timeInMs": 842
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.dto.BucketMetadataTest",
+      "timeInMs": 8798
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.dto.CatalogObjectMetadataTest",
+      "timeInMs": 2627
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.graphql.handler.catalogobject.CatalogObjectAndOrGroupFilterHandlerTest",
+      "timeInMs": 29053
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.repository.entity.BucketEntityTest",
+      "timeInMs": 8686
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.repository.entity.CatalogObjectEntityTest",
+      "timeInMs": 310
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.repository.entity.CatalogObjectRevisionEntityTest",
+      "timeInMs": 8830
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.rest.controller.BucketControllerTest",
+      "timeInMs": 10912
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.rest.controller.CatalogObjectControllerTest",
+      "timeInMs": 7660
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.rest.controller.CatalogObjectReportControllerTest",
+      "timeInMs": 11526
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.rest.controller.CatalogObjectRevisionControllerTest",
+      "timeInMs": 12649
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.rest.controller.SwaggerControllerTest",
+      "timeInMs": 9364
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.service.AuthorizationServiceTest",
+      "timeInMs": 10206
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.service.BucketServiceTest",
+      "timeInMs": 15030
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.service.CatalogObjectReportServiceTest",
+      "timeInMs": 14024
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.service.CatalogObjectServiceTest",
+      "timeInMs": 1388
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.service.GenericInformationAdderTest",
+      "timeInMs": 8669
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.service.GraphqlServiceTest",
+      "timeInMs": 964
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.service.GroupsWithPrefixRetrieverTest",
+      "timeInMs": 10012
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.service.KeyValueLabelMetadataHelperTest",
+      "timeInMs": 12333
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.service.OwnerGroupStringHelperTest",
+      "timeInMs": 8905
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.service.RestApiAccessServiceTest",
+      "timeInMs": 15557
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.service.SchedulerRestClientCreatorTest",
+      "timeInMs": 11948
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.service.SchedulerUserAuthenticationServiceTest",
+      "timeInMs": 10348
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.service.WorkflowXmlManipulatorTest",
+      "timeInMs": 10316
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.util.ArchiveManagerHelperTest",
+      "timeInMs": 585
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.util.BucketNameValidatorTest",
+      "timeInMs": 7854
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.util.CalendarDefinitionParserTest",
+      "timeInMs": 10229
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.util.CatalogObjectJSONParserTest",
+      "timeInMs": 613
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.util.DefaultCatalogObjectParserTest",
+      "timeInMs": 258
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.util.InfrastructureParserTest",
+      "timeInMs": 9493
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.util.KindAndContentTypeValidatorTest",
+      "timeInMs": 8048
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.util.NodesourceParserTest",
+      "timeInMs": 9678
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.util.PCWRuleParserTest",
+      "timeInMs": 412
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.util.PolicyParserTest",
+      "timeInMs": 9869
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.util.ProActiveCatalogObjectParserTest",
+      "timeInMs": 11406
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.util.RawObjectResponseCreatorTest",
+      "timeInMs": 11590
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.util.RevisionCommitMessageBuilderTest",
+      "timeInMs": 2144
+    },
+    {
+      "fullQualifiedName": "org.ow2.proactive.catalog.util.ScriptParserTest",
+      "timeInMs": 9812
+    }
+  ],
+  "projectName": "catalog"
+}
